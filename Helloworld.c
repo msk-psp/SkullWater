@@ -1,2 +1,6 @@
 #include <stdio.h>
-Int main
+Int main()
+{
+  printf("please!!");
+  return 0;
+}
