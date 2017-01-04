@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MainUIScript : MonoBehaviour {
+public class MainMenu : MonoBehaviour {
 
-	public void ChangeScene(string sceneName)
+    public void ChangeScene(string sceneName)
     {
         Application.LoadLevel(sceneName);
     }

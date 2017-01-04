@@ -111,7 +111,7 @@
     <Compile Include="Assets\Vuforia\Scripts\WireframeTrackableEventHandler.cs" />
     <Compile Include="Assets\Vuforia\Scripts\WordBehaviour.cs" />
     <Compile Include="Assets\Work\source\Fix.cs" />
-    <Compile Include="Assets\Work\source\MainUIScript.cs" />
+    <Compile Include="Assets\Work\source\MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
