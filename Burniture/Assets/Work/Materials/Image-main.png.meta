@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: ecafd1e1f9bd54e42aee8a0cd2c05f73
 timeCreated: 1484227878
+=======
+guid: 8995702ea1f0a914aa088c3c4cc3960a
+timeCreated: 1484242739
+>>>>>>> Ohjang
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
