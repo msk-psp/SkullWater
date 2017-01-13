@@ -1,16 +1,6 @@
 fileFormatVersion: 2
-<<<<<<< HEAD
-<<<<<<< HEAD
-guid: ecafd1e1f9bd54e42aee8a0cd2c05f73
-timeCreated: 1484227878
-=======
-guid: 8995702ea1f0a914aa088c3c4cc3960a
-timeCreated: 1484242739
->>>>>>> Ohjang
-=======
-guid: f61ac2e0ab2c1d04b889802c109f15d1
-timeCreated: 1484206531
->>>>>>> origin
+guid: c923b2d8d739e0049a2778afd16ae51e
+timeCreated: 1484206472
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
