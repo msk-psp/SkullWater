@@ -17,7 +17,7 @@ public class Line : MonoBehaviour {
 	void Update () {
 	    //if(counter<dist)
         {
-           /* 선의 시작과 끝 지점을 잡아줌 */
+            /* 선의 시작과 끝 지점을 잡아줌 */
             lineRenderer.SetPosition(0, Sphere1.position);  
             lineRenderer.SetPosition(1, Sphere2.position); 
         }
