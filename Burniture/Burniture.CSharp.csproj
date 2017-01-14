@@ -116,6 +116,7 @@
     <Compile Include="Assets\Work\source\Fix.cs" />
     <Compile Include="Assets\Work\source\Line.cs" />
     <Compile Include="Assets\Work\source\MainMenu.cs" />
+    <Compile Include="Assets\Work\source\NewDrag.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
