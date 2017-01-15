@@ -3,6 +3,7 @@ using System.Collections;
 using Firebase;
 using Firebase.Database;
 using Firebase.Unity.Editor;
+using Furniture;
 
 namespace Furniture
 {
@@ -30,23 +31,39 @@ namespace FirebaseAccess
         // Use this for initialization
         public Transaction(){
             FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://unity-d5c83.firebaseio.com/");
-            //FirebaseApp.DefaultInstance.SetEditorP12FileName("unity-d5c83-P12.p12");
-            //FirebaseApp.DefaultInstance.SetEditorServiceAccountEmail("administrator@unity-d5c83.iam.gserviceaccount.com");
-            //FirebaseApp.DefaultInstance.SetEditorP12Password("notasecret");
-
+            //Test용 계정
+            FirebaseApp.DefaultInstance.SetEditorP12FileName("unity-d5c83-P12.p12");        
+            FirebaseApp.DefaultInstance.SetEditorServiceAccountEmail("administrator@unity-d5c83.iam.gserviceaccount.com");
+            FirebaseApp.DefaultInstance.SetEditorP12Password("notasecret");
+            
             mDatabaseRef = FirebaseDatabase.DefaultInstance.RootReference;
-            Debug.Log(mDatabaseRef + "주소로 로그인");
+            //Debug.Log(mDatabaseRef + "주소로 로그인");
         }
         // Update is called once per frame
   
-        public void writeCube(string name, float X, float Y, float Z)
-        {
-            Furniture.Cube cube = new Furniture.Cube(X, Y, Z);
-            string json = JsonUtility.ToJson(cube);
-            
-            mDatabaseRef.Child("Cubes").Child(name).SetRawJsonValueAsync(json);
-            Debug.Log(json + "현태로 전송됨?");
+        public void WriteCube(string name, float X, float Y, float Z){
+            Cube cube = new Cube(X, Y, Z);
+            string json = JsonUtility.ToJson(cube);                                 //
+            mDatabaseRef.Child("Cubes").Child(name).SetRawJsonValueAsync(json);//json 형태로 바꿔 데이터베이스에 전송
+          //  Debug.Log(json + "현태로 전송됨?");
         }
-    }
+        public Cube RetrieveCube(string name){
+            Cube cube=null;
+            FirebaseDatabase.DefaultInstance
+                  .GetReference("Cubes")
+                  .GetValueAsync().ContinueWith(task =>{
+                      if (task.IsFaulted){
+                          //failed to load database snapshot
 
+                      }
+                      else if (task.IsCompleted) {
+                          DataSnapshot snapshot = task.Result;
+                          string json = snapshot.Child(name).GetRawJsonValue();
+                          Debug.Log(json +" Cube Receive");
+                      }
+                  });
+            return cube;
+        }
+       
+    }
 }
