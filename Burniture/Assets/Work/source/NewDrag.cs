@@ -35,8 +35,8 @@ public class NewDrag : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit) && sphere_num == 0) // 레이저가 오브젝트에 맞고, 아직 선택된 것이 없을때
             {
-                Debug.Log("collide");
-                Debug.Log(hit.collider.gameObject.tag);
+                //Debug.Log("collide");
+                //Debug.Log(hit.collider.gameObject.tag);
                 if (hit.collider.gameObject.tag == "Sphere1")
                 {
                     sphere_num = 1;
