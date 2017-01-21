@@ -17,12 +17,12 @@ public class Distance : MonoBehaviour {
     void Update () {
         Linepos = transform.position;
         Linepos.x = (Sphere1.transform.position.x + Sphere2.transform.position.x) / 2;
-        Linepos.y = Sphere1.transform.position.y;
-        Linepos.z = Sphere1.transform.position.z;
+        Linepos.y = (Sphere1.transform.position.y + Sphere2.transform.position.y) / 2;
+        Linepos.z = (Sphere1.transform.position.z + Sphere2.transform.position.z) / 2;
         transform.position = Linepos;
         dist = (int)Vector3.Distance(Sphere1.position, Sphere2.position); // Sphere1과 Sphere2의 사이 거리계산
-        text = GameObject.FindWithTag("distance");  // ??(text가 어떤 게임오브젝트인지 찾는것 같음)
-        distance = dist.ToString(); // folat인 dist를 문자열로 변환
+        //text = GameObject.FindWithTag("distance");  // ??(text가 어떤 게임오브젝트인지 찾는것 같음)
+        distance = dist.ToString(); // dist를 문자열로 변환
         text.GetComponent<TextMesh>().text = distance; // text에 문자열을 출력시킨다.
         text.transform.position = Linepos;
     }

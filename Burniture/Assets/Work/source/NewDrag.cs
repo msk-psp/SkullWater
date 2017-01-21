@@ -19,6 +19,8 @@ public class NewDrag : MonoBehaviour
     public GameObject Sphere8;
     public GameObject MoveSphere;               // 움직일 점을 저장할 클래스
     public int sphere_num = 0;                  // 선택된 점의 번호
+    public float FirstDistance;
+    public Vector3 v1, v2;
 
     void Update()
     {
@@ -82,6 +84,17 @@ public class NewDrag : MonoBehaviour
             {
                 var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
                 MoveSphere.transform.Translate(touchDeltaPosition.x * Speed * Time.deltaTime, 0, touchDeltaPosition.y * Speed * Time.deltaTime);
+            }
+        }
+        else if(Input.touchCount==2)
+        {
+            v1 = Input.GetTouch(0).position;
+            v2 = Input.GetTouch(1).position;
+            FirstDistance = v1.y - v2.y;
+            if (Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved && v1.y - v2.y > FirstDistance || v1.y - v2.y < FirstDistance)
+            {
+                Sphere2.transform.Translate(0, Sphere2.transform.position.y * Speed * Time.deltaTime, 0);
+                Sphere3.transform.Translate(0, Sphere3.transform.position.y * Speed * Time.deltaTime, 0);
             }
         }
     }
