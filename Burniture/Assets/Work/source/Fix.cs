@@ -16,50 +16,48 @@ public class Fix : MonoBehaviour
 
     public void FixCube()
     {
-               //윗면 Sphere3을 기준으로
-               //윗면 Sphere4
-               v.x = Sphere4.transform.position.x;
-               v.y = Sphere3.transform.position.y;
-               v.z = Sphere3.transform.position.z;
-               transform.position = v;
-               Sphere4.transform.position = v;
+        //1,2,3,7을 기준으로한다. 1과7은 2와3을 기준으로 2는 3을 기준으로한다.
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere3.transform.position.z;
+        transform.position = v;
+        Sphere4.transform.position = v;
 
-               //윗면 Sphere5
-               v.x = Sphere4.transform.position.x;
-               v.y = Sphere3.transform.position.y;
-               v.z = Sphere5.transform.position.z;
-               transform.position = v;
-               Sphere5.transform.position = v;
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere5.transform.position = v;
 
-               //윗면 Sphere6
-               v.x = Sphere3.transform.position.x;
-               v.y = Sphere3.transform.position.y;
-               v.z = Sphere6.transform.position.z;
-               transform.position = v;
-               Sphere6.transform.position = v;
+        v.x = Sphere3.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere6.transform.position = v;
 
-               //아랫면 Sphere2를 기준으로
-               //아랫면 Sphere1
-               v.x = Sphere1.transform.position.x;
-               v.y = Sphere2.transform.position.y;
-               v.z = Sphere2.transform.position.z;
-               transform.position = v;
-               Sphere1.transform.position = v;
+        v.x = Sphere3.transform.position.x;
+        v.y = Sphere2.transform.position.y;
+        v.z = Sphere3.transform.position.z;
+        transform.position = v;
+        Sphere2.transform.position = v;
 
-               //아랫면 Sphere7
-               v.x = Sphere2.transform.position.x;
-               v.y = Sphere2.transform.position.y;
-               v.z = Sphere7.transform.position.z;
-               transform.position = v;
-               Sphere7.transform.position = v;
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere2.transform.position.y;
+        v.z = Sphere2.transform.position.z;
+        transform.position = v;
+        Sphere1.transform.position = v;
 
-               //아랫면 Sphere8
-               //v.x = Sphere1.transform.position.x;
-               v.x = Sphere8.transform.position.x;
-               v.y = Sphere2.transform.position.y;
-               v.z = Sphere8.transform.position.z;
-               transform.position = v;
-               Sphere8.transform.position = v;
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere2.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere8.transform.position = v;
+
+        v.x = Sphere2.transform.position.x;
+        v.y = Sphere2.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere7.transform.position = v;
     }
     /*void Update()
     {
