@@ -7,7 +7,7 @@ public class SendToDatabase : MonoBehaviour{
     //private Camera _mainCam = null; //Main Camera
     private Transaction mTran;   //Database Transaction Class
     //private Cube cube;
-    private bool _mouseState;
+    //private bool _mouseState;
     Vector3 v;
 	// Use this for initialization
 	public void SendCube () {
