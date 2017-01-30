@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Work/Scene/MainMenu.unity
+- path: Assets/Work/Scene/Burniture.unity
   isLoaded: 1
   isActive: 1
