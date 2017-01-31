@@ -5,7 +5,6 @@ using System;
 
 public class MainMenu : MonoBehaviour {
 
-    public AndroidJavaObject and;
     public DateTime EndNow = DateTime.Now;
     public int EndStatus = 0;
 
@@ -45,7 +44,6 @@ public class MainMenu : MonoBehaviour {
             EndStatus = 0;
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            
             if (EndStatus == 0)
             {
                 EndNow = DateTime.Now;//백키 누른 시간을 저장

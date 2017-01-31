@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Distance : MonoBehaviour {
     public GameObject text;
-    public int dist;
+    public float dist;
     public string distance;
     public Transform Sphere1;
     public Transform Sphere2;
@@ -20,8 +20,8 @@ public class Distance : MonoBehaviour {
         Linepos.y = (Sphere1.transform.position.y + Sphere2.transform.position.y) / 2;
         Linepos.z = (Sphere1.transform.position.z + Sphere2.transform.position.z) / 2;
         transform.position = Linepos;
-        dist = (int)Vector3.Distance(Sphere1.position, Sphere2.position); // Sphere1과 Sphere2의 사이 거리계산
-        //text = GameObject.FindWithTag("distance");  // ??(text가 어떤 게임오브젝트인지 찾는것 같음)
+        dist = Vector3.Distance(Sphere1.position, Sphere2.position); // Sphere1과 Sphere2의 사이 거리계산
+        dist = (int)((dist/99)*22);
         distance = dist.ToString(); // dist를 문자열로 변환
         text.GetComponent<TextMesh>().text = distance; // text에 문자열을 출력시킨다.
         text.transform.position = Linepos;
