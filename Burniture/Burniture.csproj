@@ -64,9 +64,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Vuforia.UnityExtensions">
-      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="Firebase.App">
       <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
@@ -90,6 +87,9 @@
     </Reference>
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Vuforia.UnityExtensions">
+      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -137,7 +137,9 @@
     <Compile Include="Assets\Work\source\BackButton.cs" />
     <Compile Include="Assets\Work\source\ColorPick.cs" />
     <Compile Include="Assets\Work\source\Distance.cs" />
+    <Compile Include="Assets\Work\source\Drag.cs" />
     <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
+    <Compile Include="Assets\Work\source\FirebaseAnonymouslyLoginBehaviour.cs" />
     <Compile Include="Assets\Work\source\Fix.cs" />
     <Compile Include="Assets\Work\source\FurnitureGenerate.cs" />
     <Compile Include="Assets\Work\source\Guide.cs" />
@@ -146,11 +148,12 @@
     <Compile Include="Assets\Work\source\MainMenu.cs" />
     <Compile Include="Assets\Work\source\MyMenuClick.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
-    <Compile Include="Assets\Work\source\NewDrag.cs" />
     <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
     <Compile Include="Assets\Work\source\RoomGenerate.cs" />
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />
     <Compile Include="Assets\Work\source\Test.cs" />
+    <Compile Include="Assets\Work\source\loadScene.cs" />
+    <Compile Include="Assets\Work\source\start.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Firebase\Plugins\link.xml" />
@@ -160,8 +163,8 @@
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
-    <None Include="Assets\Plugins\Android\firebase-common-10.0.1\AndroidManifest.xml" />
-    <None Include="Assets\Plugins\Android\firebase-common-10.0.1\proguard.txt" />
+    <None Include="Assets\Plugins\Android\firebase-common-10.2.1\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\firebase-common-10.2.1\proguard.txt" />
     <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
     <None Include="Assets\Vuforia\Editor\Scripts\Vuforia.UnityExtensions.Editor.XML" />
     <None Include="Assets\Vuforia\Editor\WebcamProfiles\profiles.xml" />
