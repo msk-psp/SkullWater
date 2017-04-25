@@ -1,0 +1,73 @@
+{
+  "project_info": {
+    "project_number": "1066105152339",
+    "firebase_url": "https://unity-d5c83.firebaseio.com",
+    "project_id": "unity-d5c83",
+    "storage_bucket": "unity-d5c83.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066105152339:android:ba3c69da318883f7",
+        "android_client_info": {
+          "package_name": "com.KPU.Burniture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066105152339-csf42e659aeepic2j69i2tervkgf4f0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqEms_Rh56UAc5hHk8SG4VV9wOnvb8-mY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1066105152339:android:d52a97ca5495c4d5",
+        "android_client_info": {
+          "package_name": "com.kpu.burniture"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1066105152339-csf42e659aeepic2j69i2tervkgf4f0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqEms_Rh56UAc5hHk8SG4VV9wOnvb8-mY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

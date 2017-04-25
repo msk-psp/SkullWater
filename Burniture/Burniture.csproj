@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.4.2f2</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+    <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -148,6 +148,8 @@
     <Compile Include="Assets\Work\source\MainMenu.cs" />
     <Compile Include="Assets\Work\source\MyMenuClick.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
+    <Compile Include="Assets\Work\source\NewDrag.cs" />
+    <Compile Include="Assets\Work\source\NothingScript.cs" />
     <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
     <Compile Include="Assets\Work\source\RoomGenerate.cs" />
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />
@@ -177,6 +179,7 @@
     <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
+    <None Include="Assets\Work\StreamingAssets\QCAR\Burniture.xml" />
     <None Include="Assets\license_3rdpartynotice.txt" />
     <None Include="Assets\link.xml" />
     <None Include="Assets\readme_SDK.txt" />

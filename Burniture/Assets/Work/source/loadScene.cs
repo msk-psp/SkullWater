@@ -1,27 +1,28 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System;
+using System.Threading;
 public class loadScene : MonoBehaviour {
 
     public DateTime EndNow = DateTime.Now;
     public int EndStatus = 0;
-    private AndroidJavaObject javaObj = null;
-    AndroidJavaObject activity;
-
+    public GameObject Toast;
+    private float screenx, screeny;
 
     // Use this for initialization
     void Start () {
-        AndroidJavaClass jclass = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-        activity = jclass.GetStatic<AndroidJavaObject>("currentActivity");
+        
+        Toast.SetActive(false);
     }
 	
 	// Update is called once per frame
 	void Update () {
         DateTime now = DateTime.Now;//시간 계속 갱신
         TimeSpan datediff = now - EndNow;
+        
 
-     //   GetJavaObject().Call("setActivity", activity);
         if (EndStatus == 1 && datediff.Seconds == 2)
             EndStatus = 0;
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -30,7 +31,10 @@ public class loadScene : MonoBehaviour {
             {
                 EndNow = DateTime.Now;//백키 누른 시간을 저장
                 EndStatus = 1;
-       //         GetJavaObject().Call("EscapeMessage");
+                Toast.SetActive(true);
+
+                //삭제해주는코드 
+                Invoke("FalseActive", 3);
             }
             else if (EndStatus == 1)
             {
@@ -42,16 +46,12 @@ public class loadScene : MonoBehaviour {
     {
         SceneManager.LoadScene(sceneName);
     }
+    public void FalseActive()
+    {
+        Toast.SetActive(false);
+    }
     public void End()
     {
         Application.Quit();
-    }
-    private AndroidJavaObject GetJavaObject()
-    {
-        if (javaObj == null)
-        {
-            javaObj = new AndroidJavaObject("com.kpu.burniture.MainActivity");
-        }
-        return javaObj;
     }
 }

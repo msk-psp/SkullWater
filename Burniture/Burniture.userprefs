@@ -1,9 +1,10 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Work\source\Drag.cs">
+﻿<Properties StartupItem="Burniture.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Work\source\BackButton.cs">
     <Files>
       <File FileName="Assets\Work\source\Distance.cs" Line="1" Column="1" />
       <File FileName="Assets\Work\source\Drag.cs" Line="1" Column="1" />
+      <File FileName="Assets\Work\source\BackButton.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
