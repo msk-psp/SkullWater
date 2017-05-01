@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using Firebase.Auth;
-using Firebase.Unity.Editor;
-using System.Collections;
+
 
 public class FirebaseAnonymouslyLoginBehaviour : MonoBehaviour {
     const string PLAYERID = "USER_ID_KEY";

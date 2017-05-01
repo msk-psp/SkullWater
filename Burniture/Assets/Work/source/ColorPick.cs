@@ -42,7 +42,7 @@ public class ColorPick : MonoBehaviour
         {
             selectColor = screenShot.GetPixel((int)Input.mousePosition.x, (int)Input.mousePosition.y);                  // 스크린샷의 좌표에 해당 색 추출
             GameObject.Find("ColorPicker").GetComponent<RawImage>().color = selectColor;                                // 추출된 컬러 삽입
-            PlayerPrefs.SetString(COLORS,string.Format("{0},{1},{2}", selectColor.r, selectColor.g, selectColor.b));
+            PlayerPrefs.SetString(COLORS, string.Format("{0},{1},{2}", selectColor.r, selectColor.g, selectColor.b));
             ;
             for (int i = 1; i < 9; i++)                                                                                 // Sphere의 색도 변경.
             {

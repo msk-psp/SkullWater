@@ -20,7 +20,6 @@ public class RoomGenerate : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       
     }
     public void DestroyRoom()
     {
@@ -43,7 +42,6 @@ public class RoomGenerate : MonoBehaviour {
 
         if (null!=GameObject.FindWithTag("Bottom"))
         {
-            //Debug.Log("요고요고");
            //토스트 방이 이미 생성되었습니다.
         }
         else

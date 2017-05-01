@@ -6,7 +6,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8CFB4CA6-B153-183E-71D4-C5F05CAB390B}</ProjectGuid>
+    <ProjectGuid>{AE14DBDD-F5F3-77DF-039C-674481717464}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -38,10 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>D:/program fiiles/unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>D:/program fiiles/unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -89,6 +89,7 @@
      <Compile Include="Assets\Work\source\BackButton.cs" />
      <Compile Include="Assets\Work\source\ColorPick.cs" />
      <Compile Include="Assets\Work\source\Distance.cs" />
+     <Compile Include="Assets\Work\source\Drag.cs" />
      <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
      <Compile Include="Assets\Work\source\FirebaseAnonymouslyLoginBehaviour.cs" />
      <Compile Include="Assets\Work\source\Fix.cs" />
@@ -100,10 +101,14 @@
      <Compile Include="Assets\Work\source\MyMenuClick.cs" />
      <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
      <Compile Include="Assets\Work\source\NewDrag.cs" />
+     <Compile Include="Assets\Work\source\NothingScript.cs" />
      <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
      <Compile Include="Assets\Work\source\RoomGenerate.cs" />
      <Compile Include="Assets\Work\source\SendToDatabase.cs" />
      <Compile Include="Assets\Work\source\Test.cs" />
+     <Compile Include="Assets\Work\source\loadScene.cs" />
+     <Compile Include="Assets\Work\source\start.cs" />
+     <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
      <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />
      <None Include="Assets\Plugins\Android\firebase-common-10.2.1\proguard.txt" />
      <None Include="Assets\link.xml" />
@@ -112,7 +117,7 @@
      <None Include="Assets\Plugins\Android\firebase-common-10.2.1\AndroidManifest.xml" />
      <None Include="Assets\Vuforia\Shaders\RenderVideoBackground.shader" />
      <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
-     <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
+     <None Include="Assets\Work\StreamingAssets\QCAR\Burniture.xml" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
      <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
      <None Include="Assets\license_3rdpartynotice.txt" />
@@ -127,40 +132,40 @@
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
      <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
  <Reference Include="UnityEngine.UI">
- <HintPath>D:/program fiiles/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>D:/program fiiles/unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>D:/program fiiles/unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
- </Reference>
- <Reference Include="Firebase.App">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
- </Reference>
- <Reference Include="Firebase.Auth">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
- </Reference>
- <Reference Include="Firebase.Database">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
- </Reference>
- <Reference Include="Firebase.Database.Unity">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Firebase.Database.Unity.dll</HintPath>
- </Reference>
- <Reference Include="Google.MiniJson">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
- </Reference>
- <Reference Include="Google.Sharpen">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Compat">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Tasks">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Vuforia.UnityExtensions">
- <HintPath>C:/Users/Kim/Desktop/ohjangwon_burniture/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
+ <HintPath>D:/SkullWater/Burniture/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
+ </Reference>
+ <Reference Include="Firebase.App">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+ </Reference>
+ <Reference Include="Firebase.Auth">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+ </Reference>
+ <Reference Include="Firebase.Database">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
+ </Reference>
+ <Reference Include="Firebase.Database.Unity">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Database.Unity.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.MiniJson">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+ </Reference>
+ <Reference Include="Google.Sharpen">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Compat">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.Tasks">
+ <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
