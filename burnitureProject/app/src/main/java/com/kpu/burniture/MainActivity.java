@@ -23,11 +23,22 @@ public class MainActivity{
     {
         Toast.makeText(mCurrentActivity,"한번 더 누르면 종료됩니다.",Toast.LENGTH_SHORT).show();
     }
+<<<<<<< HEAD
+=======
+    public void ToastW()
+    {
+        Toast.makeText(mCurrentActivity,"벽이 이미 존재합니다.",Toast.LENGTH_SHORT).show();
+    }
+>>>>>>> newStopsBranch
 
     public void EscapeMessage()
     {
         handler.sendEmptyMessage(0);
     }
+<<<<<<< HEAD
+=======
+    public void WallCheckMessage(){handler.sendEmptyMessage(1);}
+>>>>>>> newStopsBranch
 
     Handler handler=new Handler(){
       public void handleMessage(Message msg){
@@ -36,6 +47,10 @@ public class MainActivity{
                   ToastM();
                   break;
               case 1:
+<<<<<<< HEAD
+=======
+                  ToastW();
+>>>>>>> newStopsBranch
                   break;
               default:
                   break;

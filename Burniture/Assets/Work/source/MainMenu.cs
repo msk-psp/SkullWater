@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+<<<<<<< HEAD
 using UnityEngine.UI;
+=======
+>>>>>>> newStopsBranch
 using System;
 
 public class MainMenu : MonoBehaviour {

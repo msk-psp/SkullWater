@@ -12,13 +12,21 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+<<<<<<< HEAD
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+=======
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
+>>>>>>> newStopsBranch
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.4.2f2</UnityVersion>
     <RootNamespace></RootNamespace>
+<<<<<<< HEAD
     <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
+=======
+    <LangVersion>4</LangVersion>
+>>>>>>> newStopsBranch
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,6 +72,33 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
+<<<<<<< HEAD
+=======
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Database">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="Firebase.Database.Unity">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.MiniJson">
+      <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.Sharpen">
+      <HintPath>Assets\Firebase\Plugins\Google.Sharpen.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Compat">
+      <HintPath>Assets\Firebase\Plugins\Unity.Compat.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Tasks">
+      <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
+    </Reference>
+>>>>>>> newStopsBranch
     <Reference Include="Vuforia.UnityExtensions">
       <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
@@ -110,6 +145,7 @@
     <Compile Include="Assets\Vuforia\Scripts\WireframeBehaviour.cs" />
     <Compile Include="Assets\Vuforia\Scripts\WireframeTrackableEventHandler.cs" />
     <Compile Include="Assets\Vuforia\Scripts\WordBehaviour.cs" />
+<<<<<<< HEAD
     <Compile Include="Assets\Work\source\Distance.cs" />
     <Compile Include="Assets\Work\source\Fix.cs" />
     <Compile Include="Assets\Work\source\Guide.cs" />
@@ -119,6 +155,41 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+=======
+    <Compile Include="Assets\Work\source\BackButton.cs" />
+    <Compile Include="Assets\Work\source\ColorPick.cs" />
+    <Compile Include="Assets\Work\source\Distance.cs" />
+    <Compile Include="Assets\Work\source\Drag.cs" />
+    <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
+    <Compile Include="Assets\Work\source\FirebaseAnonymouslyLoginBehaviour.cs" />
+    <Compile Include="Assets\Work\source\Fix.cs" />
+    <Compile Include="Assets\Work\source\FurnitureGenerate.cs" />
+    <Compile Include="Assets\Work\source\Guide.cs" />
+    <Compile Include="Assets\Work\source\Gyro.cs" />
+    <Compile Include="Assets\Work\source\Line.cs" />
+    <Compile Include="Assets\Work\source\MainMenu.cs" />
+    <Compile Include="Assets\Work\source\MyMenuClick.cs" />
+    <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
+    <Compile Include="Assets\Work\source\NewDrag.cs" />
+    <Compile Include="Assets\Work\source\NothingScript.cs" />
+    <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
+    <Compile Include="Assets\Work\source\RoomGenerate.cs" />
+    <Compile Include="Assets\Work\source\SendToDatabase.cs" />
+    <Compile Include="Assets\Work\source\Test.cs" />
+    <Compile Include="Assets\Work\source\loadScene.cs" />
+    <Compile Include="Assets\Work\source\start.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Firebase\Plugins\link.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
+    <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
+    <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
+    <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
+    <None Include="Assets\Plugins\Android\firebase-common-10.2.1\AndroidManifest.xml" />
+    <None Include="Assets\Plugins\Android\firebase-common-10.2.1\proguard.txt" />
+>>>>>>> newStopsBranch
     <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
     <None Include="Assets\Vuforia\Editor\Scripts\Vuforia.UnityExtensions.Editor.XML" />
     <None Include="Assets\Vuforia\Editor\WebcamProfiles\profiles.xml" />
@@ -131,6 +202,10 @@
     <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
+<<<<<<< HEAD
+=======
+    <None Include="Assets\Work\StreamingAssets\QCAR\Burniture.xml" />
+>>>>>>> newStopsBranch
     <None Include="Assets\license_3rdpartynotice.txt" />
     <None Include="Assets\link.xml" />
     <None Include="Assets\readme_SDK.txt" />

@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: 447e6e598ed9f5749b832873cbd96fcb
 folderAsset: yes
+<<<<<<< HEAD
 timeCreated: 1485161286
+=======
+timeCreated: 1490515330
+>>>>>>> newStopsBranch
 licenseType: Free
 DefaultImporter:
   userData: 

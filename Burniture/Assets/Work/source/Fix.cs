@@ -59,6 +59,55 @@ public class Fix : MonoBehaviour
         transform.position = v;
         Sphere7.transform.position = v;
     }
+<<<<<<< HEAD
+=======
+    public void Fixed()
+    {
+        //바닥
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere2.transform.position.y;
+        v.z = Sphere2.transform.position.z;
+        transform.position = v;
+        Sphere1.transform.position = v;
+
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere7.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere8.transform.position = v;
+
+        v.x = Sphere2.transform.position.x;
+        v.y = Sphere7.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere7.transform.position = v;
+
+        //천장
+        v.x = Sphere2.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere3.transform.position.z;
+        transform.position = v;
+        Sphere3.transform.position = v;
+
+        v.x = Sphere1.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere3.transform.position.z;
+        transform.position = v;
+        Sphere4.transform.position = v;
+
+        v.x = Sphere8.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere8.transform.position.z;
+        transform.position = v;
+        Sphere5.transform.position = v;
+
+        v.x = Sphere7.transform.position.x;
+        v.y = Sphere3.transform.position.y;
+        v.z = Sphere7.transform.position.z;
+        transform.position = v;
+        Sphere6.transform.position = v;
+    }
+>>>>>>> newStopsBranch
     /*void Update()
     {
         if(Input.touchCount==1)
@@ -383,6 +432,11 @@ public class Fix : MonoBehaviour
              v.y = Sphere1.transform.position.y;
              v.z = Sphere7.transform.position.z;
              Sphere8.transform.position = v;*/
+<<<<<<< HEAD
         //}
         //}
+=======
+    //}
+    //}
+>>>>>>> newStopsBranch
 }
