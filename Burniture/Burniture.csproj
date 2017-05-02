@@ -12,7 +12,7 @@
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>Unity Full v3.5</TargetFrameworkProfile>
     <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>Android:13</UnityBuildTarget>
@@ -145,10 +145,8 @@
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />
     <Compile Include="Assets\Work\source\Line.cs" />
-    <Compile Include="Assets\Work\source\MainMenu.cs" />
     <Compile Include="Assets\Work\source\MyMenuClick.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
-    <Compile Include="Assets\Work\source\NewDrag.cs" />
     <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
     <Compile Include="Assets\Work\source\RoomGenerate.cs" />
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />

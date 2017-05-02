@@ -59,8 +59,6 @@ public class Fix : MonoBehaviour
         transform.position = v;
         Sphere7.transform.position = v;
     }
-<<<<<<< HEAD
-=======
     public void Fixed()
     {
         //바닥
@@ -107,7 +105,6 @@ public class Fix : MonoBehaviour
         transform.position = v;
         Sphere6.transform.position = v;
     }
->>>>>>> newStopsBranch
     /*void Update()
     {
         if(Input.touchCount==1)
@@ -432,11 +429,8 @@ public class Fix : MonoBehaviour
              v.y = Sphere1.transform.position.y;
              v.z = Sphere7.transform.position.z;
              Sphere8.transform.position = v;*/
-<<<<<<< HEAD
         //}
         //}
-=======
     //}
     //}
->>>>>>> newStopsBranch
 }
