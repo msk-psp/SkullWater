@@ -40,7 +40,7 @@ public class FurnitureGenerate : MonoBehaviour {
         {
             Cube_num = 0;                     // 선택된 것도 없음
             //MoveCube = null;
-            if (this.name != MoveCube.name)
+            //if (this.name != MoveCube.name)
                this.GetComponent<MeshRenderer>().material = Mat;// 원래색으로 돌려줌
         }
         if (Input.touchCount == 1)              // 화면에 터치한 손가락의 갯수가 한개일때
@@ -56,7 +56,7 @@ public class FurnitureGenerate : MonoBehaviour {
                 {
                     Cube_num = 1;
                     MoveCube = hit.collider.gameObject;
-                    color = MoveCube.GetComponent<Renderer>().sharedMaterial.color;
+                    //color = MoveCube.GetComponent<Renderer>().sharedMaterial.color;
                     MoveCube.GetComponent<Renderer>().material.color = new Color(12, 166, 242, 0.3f); // 선택된 객체 투명하게
                     //MoveCube.GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 0.5f);
                 }
