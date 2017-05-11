@@ -9,16 +9,17 @@ public class FurnitureGenerate : MonoBehaviour {
     public float Speed = 15f;
     public int Cube_num = 0;
     public GameObject MoveCube;
-    public Vector3 v;
-    public Color color;
+    public Vector3 v,Fv;
     public Material Mat;
 
     public void Generate()
     {
         GameObject Furniture;
         GameObject plane = GameObject.FindWithTag("Bottom");
+        string Fname;
 
         Furniture = Instantiate(cube);
+
         v.x = plane.transform.position.x;
         v.y = plane.transform.position.y;
         v.z = plane.transform.position.z;
@@ -57,8 +58,9 @@ public class FurnitureGenerate : MonoBehaviour {
                     Cube_num = 1;
                     MoveCube = hit.collider.gameObject;
                     //color = MoveCube.GetComponent<Renderer>().sharedMaterial.color;
-                    MoveCube.GetComponent<Renderer>().material.color = new Color(12, 166, 242, 0.3f); // 선택된 객체 투명하게
+                    MoveCube.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 선택된 객체 투명하게
                     //MoveCube.GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 0.5f);
+                    //회전해야함
                 }
                 else
                     this.GetComponent<MeshRenderer>().material = Mat;
