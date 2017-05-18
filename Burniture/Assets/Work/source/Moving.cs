@@ -8,22 +8,28 @@ public class Moving : MonoBehaviour
     public float Speed = 15f;
     public int Cube_num = 0;
     public GameObject MoveCube;
+    private GameObject Furn;
+    private GameObject Arrow;
     
     public Material Mat;
 
     void Start()
     {
         FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-        //rend = GetComponent<MeshRenderer>();
-        //rend.enabled = true;
     }
     void Update()
     {
+        if(MoveCube.gameObject.name==this.gameObject.name) // 터치된 오브젝트의
+        {
+            Arrow = this.transform.transform.FindChild("Arrow").gameObject; // 터치된 오브젝트의 자식 오브젝트 중 Arrow이름을 가진 오브젝트를 Arrow로한다.
+            Arrow.SetActive(true); // 화살표를 활성화
+        }
         if (Input.touchCount == 0)              // 터치가 없으면
         {
             Cube_num = 0;                     // 선택된 것도 없음
 
-            this.GetComponent<MeshRenderer>().material = Mat;// 원래색으로 돌려줌
+            //this.GetComponent<MeshRenderer>().material = Mat;// 원래색으로 돌려줌
+            Furn.GetComponent<MeshRenderer>().material = Mat;
         }
         if (Input.touchCount == 1)              // 화면에 터치한 손가락의 갯수가 한개일때
         {
@@ -33,19 +39,18 @@ public class Moving : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit) && Cube_num == 0) // 레이저가 오브젝트에 맞고, 아직 선택된 것이 없을때
             {
-                /*if (hit.collider.gameObject.tag == "Cube")*/
-                if (hit.collider.gameObject.name == this.gameObject.name)
+                if (hit.collider.gameObject.name == this.gameObject.name)//터치된것과 안된것을 이름으로 구별
                 {
                     Cube_num = 1;
                     MoveCube = hit.collider.gameObject;
-                    //color = MoveCube.GetComponent<Renderer>().sharedMaterial.color;
-                    MoveCube.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 선택된 객체 투명하게
-                    //MoveCube.GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 0.5f);
+                    Furn = this.transform.transform.FindChild("chair").gameObject;//자식 오브젝트를 찾음
+                    Furn.transform.localScale = this.transform.localScale;//크기를 같게 맞추어준다
+                    Furn.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 선택된 객체 투명하게
                     //회전해야함
                 }
                 else
-                    this.GetComponent<MeshRenderer>().material = Mat;
-                //MoveCube.GetComponent<RawImage>().color = new Color(1f, 1f, 1f, 1f);
+                    Furn.GetComponent<MeshRenderer>().material = Mat;
+                //this.GetComponent<MeshRenderer>().material = Mat;
             }
             else
             {
@@ -59,7 +64,6 @@ public class Moving : MonoBehaviour
         {
             if (Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)
             {
-                //var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
                 if (Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position) > FirstDistance) // 위아래
                 {
                     FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
