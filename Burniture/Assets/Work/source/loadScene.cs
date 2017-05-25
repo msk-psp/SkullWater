@@ -14,7 +14,7 @@ public class loadScene : MonoBehaviour {
     // Use this for initialization
     void Start () {
         
-        Toast.SetActive(false);
+        //Toast.SetActive(false);
     }
 	
 	// Update is called once per frame

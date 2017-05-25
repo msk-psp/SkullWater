@@ -8,28 +8,31 @@ public class Moving : MonoBehaviour
     public float Speed = 15f;
     public int Cube_num = 0;
     public GameObject MoveCube;
-    private GameObject Furn;
-    private GameObject Arrow;
+    public GameObject Furn;
+    public GameObject Arrow;
+    private int TouchState = 0;
     
     public Material Mat;
 
     void Start()
     {
-        FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
+        //FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
     }
     void Update()
     {
         if(MoveCube.gameObject.name==this.gameObject.name) // 터치된 오브젝트의
         {
-            Arrow = this.transform.transform.FindChild("Arrow").gameObject; // 터치된 오브젝트의 자식 오브젝트 중 Arrow이름을 가진 오브젝트를 Arrow로한다.
-            Arrow.SetActive(true); // 화살표를 활성화
+            //Arrow = this.transform.transform.FindChild("Arrow").gameObject; // 터치된 오브젝트의 자식 오브젝트 중 Arrow이름을 가진 오브젝트를 Arrow로한다.
+            //Arrow.SetActive(true); // 화살표를 활성화
         }
+        Arrow = this.transform.FindChild("RotateArrow").gameObject;
+        Furn = this.transform.FindChild("chair(Clone)").gameObject;//자식 오브젝트를 찾음
         if (Input.touchCount == 0)              // 터치가 없으면
         {
             Cube_num = 0;                     // 선택된 것도 없음
-
+            TouchState = 0;                   // 손가락이 떼지면 변화
             //this.GetComponent<MeshRenderer>().material = Mat;// 원래색으로 돌려줌
-            Furn.GetComponent<MeshRenderer>().material = Mat;
+            //Furn.GetComponent<MeshRenderer>().material = Mat;
         }
         if (Input.touchCount == 1)              // 화면에 터치한 손가락의 갯수가 한개일때
         {
@@ -43,14 +46,25 @@ public class Moving : MonoBehaviour
                 {
                     Cube_num = 1;
                     MoveCube = hit.collider.gameObject;
-                    Furn = this.transform.transform.FindChild("chair").gameObject;//자식 오브젝트를 찾음
-                    Furn.transform.localScale = this.transform.localScale;//크기를 같게 맞추어준다
-                    Furn.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 선택된 객체 투명하게
+                    
+                    //Furn.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 선택된 객체 투명하게
                     //회전해야함
+                    Arrow.SetActive(true);
+                    //if(hit.collider.gameObject.name==this.)
+                }
+                else if(hit.collider.gameObject.name == MoveCube.transform.FindChild("RotateArrow").gameObject.name)
+                {
+                    if (TouchState == 0)
+                    {
+                        TouchState = 1; // 누르고있는 동안 한번만 변화하기 위한 상태변수
+                        Furn.transform.Rotate(0, 0, 90);
+                    }
                 }
                 else
-                    Furn.GetComponent<MeshRenderer>().material = Mat;
-                //this.GetComponent<MeshRenderer>().material = Mat;
+                {
+                    //Furn.GetComponent<MeshRenderer>().material = Mat;
+                    Arrow.SetActive(false);
+                }
             }
             else
             {

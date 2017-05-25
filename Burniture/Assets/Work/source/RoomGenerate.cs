@@ -3,13 +3,14 @@ using System.Collections;
 
 public class RoomGenerate : MonoBehaviour {
 
-    public GameObject Plane;
-    public GameObject Quad1, Quad2, Quad3, Quad4;
+    private GameObject Plane;
+    private GameObject Quad1, Quad2, Quad3, Quad4;
     public GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU;
     private float Plane_xScale, Plane_yScale, Plane_zScale;
     private float Plane_xPosition, Plane_yPosition, Plane_zPosition;
     private float Quad_xScale, Quad_yScale, Quad_zScale;
     private float Quad_xPosition, Quad_yPosition, Quad_zPosition;
+    public Material Wmat;
 
     // Use this for initialization
     void Start()
@@ -58,12 +59,16 @@ public class RoomGenerate : MonoBehaviour {
 
             Plane.transform.position = new Vector3(Plane_xPosition, Plane_yPosition, Plane_zPosition);
             Plane.transform.localScale = new Vector3(Plane_xScale, Plane_yScale, Plane_zScale);
+            Plane.transform.Rotate(new Vector3(0, 180, 0));
 
             Plane.layer = 2; // 레이캐스트 무시
 
             rb = Plane.AddComponent<BoxCollider>();
             rb.size = new Vector3(Plane_xScale, 100, Plane_zScale);
             rb.center = new Vector3(0, -rb.size.y / 2, 0);
+
+            Plane.GetComponent<Renderer>().material = Wmat;
+            Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
 
             /*왼쪽벽*/
             Quad1 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -86,6 +91,9 @@ public class RoomGenerate : MonoBehaviour {
             rb.size = new Vector3(3, 3, 100);
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
+            Quad1.GetComponent<Renderer>().material = Wmat;
+            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
+
             /*뒷쪽벽*/
             Quad2 = GameObject.CreatePrimitive(PrimitiveType.Quad);
             Quad2.tag = "BackWall";
@@ -105,6 +113,9 @@ public class RoomGenerate : MonoBehaviour {
             rb = Quad2.AddComponent<BoxCollider>();
             rb.size = new Vector3(3, 3, 100);
             rb.center = new Vector3(0, 0, rb.size.z / 2);
+
+            Quad2.GetComponent<Renderer>().material = Wmat;
+            Quad2.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
 
             /*오른쪽벽*/
             Quad3 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -127,6 +138,8 @@ public class RoomGenerate : MonoBehaviour {
             rb.size = new Vector3(3, 3, 100);
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
+            Quad3.GetComponent<Renderer>().material = Wmat;
+            Quad3.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
 
             //Quad3.AddComponent<BoxCollider>();
 
@@ -150,6 +163,9 @@ public class RoomGenerate : MonoBehaviour {
             rb = Quad4.AddComponent<BoxCollider>();
             rb.size = new Vector3(3, 3, 100);
             rb.center = new Vector3(0, 0, rb.size.z / 2);
+
+            Quad4.GetComponent<Renderer>().material = Wmat;
+            Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
 
             //Plane.transform.localScale += new Vector3(Plane_xScale/11, Plane_yScale/2, Plane_zScale/11) /*- new Vector3(1, 1, 1)*/;
             //Instantiate(Plane);
