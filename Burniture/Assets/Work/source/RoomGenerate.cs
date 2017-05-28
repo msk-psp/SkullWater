@@ -68,7 +68,7 @@ public class RoomGenerate : MonoBehaviour {
             rb.center = new Vector3(0, -rb.size.y / 2, 0);
 
             Plane.GetComponent<Renderer>().material = Wmat;
-            Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
+            Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
 
             /*왼쪽벽*/
             Quad1 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -92,7 +92,7 @@ public class RoomGenerate : MonoBehaviour {
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad1.GetComponent<Renderer>().material = Wmat;
-            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
+            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
 
             /*뒷쪽벽*/
             Quad2 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -115,7 +115,7 @@ public class RoomGenerate : MonoBehaviour {
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad2.GetComponent<Renderer>().material = Wmat;
-            Quad2.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
+            Quad2.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
 
             /*오른쪽벽*/
             Quad3 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -139,7 +139,7 @@ public class RoomGenerate : MonoBehaviour {
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad3.GetComponent<Renderer>().material = Wmat;
-            Quad3.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
+            Quad3.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
 
             //Quad3.AddComponent<BoxCollider>();
 
@@ -165,7 +165,7 @@ public class RoomGenerate : MonoBehaviour {
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad4.GetComponent<Renderer>().material = Wmat;
-            Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.2f);
+            Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
 
             //Plane.transform.localScale += new Vector3(Plane_xScale/11, Plane_yScale/2, Plane_zScale/11) /*- new Vector3(1, 1, 1)*/;
             //Instantiate(Plane);

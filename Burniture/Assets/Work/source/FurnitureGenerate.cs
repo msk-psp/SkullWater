@@ -8,6 +8,7 @@ public class FurnitureGenerate : MonoBehaviour {
     public GameObject chair,table;//가구 이름
     public Vector3 v;
     private Transform Fv;
+    private int num;
 
 
     public void Generate()
@@ -24,7 +25,8 @@ public class FurnitureGenerate : MonoBehaviour {
         v.z = plane.transform.position.z;
         transform.position = v;
         FurnitureCube.transform.localScale = new Vector3(50, 50, 50); // 측정한 가구의크기
-        //FurnitureCube.name = Furn.name + FurnitureCube.name; // 나중에 이름으로 컨트롤 하기위하여 이름을 따로 지정
+        FurnitureCube.name = Furn.name + num; //컨트롤 하기위하여 이름을 모두 다르게 지정
+        num++;
         FurnitureCube.transform.position = new Vector3(v.x, FurnitureCube.transform.localScale.x / 2 + 1, v.z); // 바닥 위에 생성
         FurnitureCube.SetActive(true);
         Fv = FurnitureCube.transform;
