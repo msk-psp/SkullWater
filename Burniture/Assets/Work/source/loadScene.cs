@@ -13,8 +13,8 @@ public class loadScene : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        GameObject.Find("SandTimer").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0f);   // Screenshot 객체 투명화
-        Toast.SetActive(false);
+        
+        //Toast.SetActive(false);
     }
 	
 	// Update is called once per frame
@@ -44,7 +44,6 @@ public class loadScene : MonoBehaviour {
     }
     public void ChangeScene(string sceneName)
     {
-        GameObject.Find("SandTimer").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);   // Screenshot 객체 불투명화
         SceneManager.LoadScene(sceneName);
     }
     public void FalseActive()

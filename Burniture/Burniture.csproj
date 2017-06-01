@@ -88,29 +88,29 @@
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
     </Reference>
-    <Reference Include="Vuforia.UnityExtensions">
-      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data">
-      <HintPath>Assets\Plugins\System.Data.dll</HintPath>
+    <Reference Include="Mono.Data">
+      <HintPath>Assets\Plugins\Mono.Data.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.Sqlite">
       <HintPath>Assets\Plugins\Mono.Data.Sqlite.dll</HintPath>
     </Reference>
-    <Reference Include="System.EnterpriseServices">
-      <HintPath>Assets\Plugins\System.EnterpriseServices.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Data.SqliteClient">
       <HintPath>Assets\Plugins\Mono.Data.SqliteClient.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Security">
-      <HintPath>Assets\Plugins\System.Security.dll</HintPath>
     </Reference>
     <Reference Include="System.Configuration">
       <HintPath>Assets\Plugins\System.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Data">
-      <HintPath>Assets\Plugins\Mono.Data.dll</HintPath>
+    <Reference Include="System.Data">
+      <HintPath>Assets\Plugins\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <HintPath>Assets\Plugins\System.EnterpriseServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security">
+      <HintPath>Assets\Plugins\System.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Vuforia.UnityExtensions">
+      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -166,6 +166,7 @@
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />
     <Compile Include="Assets\Work\source\Line.cs" />
+    <Compile Include="Assets\Work\source\Moving.cs" />
     <Compile Include="Assets\Work\source\MyMenuClick.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
     <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
@@ -174,7 +175,6 @@
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />
     <Compile Include="Assets\Work\source\SendToInternalDB.cs" />
     <Compile Include="Assets\Work\source\SqlLiteBehaviour.cs" />
-    <Compile Include="Assets\Work\source\Test.cs" />
     <Compile Include="Assets\Work\source\loadScene.cs" />
     <Compile Include="Assets\Work\source\start.cs" />
   </ItemGroup>
@@ -201,6 +201,7 @@
     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
     <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
     <None Include="Assets\Work\StreamingAssets\QCAR\Burniture.xml" />
+    <None Include="Assets\Work\source\Outline.shader" />
     <None Include="Assets\license_3rdpartynotice.txt" />
     <None Include="Assets\link.xml" />
     <None Include="Assets\readme_SDK.txt" />

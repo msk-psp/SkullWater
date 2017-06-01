@@ -33,6 +33,18 @@
             <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
             <meta-data android:name="unityplayer.ForwardNativeEventsToDalvik" android:value="false" />
         </activity>
+<<<<<<< HEAD
+=======
+  
+      <activity android:name="com.kpu.burniture.MainActivity">
+        <!--<intent-filter>
+          <action android:name="android.intent.action.MAIN" />
+
+          <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>-->
+      </activity>
+      
+>>>>>>> 853028510560f3cd7815c7253c56ee40ed7f874e
         <activity android:name="com.unity3d.player.VideoPlayer"
                   android:label="@string/app_name"
                   android:screenOrientation="portrait"
