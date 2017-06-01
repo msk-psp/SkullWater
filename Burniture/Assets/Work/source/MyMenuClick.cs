@@ -23,9 +23,6 @@ public class MyMenuClick : MonoBehaviour {
         GameObject plane = GameObject.FindWithTag("Bottom");
         GameObject Furniture;
         mCube_name = prefab.FindChild("TitlePanel").FindChild("CubeName").GetComponent<Text>().text.ToString();
-       // if(GameObject.FindWithTag("Furniture")==null){
-        //}
-        
 
         if (GameObject.Find(mCube_name)!=null)
         {
@@ -38,6 +35,7 @@ public class MyMenuClick : MonoBehaviour {
         }
         else {
             Furniture = Instantiate(oCube);     //처음 생성
+            
         }
         
 
@@ -49,7 +47,6 @@ public class MyMenuClick : MonoBehaviour {
         float.TryParse(prefab.FindChild("YText").GetComponent<Text>().text, out mCube_yScale);
         float.TryParse(prefab.FindChild("ZText").GetComponent<Text>().text, out mCube_zScale);
 
-        
         Furniture.transform.localScale = new Vector3(mCube_xScale*10, mCube_yScale*10, mCube_zScale*10);
         Furniture.transform.position = new Vector3(mCube_xPosition, Furniture.transform.localScale.x / 2 + 1, mCube_zPosition);
         Furniture.SetActive(true);

@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.4.2f2</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>4</LangVersion>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,9 +64,6 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Vuforia.UnityExtensions">
-      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
-    </Reference>
     <Reference Include="Firebase.App">
       <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
@@ -90,6 +87,30 @@
     </Reference>
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Vuforia.UnityExtensions">
+      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets\Plugins\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.Sqlite">
+      <HintPath>Assets\Plugins\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.EnterpriseServices">
+      <HintPath>Assets\Plugins\System.EnterpriseServices.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data.SqliteClient">
+      <HintPath>Assets\Plugins\Mono.Data.SqliteClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security">
+      <HintPath>Assets\Plugins\System.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>Assets\Plugins\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data">
+      <HintPath>Assets\Plugins\Mono.Data.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -149,7 +170,10 @@
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
     <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
     <Compile Include="Assets\Work\source\RoomGenerate.cs" />
+    <Compile Include="Assets\Work\source\SaveLoadBehaviour.cs" />
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />
+    <Compile Include="Assets\Work\source\SendToInternalDB.cs" />
+    <Compile Include="Assets\Work\source\SqlLiteBehaviour.cs" />
     <Compile Include="Assets\Work\source\Test.cs" />
     <Compile Include="Assets\Work\source\loadScene.cs" />
     <Compile Include="Assets\Work\source\start.cs" />

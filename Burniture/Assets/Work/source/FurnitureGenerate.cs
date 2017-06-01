@@ -42,7 +42,7 @@ public class FurnitureGenerate : MonoBehaviour {
             Cube_num = 0;                     // 선택된 것도 없음
             //MoveCube = null;
             //if (this.name != MoveCube.name)
-               this.GetComponent<MeshRenderer>().material = Mat;// 원래색으로 돌려줌
+            //   this.GetComponent<MeshRenderer>().material = Mat;// 원래색으로 돌려줌
         }
         if (Input.touchCount == 1)              // 화면에 터치한 손가락의 갯수가 한개일때
         {

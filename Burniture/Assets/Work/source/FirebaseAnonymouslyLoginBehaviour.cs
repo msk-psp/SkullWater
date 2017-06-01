@@ -22,7 +22,7 @@ public class FirebaseAnonymouslyLoginBehaviour : MonoBehaviour {
 
                 });
         }
-        Debug.Log("saved id:" + PlayerPrefs.GetString(PLAYERID));
+        Debug.Log("[Firebase] Saved id:" + PlayerPrefs.GetString(PLAYERID));
 	}
 
 }

@@ -20,6 +20,7 @@ public class ColorPick : MonoBehaviour
     Texture2D screenShot;                               // 스크린샷을 Texture2D형식으로 저장하기 위한 변수
     CameraClearFlags temp_clearFlags;                   // 카메라의 초기 clearFlags값을 저장 하기 위한 변수
     public Canvas myScreen;                             // 나의 캔버스 정보를 받아오기 위한 클래스 변수
+    public GameObject Spuit;                            // Spuit 이미지를 저장하기 위한 변수
     public Color selectColor;                           // 선택한 색
     GameObject test;
     const string COLORS = "COLORS";
@@ -41,9 +42,10 @@ public class ColorPick : MonoBehaviour
         if (stateSwitch && Input.touchCount == 1)        // switch가 켜지고, 누르고 있을 때
         {
             selectColor = screenShot.GetPixel((int)Input.mousePosition.x, (int)Input.mousePosition.y);                  // 스크린샷의 좌표에 해당 색 추출
+            Spuit.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f);                       // Spuit 이미지 좌표 변경
             GameObject.Find("ColorPicker").GetComponent<RawImage>().color = selectColor;                                // 추출된 컬러 삽입
+            GameObject.Find("Spuit").GetComponent<RawImage>().color = selectColor;                                // 추출된 컬러 삽입
             PlayerPrefs.SetString(COLORS, string.Format("{0},{1},{2}", selectColor.r, selectColor.g, selectColor.b));
-            ;
             for (int i = 1; i < 9; i++)                                                                                 // Sphere의 색도 변경.
             {
                 GameObject.Find("Sphere" + i).GetComponent<Renderer>().material.color = selectColor;
@@ -53,6 +55,8 @@ public class ColorPick : MonoBehaviour
         else if (Input.touchCount == 0 && touchState)         // 누른 것이 없고, 터치 변수가 true이면
         {
             GameObject.Find("Screenshot").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0f); // Screenshot 객체 투명화
+            GameObject.Find("ScreenEdge").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0f); // Screenshot 객체 투명화
+            GameObject.Find("Spuit").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0f);      // Spuit 객체 투명화
             Camera.main.clearFlags = temp_clearFlags;           // 카메라 기능 ON
             Camera.main.cullingMask = temp_cullingMask;         // 카메라 기능 ON
             stateSwitch = false;                                // switch OFF
@@ -67,6 +71,8 @@ public class ColorPick : MonoBehaviour
         Camera.main.cullingMask = 0;                    // 화면을 멈춘다
         GameObject.Find("Screenshot").GetComponent<RawImage>().texture = tempImage;                         // tempImage를 Screenshot 객체에 덮어 씌운다.
         GameObject.Find("Screenshot").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 1f);     // Screenshot 객체 불투명화
+        GameObject.Find("ScreenEdge").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);   // Screenshot 객체 불투명화
+        GameObject.Find("Spuit").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);          // Spuit 객체 불투명화
         Invoke("ChangeStateValue", 1.0f);               //1초 뒤 상태변수 변경
     }
     void ChangeStateValue()                             // 상태변수 변경.
