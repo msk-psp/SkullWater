@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+﻿/***********************************
+코  드 : MyMenuClick
+수  정 : 20170602 김민수, 오장원, 정지훈 작성
+***********************************/
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using Furniture;
 public class MyMenuClick : MonoBehaviour {
-    public RectTransform prefab;
     public GameObject oCube;
-
+    private RectTransform prefab;
     private string mCube_name;
 
     private float mCube_xScale;
@@ -20,6 +23,7 @@ public class MyMenuClick : MonoBehaviour {
     
     public void CreateCube()
     {
+        prefab = this.GetComponent<RectTransform>();
         GameObject plane = GameObject.FindWithTag("Bottom");
         GameObject Furniture;
         mCube_name = prefab.FindChild("TitlePanel").FindChild("CubeName").GetComponent<Text>().text.ToString();
@@ -37,7 +41,6 @@ public class MyMenuClick : MonoBehaviour {
             Furniture = Instantiate(oCube);     //처음 생성
             
         }
-        
 
         mCube_xPosition = plane.transform.position.x;
         mCube_yPosition = plane.transform.position.y;

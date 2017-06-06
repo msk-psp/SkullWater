@@ -30,7 +30,7 @@ public class SqlLiteBehaviour : MonoBehaviour
 
 
 
-            Debug.Log("type= " + type + "  name =" + name);
+         //   Debug.Log("type= " + type + "  name =" + name);
         }
         reader.Close();                                             // 리더(커서 비슷한거) 닫아주기
         reader = null;

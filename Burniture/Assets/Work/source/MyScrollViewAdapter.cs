@@ -3,19 +3,22 @@
 수  정 : 20170530 김민수, 정지훈 작성
 ***********************************/
 using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using FirebaseAccess;
 using Furniture;
 using System.Data;
 using Mono.Data.Sqlite;
+using System.IO;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 public class MyScrollViewAdapter : MonoBehaviour
 {
 
-    public Texture2D[] availableIcons;                  // 아이콘 이미지들
+    public Texture2D[] fImage = new Texture2D[9];       // 아이콘 이미지들
     public RectTransform prefab;                        // 아이템 prefab
     //public Text countText;                            // 개수 텍스트 여기에 큐브 개수 넣으면 됨.
     public RectTransform panel;                         // 데이터 베이스를 보여줄 Panel
@@ -23,12 +26,14 @@ public class MyScrollViewAdapter : MonoBehaviour
     public string userID;                               // user ID;
     private Transaction tran;                           // 파이어 베이스에서 데이터 가져올 때 사용하는 클래스
     string dbName = "burnitureDatabase.db";             // 내부 DB 파일로 저장될 이름
-    string filePath;                                    // 기본 경로를 받아오기 위한 변수
     private string mCube_name = null;                   // 저장할 큐브 이름
-
+    private string filePath;                            // 기본 경로를 받아오기 위한 변수
+    private string conn;                                // URI+ filepath
     private float mCube_xScale;                         // 큐브의 x 크기
     private float mCube_yScale;                         // 큐브의 y 크기
     private float mCube_zScale;                         // 큐브의 z 크기
+    public Texture2D[] my_button = new Texture2D[2];
+    public Texture2D[] web_button = new Texture2D[2];
 
     public int switch_value = 0;                        // 스위치를 통해 View조작
 
@@ -37,30 +42,113 @@ public class MyScrollViewAdapter : MonoBehaviour
     void Start()                                        // 데이터베이스창을 여는 함수
     {
         panel.gameObject.SetActive(false);              // panel 오브젝트 비활성화
+        //filePath = Application.persistentDataPath + "/" + dbName; //for android
+        filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
+        {
+
+            WWW loadDB = new WWW("jar:file://" + Application.dataPath + "!/assets/" + dbName);  // this is the path to your StreamingAssets in android
+            while (!loadDB.isDone)
+            {
+
+            }  // CAREFUL here, for safety reasons you shouldn't let this while loop unattended, place a timer and error check
+
+            // then save to Application.persistentDataPath
+
+            File.WriteAllBytes(filePath, loadDB.bytes);
+        }
+        Debug.Log("DB Log : " + filePath);
     }
     public void View_On()                               // List를 보여주기 위한 함수
     {
         panel.gameObject.SetActive(true);               // panel 오브젝트 활성화
         Internal_Update_Items();                        // 내부DB를 불러오는 함수
+        //Debug.Log("DB Path : " + conn);
     }
-    public void View_Off()                                       // 데이터베이스창을 여는 함수
+    public void View_Off()                              // 데이터베이스창을 여는 함수
     {
         panel.gameObject.SetActive(false);              // panel 오브젝트 비활성화
     }
-
     public void Internal_Update_Items()                 // 내부DB 아이템 업데이트
     {  
-        StartCoroutine(RecieveInternalDB(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고        
-    }
+        StartCoroutine(RecieveInternalDB(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고
+        GameObject.Find("MyFurniture").GetComponent<RawImage>().texture = my_button[0];
+        GameObject.Find("WeFurniture").GetComponent<RawImage>().texture = web_button[1];
 
+    }
+    public void Internal_Delete_Item(int index)
+    {
+        IDbConnection dbconn;
+
+        dbconn = new SqliteConnection(conn);                        // db 연결
+        dbconn.Open();                                              //Open connection to the database.
+        IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
+        string sqlQuery = "DELETE FROM myBurniture WHERE IndexNo=" + index + "";         // 쿼리문 만들기
+
+        dbcmd.CommandText = sqlQuery;                               // 명령어 설정
+        dbcmd.ExecuteNonQuery();
+
+        dbcmd.Dispose();                                            // 커멘드 닫아주기
+        dbcmd = null;
+        dbconn.Close();                                             // 트랜잭션 닫아주기
+        dbconn = null;
+        Internal_Update_Items();
+    }
     public void External_Update_Items()                 // 외부DB 아이템 업데이트
     {
         tran = new Transaction();                       // 임의로 만든 저장객체
-        tran.RetrieveCubesByUserid(userID);             // 외부DB에서 불러오는 부분 (비동기적)
-        StartCoroutine(FetchItemModelsFromServer(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고        
+        tran.RetrieveCubesByUserId(userID);             // 외부DB에서 불러오는 부분 (비동기적)
+        StartCoroutine(FetchItemModelsFromServer(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고  
+        GameObject.Find("MyFurniture").GetComponent<RawImage>().texture = my_button[1];
+        GameObject.Find("WeFurniture").GetComponent<RawImage>().texture = web_button[0];
     }
-    // OnreceivedNewModels에 넘겨줘 각 게임 오브젝트를 생성하고 view List에 
+    public void External_Download_Item(string mCube_name)
+    {
+        /*
+        tran = new Transaction();
+        int delay = 0;
+        //Task<Cube> task = Task<Cube>.Factory.StartNew(() => tran.RetrieveCubeByUserIDAndCubeName("",mCube_name));
+        
+       
+        
+        Debug.Log("External_Download_Item cubeName:"+mCube_name);
+        //while (!task.IsCompleted) ;
+        tran.RetrieveCubeByUserIDAndCubeName("", mCube_name);
+        while (true)                                                 //  서버에서 값을 받아 올 때 까지 기다림 
+        {
+            if (tran.isFailed || 100 <= delay++) { Debug.Log("is failed in download while"); break; }
+            else if (tran.isWaiting) { Debug.Log("is waiting in download while"); new WaitForSeconds(0.1f); }
+            else if (tran.isSuccess) { Debug.Log("is success in download while"); break; }
+        }
+        if (tran.isSuccess)
+        {
+            Debug.Log("if" + tran.isSuccess);
+            (new SendToDatabase()).SendInternalDB(tran.cube, false);
+        }
+        else
+            Debug.Log("status " + tran.isFailed + tran.isSuccess + tran.isWaiting);
+        Debug.Log(JsonUtility.ToJson(tran.cube));
+         */
+    }
+    public void External_Delete_Item(string cubeName)
+    {
+        /*
+        int delay = 0;
+        tran = new Transaction();
+        tran.DeleteCubeByCubeName(cubeName);
 
+        while (true)                                                 //  서버에서 값을 받아 올 때 까지 기다림 
+        {
+            if (tran.isFailed || 20 <= delay++) { Debug.Log("is failed in delete while");  break; }
+            else if (tran.isWaiting) { Debug.Log("is waiting in delete while");  new WaitForSeconds(0.2f); }
+            else if (tran.isSuccess) { Debug.Log("is success in delete while"); break; }
+        }
+
+        tran.RetrieveCubesByUserId(userID);             // 외부DB에서 불러오는 부분 (비동기적)
+
+        StartCoroutine(FetchItemModelsFromServer(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고        
+        */
+    }
     void OnReceivedNewModels(CubeItem[] models)                                     // content에 data 추가하는 함수
     {
         foreach (Transform child in content.transform)                              // content 에 있는 아이템들 다 지움
@@ -78,7 +166,7 @@ public class MyScrollViewAdapter : MonoBehaviour
             instance.SetActive(true);
             var view = InitializeItemView(instance, model);
             //GameObject.Find("ScrollItemPrefab(Clone)").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);
-            Debug.Log("foreach view " + view.titleText.text);
+           // Debug.Log("foreach view " + view.titleText.text);
             views.Add(view);
             ++i;
         }
@@ -86,17 +174,25 @@ public class MyScrollViewAdapter : MonoBehaviour
     CubeItemView InitializeItemView(GameObject viewGameObject, CubeItem model)          // CubeItem View를 초기화하여 넘겨줌,
     {
         CubeItemView view = new CubeItemView(viewGameObject.transform);
+
+        view.index.text = model.index.ToString();
+        view.type.text = Furniture_Choose(model.type);
         view.titleText.text = model.name;
-        // view.iconImage.texture = availableIcons[model.iconIndex];                           //각 index들은 fetch에서 랜덤으로 받아옴'
+        view.color.text = ColorUtility.ToHtmlStringRGB(model.color);
+        view.typeNum.text = model.type.ToString();
+        Debug.Log("MyScrollViewAdapter_Debug view.color.text :" + view.color.text);
+        view.furnitureImage.texture = fImage[model.type];
+        
         view.x.text = model.x.ToString();
         view.y.text = model.y.ToString();
         view.z.text = model.z.ToString();
-        
-        //view.icon2Image.texture = availableIcons[model.icon2Index];
-        //view.icon3Image.texture = availableIcons[model.icon3Index];
+
+        //view.xAxis.text = model.xAxis.ToString();
+        //view.yAxis.text = model.yAxis.ToString();
+        //view.zAxis.text = model.zAxis.ToString();
+
         return view;
     }
-    
     IEnumerator FetchItemModelsFromServer(Action<CubeItem[]> onDone)            // 비동기로 처리라 서버에서 값을 처리할때 까지 기다림
     {
         int count = 0;
@@ -109,7 +205,9 @@ public class MyScrollViewAdapter : MonoBehaviour
             else if (tran.isWaiting) { Debug.Log("is waiting in FetchItem while"); yield return new WaitForSeconds(0.5f); }
             else if (tran.isSuccess) { count = tran.cubes.Count; Debug.Log("is success in FetchItem while"); break; }
         }
-
+        tran.isFailed = false;                                                                // 접속 실패
+        tran.isWaiting = true;                                                               // 대기중
+        tran.isSuccess = false;
         Debug.Log("after FetchItem while");
 
         count = tran.cubes.Count;
@@ -118,86 +216,61 @@ public class MyScrollViewAdapter : MonoBehaviour
 
         for (int i = 0; i < count; ++i)                                 // count 만큼 results[i] 에 값을 넣어줌 그걸 리턴 함
         {                                                               //여기서 큐브의 정보를 넣어주면 됨 
+            results[i].index = i;
             results[i] = new CubeItem();                                // X,Y,Z , 위치좌표, 큐브이름 
-            results[i].name = tran.cubes[i].name;
-            //results[i].iconIndex = UnityEngine.Random.Range(0, availableIcons.Length);
-            results[i].x = tran.cubes[i].x.ToString();
-            results[i].y = tran.cubes[i].y.ToString();
-            results[i].z = tran.cubes[i].z.ToString();
-
-            //results[i].icon2Index = UnityEngine.Random.Range(0, availableIcons.Length);
-            //results[i].icon3Index = UnityEngine.Random.Range(0, availableIcons.Length);
+            results[i].name = tran.cubes[i].name.Trim();
+            results[i].type = int.Parse(tran.cubes[i].type.ToString().Trim());
+            results[i].x = tran.cubes[i].x.ToString().Trim();
+            results[i].y = tran.cubes[i].y.ToString().Trim();
+            results[i].z = tran.cubes[i].z.ToString().Trim();
+            //results[i].xAxis = tran.cubes[i].xAxis.ToString().Trim();
+            //results[i].yAxis = tran.cubes[i].yAxis.ToString().Trim();
+            //results[i].zAxis = tran.cubes[i].zAxis.ToString().Trim();
+            ColorUtility.TryParseHtmlString(tran.cubes[i].color.Trim(), out results[i].color);
+            Debug.Log("MyScrollViewAdapter_Debug result[i].color : " + results[i].color);
         }
         onDone(results);
-    }
-    
-    public class CubeItemView
-    {
-        public Text titleText;
-        public Text x, y, z;
-        public Text xAxis, yAxis, zAxis;
-        //public RawImage iconImage;//, icon2Image,icon3Image;
-
-        public CubeItemView(Transform rootView)
-        {
-            titleText = rootView.Find("TitlePanel/CubeName").GetComponent<Text>();
-            //iconImage = rootView.Find("IconImage").GetComponent<RawImage>();
-            x = rootView.Find("XText").GetComponent<Text>();
-            y = rootView.Find("YText").GetComponent<Text>();
-            z = rootView.Find("ZText").GetComponent<Text>();
-            xAxis = rootView.Find("XAxisText").GetComponent<Text>();
-            yAxis = rootView.Find("YAxisText").GetComponent<Text>();
-            zAxis = rootView.Find("ZAxisText").GetComponent<Text>();
-        }
-
-    }
-    public class CubeItem
-    {
-        public string name;
-        public string x, y, z;
-        public int type;
-        public string rgb;
-        // public int iconIndex;//, icon2Index, icon3Index;
     }
     IEnumerator RecieveInternalDB(Action<CubeItem[]> onDone)
     {
         IDbConnection dbconn;
 
-        string color;
-        string conn;
         int count;
-
-        filePath = Application.persistentDataPath + "/" + dbName;
-         conn = "URI=file:" + Application.dataPath + "/" + dbName;//test
-
+        conn = "URI=file:" + filePath;
+        //  Debug.Log("Database path : " + conn);
         dbconn = new SqliteConnection(conn);                        // db 연결
         dbconn.Open();                                              //Open connection to the database.
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
-        string sqlQuery = "SELECT * " + "FROM myBurniture";         // 쿼리문 만들기
+        string sqlQuery = "SELECT count(IndexNo) FROM myBurniture";         // 쿼리문 만들기
 
-        dbcmd.CommandText = sqlQuery;                               // 명령어 설정
+        dbcmd.CommandText = sqlQuery;                               // 명령어 설정       
+
+        count = Convert.ToInt32(dbcmd.ExecuteScalar());
+        dbcmd.CommandText = "SELECT * FROM myBurniture";
         IDataReader reader = dbcmd.ExecuteReader();                 // 명령어 실행하여 데이터 리더기에 저장
-        count = reader.FieldCount-1;
+
         var results = new CubeItem[count];
-       
-        if (reader.FieldCount == 0)
+
+        if (count == 0)
         {
-            Debug.Log("No Data!!!!");                               // No data
+            Debug.Log("There is No Data!!!!");                               // No data
         }
 
         for (int i = 0; i < count; ++i)                                 // count 만큼 results[i] 에 값을 넣어줌 그걸 리턴 함
         {
             if (!reader.Read()) break; ;//여기서 큐브의 정보를 넣어주면 됨 
             results[i] = new CubeItem();                                // X,Y,Z , 위치좌표, 큐브이름 
+            results[i].index = reader.GetInt32(0);
             results[i].type = reader.GetInt32(1);                       // 저장한 가구의 타입을 가져옴
             results[i].name = reader.GetString(2);                      // 저장한 가구의 이름을 가져옴
             results[i].x = reader.GetString(3);                         // 저장한 가구의 x크기 가져옴
             results[i].y = reader.GetString(4);                         // 저장한 가구의 y크기 가져옴
-            results[i].z = reader.GetString(5);                         // 저장한 가구의 z크기 가져옴
-            results[i].rgb = reader.GetString(6);                       // 저장한 가구의 rgb 가져옴
-            Debug.Log("type= " + results[i].type + "  name =" + results[i].name);
+            results[i].z = reader.GetString(5);                         // 저장한 가구의 z크기 가져옴  
+                                                                        // results[i].xAxis = reader.GetString(6);                     //x 축 y 축 z 축
+                                                                        // results[i].yAxis = reader.GetString(7);
+                                                                        // results[i].zAxis = reader.GetString(8);
         }
- 
+
         dbcmd.Dispose();                                            // 커멘드 닫아주기
         dbcmd = null;
         dbconn.Close();                                             // 트랜잭션 닫아주기
@@ -207,4 +280,66 @@ public class MyScrollViewAdapter : MonoBehaviour
 
         yield return null;
     }
+    public string Furniture_Choose(int num)
+    {
+        switch (num)
+        {
+            case 1:
+                return "서랍장";
+            case 2:
+                return "에어컨";
+            case 3:
+                return "옷장";
+            case 4:
+                return "의자";
+            case 5:
+                return "책장";
+            case 6:
+                return "책상";
+            case 7:
+                return "침대";
+            case 8:
+                return "화장대";
+            default:
+                return "NO";
+        }
+    }
+    public class CubeItemView
+    {
+        public Text titleText;
+        public Text x, y, z;
+        public Text xAxis, yAxis, zAxis;
+        public Text type;
+        public Text index;
+        public Text color;
+        public Text typeNum;
+        public RawImage furnitureImage;
+        //public RawImage iconImage;//, icon2Image,icon3Image;
+
+        public CubeItemView(Transform rootView)
+        {
+            index = rootView.Find("Index").GetComponent<Text>();
+            furnitureImage = rootView.Find("FImage").GetComponent<RawImage>();
+            type = rootView.Find("TitlePanel/Type").GetComponent<Text>();
+            color = rootView.Find("Color").GetComponent<Text>();
+            typeNum = rootView.Find("TypeNum").GetComponent<Text>();
+            titleText = rootView.Find("TitlePanel/CubeName").GetComponent<Text>();
+            x = rootView.Find("TitlePanel/XText").GetComponent<Text>();
+            y = rootView.Find("TitlePanel/YText").GetComponent<Text>();
+            z = rootView.Find("TitlePanel/ZText").GetComponent<Text>();
+            xAxis = rootView.Find("XAxisText").GetComponent<Text>();
+            yAxis = rootView.Find("YAxisText").GetComponent<Text>();
+            zAxis = rootView.Find("ZAxisText").GetComponent<Text>();
+        }
+    }
+    public class CubeItem
+    {
+        public string name;
+        public string x, y, z;
+        public string xAxis, yAxis, zAxis;
+        public int type;
+        public int index;
+        public Color color;
+    }
+    
 }

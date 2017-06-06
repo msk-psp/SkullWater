@@ -38,17 +38,10 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-<<<<<<< HEAD
-      <HintPath>D:/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor">
-      <HintPath>D:/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
-=======
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
->>>>>>> newStopsBranch
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -93,21 +86,9 @@
      <Compile Include="Assets\Vuforia\Scripts\WireframeBehaviour.cs" />
      <Compile Include="Assets\Vuforia\Scripts\WireframeTrackableEventHandler.cs" />
      <Compile Include="Assets\Vuforia\Scripts\WordBehaviour.cs" />
-<<<<<<< HEAD
-     <Compile Include="Assets\Work\source\Distance.cs" />
-     <Compile Include="Assets\Work\source\Fix.cs" />
-     <Compile Include="Assets\Work\source\Line.cs" />
-     <Compile Include="Assets\Work\source\MainMenu.cs" />
-     <Compile Include="Assets\Work\source\NewDrag.cs" />
-     <None Include="Assets\Vuforia\Shaders\ColoredLines.shader" />
-     <None Include="Assets\link.xml" />
-     <None Include="Assets\Vuforia\Shaders\VertexLitWithZ.shader" />
-     <None Include="Assets\readme_SDK.txt" />
-     <None Include="Assets\Vuforia\Shaders\RenderVideoBackground.shader" />
-     <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
-=======
      <Compile Include="Assets\Work\source\BackButton.cs" />
      <Compile Include="Assets\Work\source\ColorPick.cs" />
+     <Compile Include="Assets\Work\source\Context_fun.cs" />
      <Compile Include="Assets\Work\source\Distance.cs" />
      <Compile Include="Assets\Work\source\Drag.cs" />
      <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
@@ -117,15 +98,14 @@
      <Compile Include="Assets\Work\source\Guide.cs" />
      <Compile Include="Assets\Work\source\Gyro.cs" />
      <Compile Include="Assets\Work\source\Line.cs" />
-     <Compile Include="Assets\Work\source\MainMenu.cs" />
+     <Compile Include="Assets\Work\source\Moving.cs" />
      <Compile Include="Assets\Work\source\MyMenuClick.cs" />
      <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
-     <Compile Include="Assets\Work\source\NewDrag.cs" />
-     <Compile Include="Assets\Work\source\NothingScript.cs" />
-     <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
+     <Compile Include="Assets\Work\source\Out_check.cs" />
      <Compile Include="Assets\Work\source\RoomGenerate.cs" />
+     <Compile Include="Assets\Work\source\SaveLoadBehaviour.cs" />
      <Compile Include="Assets\Work\source\SendToDatabase.cs" />
-     <Compile Include="Assets\Work\source\Test.cs" />
+     <Compile Include="Assets\Work\source\SqlLiteBehaviour.cs" />
      <Compile Include="Assets\Work\source\loadScene.cs" />
      <Compile Include="Assets\Work\source\start.cs" />
      <None Include="Assets\Plugins\Android\Firebase\AndroidManifest.xml" />
@@ -139,30 +119,16 @@
      <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
      <None Include="Assets\Work\StreamingAssets\QCAR\Burniture.xml" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
->>>>>>> newStopsBranch
      <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
      <None Include="Assets\license_3rdpartynotice.txt" />
      <None Include="Assets\Vuforia\Editor\WebcamProfiles\profiles.xml" />
      <None Include="Assets\Vuforia\Shaders\DepthMask.shader" />
-<<<<<<< HEAD
-     <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
-     <None Include="Assets\Vuforia\Shaders\ClippingMask.shader" />
-     <None Include="Assets\Vuforia\Shaders\BrightTexture.shader" />
-     <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
- <Reference Include="UnityEngine.UI">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Networking">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>D:/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
-=======
      <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
      <None Include="Assets\Plugins\Android\AndroidManifest.xml" />
      <None Include="Assets\Firebase\Plugins\link.xml" />
      <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver.txt" />
      <None Include="Assets\Vuforia\Shaders\ClippingMask.shader" />
+     <None Include="Assets\Work\source\Outline.shader" />
      <None Include="Assets\Vuforia\Shaders\BrightTexture.shader" />
      <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
      <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
@@ -174,38 +140,55 @@
  </Reference>
  <Reference Include="UnityEngine.Analytics">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
->>>>>>> newStopsBranch
  </Reference>
- <Reference Include="Vuforia.UnityExtensions">
- <HintPath>D:/SkullWater/Burniture/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
- </Reference>
-<<<<<<< HEAD
-=======
  <Reference Include="Firebase.App">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.App.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Auth">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Auth.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Database">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Database.dll</HintPath>
  </Reference>
  <Reference Include="Firebase.Database.Unity">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Database.Unity.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Firebase.Database.Unity.dll</HintPath>
  </Reference>
  <Reference Include="Google.MiniJson">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Google.MiniJson.dll</HintPath>
  </Reference>
  <Reference Include="Google.Sharpen">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Google.Sharpen.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Compat">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Unity.Compat.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Tasks">
- <HintPath>D:/SkullWater/Burniture/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Firebase/Plugins/Unity.Tasks.dll</HintPath>
  </Reference>
->>>>>>> newStopsBranch
+ <Reference Include="Mono.Data">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/Mono.Data.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.Data.Sqlite">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/Mono.Data.Sqlite.dll</HintPath>
+ </Reference>
+ <Reference Include="Mono.Data.SqliteClient">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/Mono.Data.SqliteClient.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Configuration">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/System.Configuration.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Data">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/System.Data.dll</HintPath>
+ </Reference>
+ <Reference Include="System.EnterpriseServices">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/System.EnterpriseServices.dll</HintPath>
+ </Reference>
+ <Reference Include="System.Security">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Plugins/System.Security.dll</HintPath>
+ </Reference>
+ <Reference Include="Vuforia.UnityExtensions">
+ <HintPath>C:/Users/minsoo/Desktop/graduation/0604/SkullWater/Burniture/Assets/Vuforia/Scripts/Internal/Vuforia.UnityExtensions.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

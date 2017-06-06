@@ -41,12 +41,12 @@ public class ColorPick : MonoBehaviour
     {
         if (stateSwitch && Input.touchCount == 1)        // switch가 켜지고, 누르고 있을 때
         {
-            selectColor = screenShot.GetPixel((int)Input.mousePosition.x, (int)Input.mousePosition.y);                  // 스크린샷의 좌표에 해당 색 추출
+            selectColor = screenShot.GetPixel((int)Input.mousePosition.x, (int)Input.mousePosition.y);                      // 스크린샷의 좌표에 해당 색 추출
             Spuit.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0f);                       // Spuit 이미지 좌표 변경
-            GameObject.Find("ColorPicker").GetComponent<RawImage>().color = selectColor;                                // 추출된 컬러 삽입
-            GameObject.Find("Spuit").GetComponent<RawImage>().color = selectColor;                                // 추출된 컬러 삽입
+            GameObject.Find("ColorPicker").GetComponent<RawImage>().color = selectColor;                                    // 추출된 컬러 삽입
+            GameObject.Find("Spuit").GetComponent<RawImage>().color = selectColor;                                          // 추출된 컬러 삽입
             PlayerPrefs.SetString(COLORS, string.Format("{0},{1},{2}", selectColor.r, selectColor.g, selectColor.b));
-            for (int i = 1; i < 9; i++)                                                                                 // Sphere의 색도 변경.
+            for (int i = 1; i < 9; i++)                                                                                     // Sphere의 색도 변경.
             {
                 GameObject.Find("Sphere" + i).GetComponent<Renderer>().material.color = selectColor;
             }
@@ -72,7 +72,7 @@ public class ColorPick : MonoBehaviour
         GameObject.Find("Screenshot").GetComponent<RawImage>().texture = tempImage;                         // tempImage를 Screenshot 객체에 덮어 씌운다.
         GameObject.Find("Screenshot").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 1f);     // Screenshot 객체 불투명화
         GameObject.Find("ScreenEdge").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);   // Screenshot 객체 불투명화
-        GameObject.Find("Spuit").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);          // Spuit 객체 불투명화
+        GameObject.Find("Spuit").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);        // Spuit 객체 불투명화
         Invoke("ChangeStateValue", 1.0f);               //1초 뒤 상태변수 변경
     }
     void ChangeStateValue()                             // 상태변수 변경.
@@ -84,7 +84,8 @@ public class ColorPick : MonoBehaviour
         Rect mcap = new Rect(0, 0, windowWidth, windowHeight);
         RenderTexture rt = new RenderTexture(windowWidth, windowHeight, 24);
         Camera.main.targetTexture = rt;
-        screenShot = new Texture2D(windowWidth, windowHeight, TextureFormat.RGB24, false);
+        screenShot = new Texture2D(windowWidth, windowHeight,
+            TextureFormat.RGB24, false);
         tempImage = new Texture2D(2, 2);
         Camera.main.Render();
         RenderTexture.active = rt;

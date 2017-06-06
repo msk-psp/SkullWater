@@ -1,0 +1,159 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using Mono.Data.Sqlite;
+using System.Data;
+using FirebaseAccess;
+
+public class Context_fun : MonoBehaviour
+{
+    public RectTransform contextMenu;
+    
+    public RectTransform panel;
+    public RectTransform myCanvas;
+
+    private RectTransform prefab;
+    private string mCube_name;
+    private Text selectedIndex;
+
+    private int type;
+    private int index;
+
+    private float mCube_xScale;
+    private float mCube_yScale;
+    private float mCube_zScale;
+
+    private float mCube_xPosition;
+    private float mCube_yPosition;
+    private float mCube_zPosition;
+
+    public GameObject cube;
+    public GameObject chair;    //가구 이름
+    public GameObject[] mFurniture = new GameObject[9];
+    public Vector3 vector;
+    private Transform Fv;
+    private int num;
+    Color fcolor;
+    public Color tcolor;
+
+    // Use this for initialization
+    void Start()
+    {
+    }
+
+    public void Touched()
+    {
+        prefab = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
+        Debug.Log("Touched : " + prefab.name);
+        myCanvas.FindChild("Outcheck").gameObject.SetActive(true);
+        myCanvas.FindChild("ContextMenu").gameObject.SetActive(true);
+        
+        if (prefab != null)
+        {
+            index = int.Parse(prefab.FindChild("Index").GetComponent<Text>().text.ToString());
+            //type = int.Parse(prefab.FindChild("TitlePanel/Type").GetComponent<Text>().text.ToString());
+            mCube_name = prefab.FindChild("TitlePanel").FindChild("CubeName").GetComponent<Text>().text.ToString();
+            int.TryParse(prefab.FindChild("TypeNum").GetComponent<Text>().text, out type);
+            float.TryParse(prefab.FindChild("TitlePanel/XText").GetComponent<Text>().text, out mCube_xScale);
+            float.TryParse(prefab.FindChild("TitlePanel/YText").GetComponent<Text>().text, out mCube_yScale);
+            float.TryParse(prefab.FindChild("TitlePanel/ZText").GetComponent<Text>().text, out mCube_zScale);
+            float.TryParse(prefab.FindChild("XAxisText").GetComponent<Text>().text, out mCube_xPosition);
+            float.TryParse(prefab.FindChild("YAxisText").GetComponent<Text>().text, out mCube_yPosition);
+            float.TryParse(prefab.FindChild("ZAxisText").GetComponent<Text>().text, out mCube_zPosition);
+            ColorUtility.TryParseHtmlString("#" + prefab.FindChild("Color").GetComponent<Text>().text, out fcolor);
+        }
+        else
+            Debug.Log("prefab is null");
+    }
+    public void DeleteItem()
+    {
+        Debug.Log("Delete:"+index);
+        if (index >0)
+        {
+            this.GetComponent<MyScrollViewAdapter>().Internal_Delete_Item(index);           
+            index = -1;
+        }
+        /*else///안쓰임
+        {
+            this.GetComponent<MyScrollViewAdapter>().External_Delete_Item(mCube_name);
+        }*/
+        ContextMenuHiding();
+    }
+    public void DownloadItem()
+    {
+        Debug.Log("DownloadItem : index " + index);
+        if (index <= 0)
+        {
+            this.GetComponent<MyScrollViewAdapter>().External_Download_Item(mCube_name);
+        }
+        ContextMenuHiding();
+    }
+    public void UploadItem()
+    {
+        if (index > 0)
+        {
+            int delay = 0;
+            Transaction tran = new Transaction();
+            while (true)                                                 //  서버에서 값을 받아 올 때 까지 기다림 
+            {
+                if (tran.isFailed || 100 <= delay++) { Debug.Log("is failed in delete while");break; }
+                else if (tran.isWaiting) { Debug.Log("is waiting in delete while"); new WaitForSeconds(0.1f); }
+                else if (tran.isSuccess) { Debug.Log("is success in delete while"); break; }
+            }
+            tran.WriteCube(type, mCube_name, mCube_xScale, mCube_yScale, mCube_zScale, mCube_xPosition, mCube_yPosition, mCube_zScale, "0");
+        }
+        else
+            Debug.Log("이미 업로드 되어있습니다.");
+
+        ContextMenuHiding();
+
+    }
+    public void NewItem()
+    {
+        GameObject FurnitureCube, Furn;
+        GameObject plane = GameObject.FindWithTag("Bottom");
+
+        if (plane != null)
+        {
+            //  Debug.Log("Button clicked!!");
+            FurnitureCube = Instantiate(cube);
+            //if문 넣어서 데이터 베이스에 저장된 가구 객체를 불러온다.
+            Furn = Instantiate(mFurniture[type]);
+            Debug.Log("NewItem Furniture : " + type);
+
+            vector.x = plane.transform.position.x;
+            vector.y = plane.transform.position.y;
+            vector.z = plane.transform.position.z;
+            //transform.position = vector;
+
+            Debug.Log(mCube_xScale + mCube_yScale + mCube_zScale);
+            FurnitureCube.transform.localScale = new Vector3(mCube_xScale, mCube_yScale, mCube_zScale); // 측정한 가구의크기
+            FurnitureCube.name = Furn.name + num; //컨트롤 하기위하여 이름을 모두 다르게 지정
+            num++;
+            FurnitureCube.transform.position = new Vector3(vector.x, FurnitureCube.transform.localScale.x / 2 + 1, vector.z); // 바닥 위에 생성
+            FurnitureCube.SetActive(true);
+            Fv = FurnitureCube.transform;
+            Furn.transform.localScale = new Vector3((float)0.6 * Fv.localScale.x, (float)0.6 * Fv.localScale.y, (float)0.5 * Fv.localScale.z);
+            Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y, -Fv.position.z);
+            //Furn.GetComponent<Renderer>().material.color = new Color(1, 0.92f, 0.016f, 1);//rgb값 넣어서 색변환
+            Furn.GetComponent<Renderer>().material.color = fcolor;
+            Debug.Log("Object Color : " + fcolor);
+            Furn.SetActive(true);
+            Furn.transform.parent = Fv; // 가구의 부모 객체를 큐브로
+
+            myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
+            myCanvas.FindChild("ContextMenu").gameObject.SetActive(false);
+            panel.gameObject.SetActive(false);
+            myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
+        }
+        else
+            Debug.Log("바닥이 생성이 되어있지 않습니다.");
+    }
+
+    private void ContextMenuHiding()
+    {
+        myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
+        myCanvas.FindChild("ContextMenu").gameObject.SetActive(false);
+    }
+}

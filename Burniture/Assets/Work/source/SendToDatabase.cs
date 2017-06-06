@@ -36,16 +36,17 @@ public class SendToDatabase : MonoBehaviour
 
     private Transaction tran;
     public GameObject prefab;
+    public Dropdown dropdown;
     // public RectTransform prefab;
     public RectTransform content;
+    public int furnitureNum;
 
     void Start()
     {
-        filePath = Application.persistentDataPath + "/" + dbName;
+        //filePath = Application.persistentDataPath + "/" + dbName; //for android
+        filePath = Application.dataPath + "/" + dbName;   // for unity editor
         tran = new Transaction();
         prefab.SetActive(false);
-        // PC환경 사용 시 코드
-        // string conn = "URI=file:" + Application.dataPath + "/burnitureDatabase.db"; //Path to database.
 
         // Smart Phone 사용 시 코드
         if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
@@ -95,26 +96,23 @@ public class SendToDatabase : MonoBehaviour
         GetPosition();
         GetText();
 
-  
         prefab.SetActive(true);
     }
 
     public void SendInternalDB()
     {
-
         mCube_name = nameField.text;
-        int test1 = 1;
-        string color;
+        const string TABLENAME = "myBurniture";
+        Color color;
         string conn;
         IDbConnection dbconn;
-        conn = "URI=file:" + filePath;                              // db 경로
-        //
+        furnitureNum = dropdown.value;
+        conn = "URI=file:" + Application.dataPath + "/" + dbName;                              // db 경로
         dbconn = new SqliteConnection(conn);                        // db 연결
         dbconn.Open(); //Open connection to the database.
-        color = GameObject.Find("Spuit").GetComponent<RawImage>().color.ToString();
+        color = GameObject.Find("Spuit").GetComponent<RawImage>().color;
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
-        string sqlQuery = "INSERT INTO myBurniture(Type,Name,XLength,YLength,ZLength,RGB) VALUES ('" + test1 + "', '" + mCube_name + "', '" + mCube_xScale.ToString() + "', '" + mCube_yScale + "', '" + mCube_zScale + "', '" + color + "');";        // 쿼리문 만들기
-
+        string sqlQuery = "INSERT INTO "+TABLENAME+"(Type,Name,XLength,YLength,ZLength,RGB) VALUES ('" + furnitureNum + "', '" + mCube_name + "', '" + mCube_xScale.ToString() + "', '" + mCube_yScale + "', '" + mCube_zScale + "', '" + ColorUtility.ToHtmlStringRGBA(color) + "');";        // 쿼리문 만들기
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
         if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
         {
@@ -131,7 +129,44 @@ public class SendToDatabase : MonoBehaviour
         dbconn = null;
         prefab.SetActive(false);
     }
+    public void SendInternalDB(Cube cube,bool isRoom)
+    {
+        string conn;
+        string TABLENAME;
+        if (isRoom)
+        {
+            TABLENAME = "myRoomFurniture";
+        }
+        else
+        {
+            TABLENAME = "myBurniture";
+        }
+        IDbConnection dbconn;
 
+        conn = "URI=file:" + Application.dataPath + "/" + dbName;                           // db 경로
+        dbconn = new SqliteConnection(conn);                        // db 연결
+        dbconn.Open(); //Open connection to the database.
+        IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
+        
+        string sqlQuery = "INSERT INTO "+TABLENAME+"(Type,Name,XLength,YLength,ZLength,XAxis,YAxis,ZAxis,RGB) VALUES ('" + cube.type + "', '" + cube.name + "', '" + cube.x.ToString() +
+                     "', '" + cube.y.ToString() + "', '" + cube.z.ToString() + "', '" + cube.xAxis + "','" + cube.yAxis + "','" + cube.zAxis + "','" + cube.color + "');";        // 쿼리문 만들기
+        Debug.Log("SendToDatabase sqlQuery:" +sqlQuery);
+        dbcmd.CommandText = sqlQuery;                               // 명령어 설정
+        if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
+        {
+            Debug.Log("Internal DataBase Rollback or Error!!!");
+        }
+        else
+        {
+            Debug.Log("Insert Query excutes Successfully");
+        }
+
+        dbcmd.Dispose();                                            // 커멘드 닫아주기
+        dbcmd = null;
+        dbconn.Close();                                             // 트랜잭션 닫아주기
+        dbconn = null;
+    }
+    
     public void SendCube()                                              // 외부 DB 전송 ( 이름 바꿀것)
     {
         string RGB = GameObject.Find("Spuit").GetComponent<RawImage>().color.ToString();                     
@@ -155,4 +190,5 @@ public class SendToDatabase : MonoBehaviour
     {
         prefab.SetActive(false);                    //Dialog off
     }
+
 }

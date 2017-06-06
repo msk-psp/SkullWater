@@ -157,6 +157,7 @@
     <Compile Include="Assets\Vuforia\Scripts\WordBehaviour.cs" />
     <Compile Include="Assets\Work\source\BackButton.cs" />
     <Compile Include="Assets\Work\source\ColorPick.cs" />
+    <Compile Include="Assets\Work\source\Context_fun.cs" />
     <Compile Include="Assets\Work\source\Distance.cs" />
     <Compile Include="Assets\Work\source\Drag.cs" />
     <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
@@ -169,14 +170,14 @@
     <Compile Include="Assets\Work\source\Moving.cs" />
     <Compile Include="Assets\Work\source\MyMenuClick.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
-    <Compile Include="Assets\Work\source\ReceiveFromDatabase.cs" />
+    <Compile Include="Assets\Work\source\Out_check.cs" />
     <Compile Include="Assets\Work\source\RoomGenerate.cs" />
     <Compile Include="Assets\Work\source\SaveLoadBehaviour.cs" />
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />
-    <Compile Include="Assets\Work\source\SendToInternalDB.cs" />
     <Compile Include="Assets\Work\source\SqlLiteBehaviour.cs" />
     <Compile Include="Assets\Work\source\loadScene.cs" />
     <Compile Include="Assets\Work\source\start.cs" />
+    <Compile Include="Assets\Work\source\testbe.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Firebase\Plugins\link.xml" />
