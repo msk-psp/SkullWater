@@ -107,12 +107,13 @@ public class SendToDatabase : MonoBehaviour
         string conn;
         IDbConnection dbconn;
         furnitureNum = dropdown.value;
-        conn = "URI=file:" + Application.dataPath + "/" + dbName;                              // db 경로
+        conn = "URI=file:" + filePath;
         dbconn = new SqliteConnection(conn);                        // db 연결
         dbconn.Open(); //Open connection to the database.
-        color = GameObject.Find("Spuit").GetComponent<RawImage>().color;
+        color = GameObject.Find("ColorPicker").GetComponent<RawImage>().color;
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
         string sqlQuery = "INSERT INTO "+TABLENAME+"(Type,Name,XLength,YLength,ZLength,RGB) VALUES ('" + furnitureNum + "', '" + mCube_name + "', '" + mCube_xScale.ToString() + "', '" + mCube_yScale + "', '" + mCube_zScale + "', '" + ColorUtility.ToHtmlStringRGBA(color) + "');";        // 쿼리문 만들기
+        Debug.Log("User_Save Color : " + ColorUtility.ToHtmlStringRGBA(color));
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
         if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
         {

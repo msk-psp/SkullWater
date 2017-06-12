@@ -9,7 +9,7 @@ using FirebaseAccess;
 public class Context_fun : MonoBehaviour
 {
     public RectTransform contextMenu;
-    
+
     public RectTransform panel;
     public RectTransform myCanvas;
 
@@ -48,7 +48,7 @@ public class Context_fun : MonoBehaviour
         Debug.Log("Touched : " + prefab.name);
         myCanvas.FindChild("Outcheck").gameObject.SetActive(true);
         myCanvas.FindChild("ContextMenu").gameObject.SetActive(true);
-        
+
         if (prefab != null)
         {
             index = int.Parse(prefab.FindChild("Index").GetComponent<Text>().text.ToString());
@@ -68,10 +68,10 @@ public class Context_fun : MonoBehaviour
     }
     public void DeleteItem()
     {
-        Debug.Log("Delete:"+index);
-        if (index >0)
+        Debug.Log("Delete:" + index);
+        if (index > 0)
         {
-            this.GetComponent<MyScrollViewAdapter>().Internal_Delete_Item(index);           
+            this.GetComponent<MyScrollViewAdapter>().Internal_Delete_Item(index);
             index = -1;
         }
         /*else///안쓰임
@@ -85,7 +85,7 @@ public class Context_fun : MonoBehaviour
         Debug.Log("DownloadItem : index " + index);
         if (index <= 0)
         {
-            this.GetComponent<MyScrollViewAdapter>().External_Download_Item(mCube_name);
+            this.GetComponent<MyScrollViewAdapter>().External_Download_Item(index);
         }
         ContextMenuHiding();
     }
@@ -97,7 +97,7 @@ public class Context_fun : MonoBehaviour
             Transaction tran = new Transaction();
             while (true)                                                 //  서버에서 값을 받아 올 때 까지 기다림 
             {
-                if (tran.isFailed || 100 <= delay++) { Debug.Log("is failed in delete while");break; }
+                if (tran.isFailed || 100 <= delay++) { Debug.Log("is failed in delete while"); break; }
                 else if (tran.isWaiting) { Debug.Log("is waiting in delete while"); new WaitForSeconds(0.1f); }
                 else if (tran.isSuccess) { Debug.Log("is success in delete while"); break; }
             }
@@ -109,6 +109,7 @@ public class Context_fun : MonoBehaviour
         ContextMenuHiding();
 
     }
+
     public void NewItem()
     {
         GameObject FurnitureCube, Furn;
@@ -134,8 +135,28 @@ public class Context_fun : MonoBehaviour
             FurnitureCube.transform.position = new Vector3(vector.x, FurnitureCube.transform.localScale.x / 2 + 1, vector.z); // 바닥 위에 생성
             FurnitureCube.SetActive(true);
             Fv = FurnitureCube.transform;
-            Furn.transform.localScale = new Vector3((float)0.6 * Fv.localScale.x, (float)0.6 * Fv.localScale.y, (float)0.5 * Fv.localScale.z);
-            Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y, -Fv.position.z);
+            Furn.transform.localScale = new Vector3(Furn.transform.localScale.x * Fv.localScale.x, Furn.transform.localScale.y * Fv.localScale.y,
+                Furn.transform.localScale.z * Fv.localScale.z);
+
+            if (Furn.gameObject.tag == "Chair") // 의자 
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 20, Fv.position.z - (Furn.transform.localScale.z / 2.6f));
+            else if (Furn.gameObject.tag == "Air") // 에어컨
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y, Fv.position.z - 1.597f);
+            else if (Furn.gameObject.tag == "Bed") // 침대 d
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 51.39358f, Fv.position.z - 0.00020029f);
+            else if (Furn.gameObject.tag == "Book") // 책장 d
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 51.395f, Fv.position.z + 5.640381e-09f);
+            else if (Furn.gameObject.tag == "Chest") // 서랍장
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 50.698f, Fv.position.z - 1);
+            else if (Furn.gameObject.tag == "Closet") // 옷장 d
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 50.41f, Fv.position.z - 0.0013838f);
+            else if (Furn.gameObject.tag == "Desk") // 책상
+                Furn.transform.position = new Vector3(Fv.position.x + 5, Fv.position.y - Furn.transform.localScale.y + 13, Fv.position.z - 1);
+            else if (Furn.gameObject.tag == "Dressing") // 화장대
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y + Furn.transform.localScale.y + 4, Fv.position.z + Furn.transform.localScale.z / 1.7f);
+            else if (Furn.gameObject.tag == "Table") // 식탁
+                Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y + (Furn.transform.localScale.y / 2) + 5, Fv.position.z);
+
             //Furn.GetComponent<Renderer>().material.color = new Color(1, 0.92f, 0.016f, 1);//rgb값 넣어서 색변환
             Furn.GetComponent<Renderer>().material.color = fcolor;
             Debug.Log("Object Color : " + fcolor);

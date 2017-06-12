@@ -61,28 +61,34 @@ public class Moving : MonoBehaviour
                 }
                 if(hit.collider.gameObject.name == MoveCube.transform.FindChild("RotateArrow").gameObject.name)
                 {
-                    Furn = MoveCube.transform.FindChild("chair(Clone)").gameObject;
+                    //Furn = MoveCube.transform.FindChild("chair(Clone)").gameObject;
+                    Arrow = MoveCube.transform.FindChild("RotateArrow").gameObject;
                     if (TouchState == 0)
                     {
                         TouchState = 1; // 누르고있는 동안 한번만 변화하기 위한 상태변수
-                        Furn.transform.Rotate(0, 0, 90);
-                        Transform FV = Furn.transform;
+                        MoveCube.transform.Rotate(0, 90, 0);
+                        
                         Transform MV = MoveCube.transform;
-                        Debug.Log(FV.eulerAngles.y);
-                        if (FV.eulerAngles.y >= 270 && FV.eulerAngles.y <= 271)
+                        Arrow.transform.position = new Vector3(Arrow.transform.position.x + MV.localScale.x, Arrow.transform.position.y,
+                            Arrow.transform.position.z);
+                        Arrow.transform.Rotate(0, -90, 0);
+                        //Transform FV = Furn.transform;
+
+                        Debug.Log(MV.eulerAngles.y);
+                        if (MV.eulerAngles.y >= 270 && MV.eulerAngles.y <= 271)
                         {
                             Debug.Log("270!!");
-                            FV.position = new Vector3(MV.position.x-FV.localScale.x/2, MV.position.y, MV.position.z);
+                            //FV.position = new Vector3(MV.position.x-FV.localScale.x/2, MV.position.y, MV.position.z);
                         }
-                        else if (FV.eulerAngles.y >= 0 && FV.eulerAngles.y <= 1)
+                        else if (MV.eulerAngles.y >= 0 && MV.eulerAngles.y <= 1)
                         {
                             Debug.Log("0!!");
                         }
-                        else if (FV.eulerAngles.y >= 90 && FV.eulerAngles.y <= 91)
+                        else if (MV.eulerAngles.y >= 90 && MV.eulerAngles.y <= 91)
                         {
                             Debug.Log("90!!");
                         }
-                        else if (FV.eulerAngles.y >= 180 && FV.eulerAngles.y <= 181)
+                        else if (MV.eulerAngles.y >= 180 && MV.eulerAngles.y <= 181)
                         {
                             Debug.Log("180!!");
                         }

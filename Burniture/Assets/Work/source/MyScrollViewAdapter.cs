@@ -70,7 +70,7 @@ public class MyScrollViewAdapter : MonoBehaviour
         panel.gameObject.SetActive(false);              // panel 오브젝트 비활성화
     }
     public void Internal_Update_Items()                 // 내부DB 아이템 업데이트
-    {  
+    {
         StartCoroutine(RecieveInternalDB(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고
         GameObject.Find("MyFurniture").GetComponent<RawImage>().texture = my_button[0];
         GameObject.Find("WeFurniture").GetComponent<RawImage>().texture = web_button[1];
@@ -102,35 +102,53 @@ public class MyScrollViewAdapter : MonoBehaviour
         GameObject.Find("MyFurniture").GetComponent<RawImage>().texture = my_button[1];
         GameObject.Find("WeFurniture").GetComponent<RawImage>().texture = web_button[0];
     }
-    public void External_Download_Item(string mCube_name)
+    public void External_Download_Item(int index)
     {
-        /*
-        tran = new Transaction();
-        int delay = 0;
-        //Task<Cube> task = Task<Cube>.Factory.StartNew(() => tran.RetrieveCubeByUserIDAndCubeName("",mCube_name));
-        
-       
-        
-        Debug.Log("External_Download_Item cubeName:"+mCube_name);
-        //while (!task.IsCompleted) ;
-        tran.RetrieveCubeByUserIDAndCubeName("", mCube_name);
-        while (true)                                                 //  서버에서 값을 받아 올 때 까지 기다림 
+        Cube cube = new Cube();
+        RectTransform selectedPrefab = content.GetChild(index * -1).GetComponent<RectTransform>();
+
+        cube.type = Furniture_Choose(selectedPrefab.Find("TitlePanel/Type").GetComponent<Text>().text);
+        cube.color = selectedPrefab.Find("Color").GetComponent<Text>().text;
+        cube.type = int.Parse(selectedPrefab.Find("TypeNum").GetComponent<Text>().text);
+        cube.name = selectedPrefab.Find("TitlePanel/CubeName").GetComponent<Text>().text;
+        cube.x = float.Parse(selectedPrefab.Find("TitlePanel/XText").GetComponent<Text>().text);
+        cube.y = float.Parse(selectedPrefab.Find("TitlePanel/YText").GetComponent<Text>().text);
+        cube.z = float.Parse(selectedPrefab.Find("TitlePanel/ZText").GetComponent<Text>().text);
+        Debug.Log("External_Download:" + selectedPrefab.Find("XAxisText").GetComponent<Text>().text);
+        cube.xAxis = float.Parse(selectedPrefab.Find("XAxisText").GetComponent<Text>().text);
+        cube.yAxis = float.Parse(selectedPrefab.Find("YAxisText").GetComponent<Text>().text);
+        cube.zAxis = float.Parse(selectedPrefab.Find("ZAxisText").GetComponent<Text>().text);
+
+        string conn;
+        string TABLENAME = "myBurniture";
+
+        IDbConnection dbconn;
+
+        conn = "URI=file:" + filePath;                   // db 경로
+        dbconn = new SqliteConnection(conn);                        // db 연결
+        dbconn.Open(); //Open connection to the database.
+        IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
+
+        string sqlQuery = "INSERT INTO " + TABLENAME + "(Type,Name,XLength,YLength,ZLength,XAxis,YAxis,ZAxis,RGB) VALUES ('" + cube.type + "', '" + cube.name + "', '" + cube.x.ToString() +
+                     "', '" + cube.y.ToString() + "', '" + cube.z.ToString() + "', '" + cube.xAxis + "','" + cube.yAxis + "','" + cube.zAxis + "','" + cube.color + "');";        // 쿼리문 만들기
+        Debug.Log("SendToDatabase sqlQuery:" + sqlQuery);
+        dbcmd.CommandText = sqlQuery;                               // 명령어 설정
+        if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
         {
-            if (tran.isFailed || 100 <= delay++) { Debug.Log("is failed in download while"); break; }
-            else if (tran.isWaiting) { Debug.Log("is waiting in download while"); new WaitForSeconds(0.1f); }
-            else if (tran.isSuccess) { Debug.Log("is success in download while"); break; }
-        }
-        if (tran.isSuccess)
-        {
-            Debug.Log("if" + tran.isSuccess);
-            (new SendToDatabase()).SendInternalDB(tran.cube, false);
+            Debug.Log("Internal DataBase Rollback or Error!!!");
         }
         else
-            Debug.Log("status " + tran.isFailed + tran.isSuccess + tran.isWaiting);
-        Debug.Log(JsonUtility.ToJson(tran.cube));
-         */
+        {
+            Debug.Log("Insert Query excutes Successfully");
+        }
+
+        dbcmd.Dispose();                                            // 커멘드 닫아주기
+        dbcmd = null;
+        dbconn.Close();                                             // 트랜잭션 닫아주기
+        dbconn = null;
+        Internal_Update_Items();
     }
-    public void External_Delete_Item(string cubeName)
+    public void External_Delete_Item(string cubeName)//웹에 있는 건 안 지우기로 함
     {
         /*
         int delay = 0;
@@ -166,7 +184,7 @@ public class MyScrollViewAdapter : MonoBehaviour
             instance.SetActive(true);
             var view = InitializeItemView(instance, model);
             //GameObject.Find("ScrollItemPrefab(Clone)").GetComponent<RawImage>().color = new Color(255f, 255f, 255f, 0.7f);
-           // Debug.Log("foreach view " + view.titleText.text);
+            // Debug.Log("foreach view " + view.titleText.text);
             views.Add(view);
             ++i;
         }
@@ -180,16 +198,17 @@ public class MyScrollViewAdapter : MonoBehaviour
         view.titleText.text = model.name;
         view.color.text = ColorUtility.ToHtmlStringRGB(model.color);
         view.typeNum.text = model.type.ToString();
+        Debug.Log("ModelColor:" + model.color);
         Debug.Log("MyScrollViewAdapter_Debug view.color.text :" + view.color.text);
         view.furnitureImage.texture = fImage[model.type];
-        
+
         view.x.text = model.x.ToString();
         view.y.text = model.y.ToString();
         view.z.text = model.z.ToString();
 
-        //view.xAxis.text = model.xAxis.ToString();
-        //view.yAxis.text = model.yAxis.ToString();
-        //view.zAxis.text = model.zAxis.ToString();
+        view.xAxis.text = model.xAxis.ToString();
+        view.yAxis.text = model.yAxis.ToString();
+        view.zAxis.text = model.zAxis.ToString();
 
         return view;
     }
@@ -216,18 +235,17 @@ public class MyScrollViewAdapter : MonoBehaviour
 
         for (int i = 0; i < count; ++i)                                 // count 만큼 results[i] 에 값을 넣어줌 그걸 리턴 함
         {                                                               //여기서 큐브의 정보를 넣어주면 됨 
-            results[i].index = i;
-            results[i] = new CubeItem();                                // X,Y,Z , 위치좌표, 큐브이름 
+            results[i] = new CubeItem();
+            results[i].index = i * -1;                         // X,Y,Z , 위치좌표, 큐브이름 
             results[i].name = tran.cubes[i].name.Trim();
             results[i].type = int.Parse(tran.cubes[i].type.ToString().Trim());
             results[i].x = tran.cubes[i].x.ToString().Trim();
             results[i].y = tran.cubes[i].y.ToString().Trim();
             results[i].z = tran.cubes[i].z.ToString().Trim();
-            //results[i].xAxis = tran.cubes[i].xAxis.ToString().Trim();
-            //results[i].yAxis = tran.cubes[i].yAxis.ToString().Trim();
-            //results[i].zAxis = tran.cubes[i].zAxis.ToString().Trim();
-            ColorUtility.TryParseHtmlString(tran.cubes[i].color.Trim(), out results[i].color);
-            Debug.Log("MyScrollViewAdapter_Debug result[i].color : " + results[i].color);
+            results[i].xAxis = tran.cubes[i].xAxis.ToString().Trim();
+            results[i].yAxis = tran.cubes[i].yAxis.ToString().Trim();
+            results[i].zAxis = tran.cubes[i].zAxis.ToString().Trim();
+            ColorUtility.TryParseHtmlString("#" + tran.cubes[i].color, out results[i].color);
         }
         onDone(results);
     }
@@ -269,6 +287,7 @@ public class MyScrollViewAdapter : MonoBehaviour
                                                                         // results[i].xAxis = reader.GetString(6);                     //x 축 y 축 z 축
                                                                         // results[i].yAxis = reader.GetString(7);
                                                                         // results[i].zAxis = reader.GetString(8);
+            ColorUtility.TryParseHtmlString("#" + reader.GetString(9), out results[i].color);
         }
 
         dbcmd.Dispose();                                            // 커멘드 닫아주기
@@ -300,8 +319,36 @@ public class MyScrollViewAdapter : MonoBehaviour
                 return "침대";
             case 8:
                 return "화장대";
+            case 9:
+                return "테이블";
             default:
                 return "NO";
+        }
+    }
+    public int Furniture_Choose(String furnitureName)
+    {
+        switch (furnitureName)
+        {
+            case "서랍장":
+                return 1;
+            case "에어컨":
+                return 2;
+            case "옷장":
+                return 3;
+            case "의자":
+                return 4;
+            case "책장":
+                return 5;
+            case "책상":
+                return 6;
+            case "침대":
+                return 7;
+            case "화장대":
+                return 8;
+            case "테이블":
+                return 9;
+            default:
+                return 0;
         }
     }
     public class CubeItemView
@@ -340,6 +387,8 @@ public class MyScrollViewAdapter : MonoBehaviour
         public int type;
         public int index;
         public Color color;
+        public CubeItem() { xAxis = "0"; yAxis = "0"; zAxis = "0"; }
     }
-    
+
+
 }
