@@ -28,18 +28,20 @@ public class Context_fun : MonoBehaviour
     private float mCube_yPosition;
     private float mCube_zPosition;
 
+
+    public GameObject[] mFurniture = new GameObject[10];
+
     public GameObject cube;
-    public GameObject chair;    //가구 이름
-    public GameObject[] mFurniture = new GameObject[9];
+    public GameObject chair, table;//가구 이름
     public Vector3 vector;
     private Transform Fv;
     private int num;
-    Color fcolor;
+    private  Color fcolor;
     public Color tcolor;
-
     // Use this for initialization
     void Start()
     {
+
     }
 
     public void Touched()
@@ -52,16 +54,18 @@ public class Context_fun : MonoBehaviour
         if (prefab != null)
         {
             index = int.Parse(prefab.FindChild("Index").GetComponent<Text>().text.ToString());
-            //type = int.Parse(prefab.FindChild("TitlePanel/Type").GetComponent<Text>().text.ToString());
+            type = Furniture_Choose(prefab.FindChild("TitlePanel/Type").GetComponent<Text>().text.ToString());
             mCube_name = prefab.FindChild("TitlePanel").FindChild("CubeName").GetComponent<Text>().text.ToString();
-            int.TryParse(prefab.FindChild("TypeNum").GetComponent<Text>().text, out type);
+            if (!ColorUtility.TryParseHtmlString("#" + prefab.FindChild("Color").GetComponent<Text>().text.ToString(), out fcolor))
+                ColorUtility.TryParseHtmlString("#FFFFFF",out fcolor);
             float.TryParse(prefab.FindChild("TitlePanel/XText").GetComponent<Text>().text, out mCube_xScale);
             float.TryParse(prefab.FindChild("TitlePanel/YText").GetComponent<Text>().text, out mCube_yScale);
             float.TryParse(prefab.FindChild("TitlePanel/ZText").GetComponent<Text>().text, out mCube_zScale);
             float.TryParse(prefab.FindChild("XAxisText").GetComponent<Text>().text, out mCube_xPosition);
             float.TryParse(prefab.FindChild("YAxisText").GetComponent<Text>().text, out mCube_yPosition);
             float.TryParse(prefab.FindChild("ZAxisText").GetComponent<Text>().text, out mCube_zPosition);
-            ColorUtility.TryParseHtmlString("#" + prefab.FindChild("Color").GetComponent<Text>().text, out fcolor);
+
+
         }
         else
             Debug.Log("prefab is null");
@@ -109,7 +113,6 @@ public class Context_fun : MonoBehaviour
         ContextMenuHiding();
 
     }
-
     public void NewItem()
     {
         GameObject FurnitureCube, Furn;
@@ -176,5 +179,32 @@ public class Context_fun : MonoBehaviour
     {
         myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
         myCanvas.FindChild("ContextMenu").gameObject.SetActive(false);
+    }
+
+    private int Furniture_Choose(string furnitureName)
+    {
+        switch (furnitureName)
+        {
+            case "서랍장":
+                return 1;
+            case "에어컨":
+                return 2;
+            case "옷장":
+                return 3;
+            case "의자":
+                return 4;
+            case "책장":
+                return 5;
+            case "책상":
+                return 6;
+            case "침대":
+                return 7;
+            case "화장대":
+                return 8;
+            case "테이블":
+                return 9;
+            default:
+                return 0;
+        }
     }
 }

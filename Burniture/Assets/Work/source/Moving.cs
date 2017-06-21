@@ -15,11 +15,12 @@ public class Moving : MonoBehaviour
     private int ChangeStatus = 1;
     public GameObject PreCube; // 이전 큐브 저장
     public GameObject PreArrow;
+    private int start_layer;
 
     public Material Mat;
     void Start()
     {
-
+        start_layer = MoveCube.layer;
     }
     void Update()
     {
@@ -40,6 +41,11 @@ public class Moving : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
             RaycastHit hit = new RaycastHit(); // 레이저가 맞을때를 hit라고 선언
 
+            /*if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Bottom")
+            {
+                MoveCube.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+            }
+            else */
             if (Physics.Raycast(ray, out hit) && Cube_num == 0) // 레이저가 오브젝트에 맞고, 아직 선택된 것이 없을때
             {
                 if (hit.collider.gameObject.tag == "Cube")//터치된것이 큐브인지 확인
@@ -102,9 +108,20 @@ public class Moving : MonoBehaviour
             }
             else
             {
-                var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
+                //var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
                 //MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
-                MoveCube.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+                if (hit.collider.gameObject.tag == "Bottom")
+                {
+                    MoveCube.transform.position = new Vector3(hit.point.x, MoveCube.transform.position.y, hit.point.z);
+                }
+            }
+            if(Cube_num != 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                MoveCube.layer = 2;
+            }
+            else
+            {
+                MoveCube.layer = start_layer;
             }
         }
 

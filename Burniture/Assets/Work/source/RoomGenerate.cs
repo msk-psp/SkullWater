@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
-
-public class RoomGenerate : MonoBehaviour {
-
+using Vuforia;
+public class RoomGenerate : MonoBehaviour
+{
+    private const string IMAGETARGET_NAME = "ImageTarget";
     private GameObject Plane;
     private GameObject Quad1, Quad2, Quad3, Quad4;
     private GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU;
@@ -43,9 +44,9 @@ public class RoomGenerate : MonoBehaviour {
 
         FindSphere();
 
-        if (null!=GameObject.FindWithTag("Bottom"))
+        if (null != GameObject.FindWithTag("Bottom"))
         {
-           //토스트 방이 이미 생성되었습니다.
+            //토스트 방이 이미 생성되었습니다.
         }
         else
         {
@@ -63,7 +64,7 @@ public class RoomGenerate : MonoBehaviour {
             Plane.transform.localScale = new Vector3(Plane_xScale, Plane_yScale, Plane_zScale);
             Plane.transform.Rotate(new Vector3(0, 180, 0));
 
-            Plane.layer = 2; // 레이캐스트 무시
+            //Plane.layer = 2; // 레이캐스트 무시
 
             rb = Plane.AddComponent<BoxCollider>();
             rb.size = new Vector3(Plane_xScale, 100, Plane_zScale);
@@ -187,6 +188,8 @@ public class RoomGenerate : MonoBehaviour {
             LBU.SetActive(false);
             RFU.SetActive(false);
             RBU.SetActive(false);
+
+            GameObject.Find(IMAGETARGET_NAME).GetComponent<DefaultTrackableEventHandler>().turnOffUpdate();
         }
     }
     void FindSphere()

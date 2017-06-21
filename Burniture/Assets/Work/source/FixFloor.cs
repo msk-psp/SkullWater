@@ -10,7 +10,6 @@ public class FixFloor : MonoBehaviour  {
     private const int SPHERE_NUMBER = 8;
     private const string IMAGETARGET_NAME = "ImageTarget";
     private const string ARCAMERA_NAME = "ARCamera";
-
 	public void fixfloor()
     {
         GameObject obj;

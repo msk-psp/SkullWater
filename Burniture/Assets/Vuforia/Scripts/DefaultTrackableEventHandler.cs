@@ -6,6 +6,7 @@ Confidential and Proprietary - Protected under copyright and other laws.
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Vuforia
 {
@@ -30,9 +31,12 @@ namespace Vuforia
         private Vector3 firstLineScale;
         private Vector3 firstSphereScale;
 
+        private bool stopFlag = false;
         private bool isStarted = false;
         private Camera myCamera;
         private RaycastHit hit, hit2;
+
+
 
         private GameObject[] Spheres;
         private GameObject[] Lines;
@@ -73,7 +77,7 @@ namespace Vuforia
         #endregion // UNTIY_MONOBEHAVIOUR_METHODS
         void Update()
         {
-            if (isStarted && (SCENENAME == BURNITURE || SCENENAME == LAYOUT))
+            if (isStarted && (SCENENAME == BURNITURE || SCENENAME == LAYOUT) && !stopFlag)
             {
                 float rate;
                 for (int i = 0; i < firstSphereDistance.Length; i++)
@@ -130,7 +134,15 @@ namespace Vuforia
             firstLineScale = new Vector3(2f, 2f, 2f);
         }
 
+        public void turnOffUpdate()
+        {
+            stopFlag = true;
+        }
 
+        public void turnOnUpdate()
+        {
+            stopFlag = false;
+        }
         #endregion // PUBLIC_METHODS
 
 
@@ -154,6 +166,8 @@ namespace Vuforia
             {
                 component.enabled = true;
             }
+
+            GameObject.Find("GenerateRoom").GetComponent<RawImage>().color = Color.red;
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 

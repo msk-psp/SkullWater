@@ -167,6 +167,7 @@
     <Compile Include="Assets\Work\source\FurnitureGenerate.cs" />
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />
+    <Compile Include="Assets\Work\source\GyroTest.cs" />
     <Compile Include="Assets\Work\source\Line.cs" />
     <Compile Include="Assets\Work\source\Moving.cs" />
     <Compile Include="Assets\Work\source\MyMenuClick.cs" />
