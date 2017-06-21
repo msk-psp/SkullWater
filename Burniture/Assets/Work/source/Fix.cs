@@ -3,19 +3,12 @@ using System.Collections;
 
 public class Fix : MonoBehaviour
 {
-    public GameObject Sphere1;
-    public GameObject Sphere2;
-    public GameObject Sphere3;
-    public GameObject Sphere4;
-    public GameObject Sphere5;
-    public GameObject Sphere6;
-    public GameObject Sphere7;
-    public GameObject Sphere8;
-    public GameObject Selected;
-    public Vector3 v;
+    public GameObject Sphere1, Sphere2, Sphere3, Sphere4, Sphere5, Sphere6, Sphere7, Sphere8;
+    private Vector3 v;
 
-    public void FixCube()
+    /*public void FixCube()
     {
+        
         //1,2,3,7을 기준으로한다. 1과7은 2와3을 기준으로 2는 3을 기준으로한다.
         v.x = Sphere1.transform.position.x;
         v.y = Sphere3.transform.position.y;
@@ -58,9 +51,11 @@ public class Fix : MonoBehaviour
         v.z = Sphere7.transform.position.z;
         transform.position = v;
         Sphere7.transform.position = v;
-    }
+    }*/
     public void Fixed()
     {
+        FindSphere();
+
         //바닥
         v.x = Sphere1.transform.position.x;
         v.y = Sphere2.transform.position.y;
@@ -104,5 +99,17 @@ public class Fix : MonoBehaviour
         v.z = Sphere7.transform.position.z;
         transform.position = v;
         Sphere6.transform.position = v;
+    }
+
+    void FindSphere()
+    {
+        Sphere1 = GameObject.FindGameObjectWithTag("Sphere1");
+        Sphere2 = GameObject.FindGameObjectWithTag("Sphere2");
+        Sphere3 = GameObject.FindGameObjectWithTag("Sphere3");
+        Sphere4 = GameObject.FindGameObjectWithTag("Sphere4");
+        Sphere5 = GameObject.FindGameObjectWithTag("Sphere5");
+        Sphere6 = GameObject.FindGameObjectWithTag("Sphere6");
+        Sphere7 = GameObject.FindGameObjectWithTag("Sphere7");
+        Sphere8 = GameObject.FindGameObjectWithTag("Sphere8");
     }
 }

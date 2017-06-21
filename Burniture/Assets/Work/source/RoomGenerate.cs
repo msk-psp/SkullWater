@@ -5,7 +5,7 @@ public class RoomGenerate : MonoBehaviour {
 
     private GameObject Plane;
     private GameObject Quad1, Quad2, Quad3, Quad4;
-    public GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU;
+    private GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU;
     private float Plane_xScale, Plane_yScale, Plane_zScale;
     private float Plane_xPosition, Plane_yPosition, Plane_zPosition;
     private float Quad_xScale, Quad_yScale, Quad_zScale;
@@ -40,6 +40,8 @@ public class RoomGenerate : MonoBehaviour {
     public void GenerateRoom()
     {
         BoxCollider rb;
+
+        FindSphere();
 
         if (null!=GameObject.FindWithTag("Bottom"))
         {
@@ -186,5 +188,17 @@ public class RoomGenerate : MonoBehaviour {
             RFU.SetActive(false);
             RBU.SetActive(false);
         }
+    }
+    void FindSphere()
+    {
+        //LF, RF, LB, RB, LFU, LBU, RFU, RBU;
+        RF = GameObject.FindGameObjectWithTag("Sphere1");
+        LF = GameObject.FindGameObjectWithTag("Sphere2");
+        LFU = GameObject.FindGameObjectWithTag("Sphere3");
+        RFU = GameObject.FindGameObjectWithTag("Sphere4");
+        RBU = GameObject.FindGameObjectWithTag("Sphere5");
+        LBU = GameObject.FindGameObjectWithTag("Sphere6");
+        LB = GameObject.FindGameObjectWithTag("Sphere7");
+        RB = GameObject.FindGameObjectWithTag("Sphere8");
     }
 }

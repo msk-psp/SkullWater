@@ -10,8 +10,15 @@ public class Distance : MonoBehaviour {
     public Transform Line;
     public Vector3 Linepos;
 
-    // Use this for initialization
 
+    private string Sphere1Name, Sphere2Name;
+    private const string CLONE = "(Clone)";
+    // Use this for initialization
+    void Start()
+    {    
+        Sphere1Name = Sphere1.name;
+        Sphere2Name = Sphere2.name;
+    }
 
     // Update is called once per frame
     void Update () {
@@ -26,5 +33,14 @@ public class Distance : MonoBehaviour {
         text.GetComponent<TextMesh>().text = distance; // text에 문자열을 출력시킨다.
         text.GetComponent<TextMesh>().characterSize = 20;
         text.transform.position = Linepos;
+    }
+
+    public void ChangeObjects(string name1, string name2)
+    {
+        if (this.name.Contains(CLONE))
+        {
+            Sphere1 = GameObject.Find(name1 + CLONE).transform;
+            Sphere2 = GameObject.Find(name2 + CLONE).transform;
+        }
     }
 }

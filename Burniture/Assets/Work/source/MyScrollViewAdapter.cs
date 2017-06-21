@@ -42,8 +42,8 @@ public class MyScrollViewAdapter : MonoBehaviour
     void Start()                                        // 데이터베이스창을 여는 함수
     {
         panel.gameObject.SetActive(false);              // panel 오브젝트 비활성화
-        //filePath = Application.persistentDataPath + "/" + dbName; //for android
-        filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        filePath = Application.persistentDataPath + "/" + dbName; //for android
+        //filePath = Application.dataPath + "/" + dbName;   // for unity editor
         if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
         {
 
@@ -98,6 +98,7 @@ public class MyScrollViewAdapter : MonoBehaviour
     {
         tran = new Transaction();                       // 임의로 만든 저장객체
         tran.RetrieveCubesByUserId(userID);             // 외부DB에서 불러오는 부분 (비동기적)
+        //tran.RetrieveCubesAll();
         StartCoroutine(FetchItemModelsFromServer(results => OnReceivedNewModels(results)));       // newCount 개수 만큼, results 에 반환 된 cube Item들을 가지고  
         GameObject.Find("MyFurniture").GetComponent<RawImage>().texture = my_button[1];
         GameObject.Find("WeFurniture").GetComponent<RawImage>().texture = web_button[0];

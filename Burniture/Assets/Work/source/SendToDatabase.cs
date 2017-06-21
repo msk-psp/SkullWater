@@ -43,8 +43,8 @@ public class SendToDatabase : MonoBehaviour
 
     void Start()
     {
-        //filePath = Application.persistentDataPath + "/" + dbName; //for android
-        filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        filePath = Application.persistentDataPath + "/" + dbName; //for android
+       // filePath = Application.dataPath + "/" + dbName;   // for unity editor
         tran = new Transaction();
         prefab.SetActive(false);
 

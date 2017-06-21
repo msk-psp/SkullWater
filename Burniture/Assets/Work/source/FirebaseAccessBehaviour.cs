@@ -221,7 +221,50 @@ namespace FirebaseAccess
 
             return cubes;
         }
+        /*
+        public List<Cube> RetrieveCubesAll()
+        {
+            isFailed = false;
+            isWaiting = true;
+            isSuccess = false;
+            
+            FirebaseDatabase.DefaultInstance
+                  .GetReference(CHILD_CUBES)
+                  .GetValueAsync().ContinueWith(task =>
+                  {                           //비동기적으로 기본주소/Users/%uid% 아래 있는 것들을 받아옴
+                      if (task.IsFaulted)
+                      {
+                          Debug.Log("Retrieve Task Fault");
+                          //failed to load database snapshot
+                          isFailed = true;                                          //받기 실패
+                      }
+                      else if (task.IsCompleted)
+                      {
+                          Debug.Log("Task Completed");
+                          DataSnapshot snapshot = task.Result;                          //받아온 걸 스냅샷에 넣음
+                          if (snapshot == null)
+                          {                                         //받아온 게 null이면
+                              Debug.LogError("해당 큐브들을 찾을 수 없습니다.");
+                              isFailed = true;                                                  //실패
+                              return;
+                          }
+                          //  Debug.Log("key : "+snapshot.Key);
+                          isSuccess = true;                                             //상태 바꿔주고
+                          isWaiting = false;
+                          
+                          foreach (DataSnapshot cubeSnap in snapshot)
+                          {
+                              cubes.Add(JsonUtility.FromJson<Cube>(cubeSnap.GetRawJsonValue())); //Cube List에 cubeSnap안에서 cube를 꺼내서 넣음
 
+                              //Debug.Log("foreach " + cubeSnap.Key + cubeSnap.GetRawJsonValue());
+                          }
+
+                      }
+                  });
+
+            return cubes;
+        }
+        */
         public Cube RetrieveCubeByUserIDAndCubeName(string userId, string cubeName)
         {
             isFailed = false;

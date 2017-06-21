@@ -3,7 +3,7 @@ using System.Collections;
 using Vuforia;
 
 public class Gyro : MonoBehaviour {
-
+    
     // Use this for initialization
     void Start()
     {
@@ -39,4 +39,46 @@ public class Gyro : MonoBehaviour {
                           -Input.gyro.rotationRateUnbiased.y,
                           0);
     }
+
+    /*private Gyroscope gyro;
+    private bool gyrosupport;
+    private Quaternion rotfix;
+
+    [SerializeField]
+    private Transform Worldobj;
+    private float startY;
+
+    // Use this for initialization
+    void Start()
+    {
+        gyrosupport = SystemInfo.supportsGyroscope;
+        GameObject camParent = new GameObject("camParent");
+        camParent.transform.position = transform.position;
+        transform.parent = camParent.transform;
+
+        if (gyrosupport)
+        {
+            gyro = Input.gyro;
+            gyro.enabled = true;
+
+            camParent.transform.rotation = Quaternion.Euler(90f, 180f, 0f);
+            rotfix = new Quaternion(0, 0, 1, 0);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (gyrosupport && startY == 0)
+        {
+            ResetGyroRotation();
+        }
+        transform.rotation = gyro.attitude * rotfix;
+    }
+
+    void ResetGyroRotation()
+    {
+        startY = transform.eulerAngles.y;
+        Worldobj.rotation = Quaternion.Euler(0f, startY, 0f);
+    }*/
 }

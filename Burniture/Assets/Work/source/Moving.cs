@@ -15,23 +15,23 @@ public class Moving : MonoBehaviour
     private int ChangeStatus = 1;
     public GameObject PreCube; // 이전 큐브 저장
     public GameObject PreArrow;
-    
+
     public Material Mat;
     void Start()
     {
 
     }
     void Update()
-    {  
+    {
         if (Input.touchCount == 0)              // 터치가 없으면
         {
             Cube_num = 0;                     // 선택된 것도 없음
             TouchState = 0;                   // 손가락이 떼지면 변화
         }
-            
+
         if (Input.touchCount == 1)              // 화면에 터치한 손가락의 갯수가 한개일때
         {
-            
+
             if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
                 if (Arrow != null && Arrow.transform.parent.gameObject.name == MoveCube.name)
@@ -39,7 +39,7 @@ public class Moving : MonoBehaviour
             }
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
             RaycastHit hit = new RaycastHit(); // 레이저가 맞을때를 hit라고 선언
-            
+
             if (Physics.Raycast(ray, out hit) && Cube_num == 0) // 레이저가 오브젝트에 맞고, 아직 선택된 것이 없을때
             {
                 if (hit.collider.gameObject.tag == "Cube")//터치된것이 큐브인지 확인
@@ -59,19 +59,19 @@ public class Moving : MonoBehaviour
                 {
                     Arrow.SetActive(false);
                 }
-                if(hit.collider.gameObject.name == MoveCube.transform.FindChild("RotateArrow").gameObject.name)
+                if (hit.collider.gameObject.name == MoveCube.transform.FindChild("RotateArrow").gameObject.name)
                 {
                     //Furn = MoveCube.transform.FindChild("chair(Clone)").gameObject;
                     Arrow = MoveCube.transform.FindChild("RotateArrow").gameObject;
                     if (TouchState == 0)
                     {
                         TouchState = 1; // 누르고있는 동안 한번만 변화하기 위한 상태변수
+                        Vector3 A = Arrow.transform.position;
                         MoveCube.transform.Rotate(0, 90, 0);
-                        
+
                         Transform MV = MoveCube.transform;
-                        Arrow.transform.position = new Vector3(Arrow.transform.position.x + MV.localScale.x, Arrow.transform.position.y,
-                            Arrow.transform.position.z);
-                        Arrow.transform.Rotate(0, -90, 0);
+                        Arrow.transform.position = new Vector3(A.x, A.y, A.z);
+                        Arrow.transform.Rotate(0, -270, 0);
                         //Transform FV = Furn.transform;
 
                         Debug.Log(MV.eulerAngles.y);
@@ -103,10 +103,11 @@ public class Moving : MonoBehaviour
             else
             {
                 var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
-                MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                //MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                MoveCube.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
             }
         }
-        
+
 
         else if (Input.touchCount > 1)
         {

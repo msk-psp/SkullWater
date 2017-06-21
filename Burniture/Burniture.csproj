@@ -163,6 +163,7 @@
     <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
     <Compile Include="Assets\Work\source\FirebaseAnonymouslyLoginBehaviour.cs" />
     <Compile Include="Assets\Work\source\Fix.cs" />
+    <Compile Include="Assets\Work\source\FixFloor.cs" />
     <Compile Include="Assets\Work\source\FurnitureGenerate.cs" />
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />
