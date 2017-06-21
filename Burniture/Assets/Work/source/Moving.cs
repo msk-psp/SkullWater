@@ -66,12 +66,12 @@ public class Moving : MonoBehaviour
                     if (TouchState == 0)
                     {
                         TouchState = 1; // 누르고있는 동안 한번만 변화하기 위한 상태변수
+                        Vector3 A = Arrow.transform.position;
                         MoveCube.transform.Rotate(0, 90, 0);
                         
                         Transform MV = MoveCube.transform;
-                        Arrow.transform.position = new Vector3(Arrow.transform.position.x + MV.localScale.x, Arrow.transform.position.y,
-                            Arrow.transform.position.z);
-                        Arrow.transform.Rotate(0, -90, 0);
+                        Arrow.transform.position = new Vector3(A.x, A.y,A.z);
+                        Arrow.transform.Rotate(0, -270, 0);
                         //Transform FV = Furn.transform;
 
                         Debug.Log(MV.eulerAngles.y);
@@ -103,7 +103,8 @@ public class Moving : MonoBehaviour
             else
             {
                 var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
-                MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                //MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                MoveCube.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
             }
         }
         

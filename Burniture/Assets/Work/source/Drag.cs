@@ -27,6 +27,17 @@ public class Drag : MonoBehaviour
 
     }
 
+    public void SetNewObject(GameObject[] Spheres)
+    {
+        Sphere1 = Spheres[0];
+        Sphere2 = Spheres[1];
+        Sphere3 = Spheres[2];
+        Sphere4 = Spheres[3];
+        Sphere5 = Spheres[4];
+        Sphere6 = Spheres[5];
+        Sphere7 = Spheres[6];
+        Sphere8 = Spheres[7];
+    }
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +52,7 @@ public class Drag : MonoBehaviour
             //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); //debug
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
             RaycastHit hit = new RaycastHit();                                  // 레이저가 맞을때를 hit라고 선언
-
+            //int myLayerMask = 1 << 8;
             if (Physics.Raycast(ray, out hit) && sphere_num == 0) // 레이저가 오브젝트에 맞고, 아직 선택된 것이 없을때
             {
                 if (hit.collider.gameObject.tag == "Sphere1")        // 해당 오브젝트가 선택시, 해당 오브젝트를 MoveSphere에 저장.
@@ -69,13 +80,14 @@ public class Drag : MonoBehaviour
                     CeilingSphere = Sphere5;
                 }
             }
-            else if (Physics.Raycast(ray, out hit))
+            else if (Physics.Raycast(ray, out hit) && Input.GetTouch(0).phase == TouchPhase.Moved)          // modify section   if (ground와 충돌 상태 && Touch.GetTouch(0)의 상태)
+            //else if (Physics.Raycast(ray, out hit, myLayerMask))          // modify section   if (ground와 충돌 상태 && Touch.GetTouch(0)의 상태)
             {
                 MoveSphere.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
                 CeilingSphere.transform.position = new Vector3(hit.point.x, CeilingSphere.transform.position.y, hit.point.z);
             }
         }
-        else if (Input.touchCount > 1)                                                                          // 높이 설정 부분.
+        else if (Input.touchCount > 1)                                     // 높이 설정 부분.
         {
             if (Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)     // 
             {

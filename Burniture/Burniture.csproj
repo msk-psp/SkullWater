@@ -18,7 +18,7 @@
     <UnityBuildTarget>Android:13</UnityBuildTarget>
     <UnityVersion>5.4.2f2</UnityVersion>
     <RootNamespace></RootNamespace>
-    <LangVersion>4</LangVersion>
+    <LangVersion Condition=" '$(VisualStudioVersion)' != '10.0' ">4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -64,53 +64,53 @@
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-    </Reference>
     <Reference Include="Firebase.Auth">
       <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Compat">
-      <HintPath>Assets\Firebase\Plugins\Unity.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Database">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
     </Reference>
-    <Reference Include="Firebase.Database.Unity">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Database.Unity.dll</HintPath>
+    <Reference Include="Unity.Compat">
+      <HintPath>Assets\Firebase\Plugins\Unity.Compat.dll</HintPath>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
     </Reference>
+    <Reference Include="Firebase.Database.Unity">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.Unity.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Sharpen">
       <HintPath>Assets\Firebase\Plugins\Google.Sharpen.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.Data">
-      <HintPath>Assets\Plugins\Mono.Data.dll</HintPath>
+    <Reference Include="Firebase.Database">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
     </Reference>
-    <Reference Include="System.Data">
-      <HintPath>Assets\Plugins\System.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Data.Sqlite">
-      <HintPath>Assets\Plugins\Mono.Data.Sqlite.dll</HintPath>
+    <Reference Include="Vuforia.UnityExtensions">
+      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data.SqliteClient">
       <HintPath>Assets\Plugins\Mono.Data.SqliteClient.dll</HintPath>
     </Reference>
-    <Reference Include="System.Configuration">
-      <HintPath>Assets\Plugins\System.Configuration.dll</HintPath>
+    <Reference Include="Mono.Data.Sqlite">
+      <HintPath>Assets\Plugins\Mono.Data.Sqlite.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.Data">
+      <HintPath>Assets\Plugins\Mono.Data.dll</HintPath>
     </Reference>
     <Reference Include="System.EnterpriseServices">
       <HintPath>Assets\Plugins\System.EnterpriseServices.dll</HintPath>
     </Reference>
+    <Reference Include="System.Data">
+      <HintPath>Assets\Plugins\System.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System.Security">
       <HintPath>Assets\Plugins\System.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Vuforia.UnityExtensions">
-      <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
+    <Reference Include="System.Configuration">
+      <HintPath>Assets\Plugins\System.Configuration.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +163,7 @@
     <Compile Include="Assets\Work\source\FirebaseAccessBehaviour.cs" />
     <Compile Include="Assets\Work\source\FirebaseAnonymouslyLoginBehaviour.cs" />
     <Compile Include="Assets\Work\source\Fix.cs" />
+    <Compile Include="Assets\Work\source\FixFloor.cs" />
     <Compile Include="Assets\Work\source\FurnitureGenerate.cs" />
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />

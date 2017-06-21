@@ -43,15 +43,15 @@ public class SendToDatabase : MonoBehaviour
 
     void Start()
     {
-        //filePath = Application.persistentDataPath + "/" + dbName; //for android
-        filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        filePath = Application.persistentDataPath + "/" + dbName; //for android
+        //filePath = Application.dataPath + "/" + dbName;   // for unity editor
         tran = new Transaction();
         prefab.SetActive(false);
 
         // Smart Phone 사용 시 코드
         if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
         {
-            
+
             WWW loadDB = new WWW("jar:file://" + Application.dataPath + "!/assets/" + dbName);  // this is the path to your StreamingAssets in android
             while (!loadDB.isDone)
             {
@@ -112,7 +112,7 @@ public class SendToDatabase : MonoBehaviour
         dbconn.Open(); //Open connection to the database.
         color = GameObject.Find("ColorPicker").GetComponent<RawImage>().color;
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
-        string sqlQuery = "INSERT INTO "+TABLENAME+"(Type,Name,XLength,YLength,ZLength,RGB) VALUES ('" + furnitureNum + "', '" + mCube_name + "', '" + mCube_xScale.ToString() + "', '" + mCube_yScale + "', '" + mCube_zScale + "', '" + ColorUtility.ToHtmlStringRGBA(color) + "');";        // 쿼리문 만들기
+        string sqlQuery = "INSERT INTO " + TABLENAME + "(Type,Name,XLength,YLength,ZLength,RGB) VALUES ('" + furnitureNum + "', '" + mCube_name + "', '" + mCube_xScale.ToString() + "', '" + mCube_yScale + "', '" + mCube_zScale + "', '" + ColorUtility.ToHtmlStringRGBA(color) + "');";        // 쿼리문 만들기
         Debug.Log("User_Save Color : " + ColorUtility.ToHtmlStringRGBA(color));
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
         if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
@@ -130,7 +130,7 @@ public class SendToDatabase : MonoBehaviour
         dbconn = null;
         prefab.SetActive(false);
     }
-    public void SendInternalDB(Cube cube,bool isRoom)
+    public void SendInternalDB(Cube cube, bool isRoom)
     {
         string conn;
         string TABLENAME;
@@ -148,10 +148,10 @@ public class SendToDatabase : MonoBehaviour
         dbconn = new SqliteConnection(conn);                        // db 연결
         dbconn.Open(); //Open connection to the database.
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
-        
-        string sqlQuery = "INSERT INTO "+TABLENAME+"(Type,Name,XLength,YLength,ZLength,XAxis,YAxis,ZAxis,RGB) VALUES ('" + cube.type + "', '" + cube.name + "', '" + cube.x.ToString() +
+
+        string sqlQuery = "INSERT INTO " + TABLENAME + "(Type,Name,XLength,YLength,ZLength,XAxis,YAxis,ZAxis,RGB) VALUES ('" + cube.type + "', '" + cube.name + "', '" + cube.x.ToString() +
                      "', '" + cube.y.ToString() + "', '" + cube.z.ToString() + "', '" + cube.xAxis + "','" + cube.yAxis + "','" + cube.zAxis + "','" + cube.color + "');";        // 쿼리문 만들기
-        Debug.Log("SendToDatabase sqlQuery:" +sqlQuery);
+        Debug.Log("SendToDatabase sqlQuery:" + sqlQuery);
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
         if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
         {
@@ -167,21 +167,21 @@ public class SendToDatabase : MonoBehaviour
         dbconn.Close();                                             // 트랜잭션 닫아주기
         dbconn = null;
     }
-    
+
     public void SendCube()                                              // 외부 DB 전송 ( 이름 바꿀것)
     {
-        string RGB = GameObject.Find("Spuit").GetComponent<RawImage>().color.ToString();                     
+        string RGB = GameObject.Find("Spuit").GetComponent<RawImage>().color.ToString();
         if (RGB.Length <= 0)
         {
             RGB = "0,0,0";
         }
-     
+
         mCube_name = nameField.text;                                    //이름 필드에서 가구 이름 받아옴
         //Debug.Log("name :" + mCube_name);
         if (mCube_name == null && mCube_name.Length == 0) { mCube_name = "MyCube" + Random.Range(1, 10000); }//가구 이름 입력 안 했으면
                                                                                                              //MyCube + 임의의 수로 정함
 
-        tran.WriteCube(mCube_name, mCube_xScale, mCube_yScale, mCube_zScale, 
+        tran.WriteCube(mCube_name, mCube_xScale, mCube_yScale, mCube_zScale,
                         mCube_xPosition, mCube_yPosition, mCube_zPosition, RGB);
         //큐브 저장
         prefab.SetActive(false);                                                                        //Dialog off

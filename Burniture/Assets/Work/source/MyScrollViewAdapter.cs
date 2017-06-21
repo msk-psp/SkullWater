@@ -42,8 +42,8 @@ public class MyScrollViewAdapter : MonoBehaviour
     void Start()                                        // 데이터베이스창을 여는 함수
     {
         panel.gameObject.SetActive(false);              // panel 오브젝트 비활성화
-        //filePath = Application.persistentDataPath + "/" + dbName; //for android
-        filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        filePath = Application.persistentDataPath + "/" + dbName; //for android
+        //filePath = Application.dataPath + "/" + dbName;   // for unity editor
         if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
         {
 
