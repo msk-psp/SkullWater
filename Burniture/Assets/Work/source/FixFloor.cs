@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Vuforia;
 public class FixFloor : MonoBehaviour  {
     
@@ -34,6 +33,10 @@ public class FixFloor : MonoBehaviour  {
             name[i] = Lines[i].GetComponent<Line>().GetNames();
             Lines[i].SetActive(false);
         }
+        GameObject ground= GameObject.Find("Ground");
+        obj = Instantiate(ground);
+        obj.transform.position = ground.transform.position;
+        ground.SetActive(false);
 
         GameObject.Find(IMAGETARGET_NAME).GetComponent<DefaultTrackableEventHandler>().ChangeObjects();
         GameObject.Find(ARCAMERA_NAME).GetComponent<Drag>().ChangeObjects();
@@ -48,6 +51,7 @@ public class FixFloor : MonoBehaviour  {
                 Lines[i].GetComponent<Distance>().ChangeObjects(splitNames[0], splitNames[1]);
             }
         }
+
             TrackerManager.Instance.GetTracker<ObjectTracker>().PersistExtendedTracking(true);
         //TrackerManager.Instance.GetTracker<ObjectTracker>().Stop();
         

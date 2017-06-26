@@ -7,20 +7,22 @@ public class Moving : MonoBehaviour
 
     float FirstDistance;
     public float Speed = 15f;
-    public int Cube_num = 0;
-    public GameObject MoveCube;
+    private int Cube_num = 0;
+    private GameObject MoveCube;
     public GameObject Furn;
-    public GameObject Arrow;
+    private GameObject Arrow;
     private int TouchState = 0;
     private int ChangeStatus = 1;
-    public GameObject PreCube; // 이전 큐브 저장
-    public GameObject PreArrow;
+    private int ColorChangeState = 0;
+    private Color F_Color,T_Color;
+    private GameObject PreCube; // 이전 큐브 저장
+    private GameObject PreArrow;
     private int start_layer;
 
     public Material Mat;
     void Start()
     {
-        start_layer = MoveCube.layer;
+        start_layer = MoveCube.layer; // 여기도
     }
     void Update()
     {
@@ -32,11 +34,43 @@ public class Moving : MonoBehaviour
 
         if (Input.touchCount == 1)              // 화면에 터치한 손가락의 갯수가 한개일때
         {
+            if ((Input.GetTouch(0).phase == TouchPhase.Began || Input.GetTouch(0).phase == TouchPhase.Moved) && MoveCube != null)
+            {
+                if (ColorChangeState == 0)
+                {
+                    Furn = MoveCube.gameObject.transform.GetChild(1).gameObject;
+                    /*try
+                    {
 
+                    }
+                    catch (UnityException)
+                    {
+                        Debug.Log("던져!");
+                    }*/
+                    F_Color = Furn.GetComponent<Renderer>().material.color;
+                }
+                T_Color = F_Color;
+                T_Color.a = 0.5f;
+                Furn.GetComponent<Renderer>().material.color = T_Color;
+                ColorChangeState = 1;
+                Arrow= MoveCube.gameObject.transform.GetChild(0).gameObject;
+                Arrow.layer = 2; // 레이캐스트 무시
+            }
             if (Input.GetTouch(0).phase == TouchPhase.Ended)
             {
+                if (ColorChangeState == 1)
+                {
+                    Furn = MoveCube.gameObject.transform.GetChild(1).gameObject;
+                    Furn.GetComponent<Renderer>().material.color = F_Color;
+                    ColorChangeState = 0;
+                }
+                //Debug.Log("디디디디버그 : " + Furn.GetComponent<Renderer>().material.color + "그리고" + F_Color);
                 if (Arrow != null && Arrow.transform.parent.gameObject.name == MoveCube.name)
+                {
                     Arrow.SetActive(true);
+                    Arrow.layer = 0;
+                }
+
             }
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
             RaycastHit hit = new RaycastHit(); // 레이저가 맞을때를 hit라고 선언
@@ -80,7 +114,7 @@ public class Moving : MonoBehaviour
                         Arrow.transform.Rotate(0, -270, 0);
                         //Transform FV = Furn.transform;
 
-                        Debug.Log(MV.eulerAngles.y);
+                        //Debug.Log(MV.eulerAngles.y);
                         if (MV.eulerAngles.y >= 270 && MV.eulerAngles.y <= 271)
                         {
                             Debug.Log("270!!");
@@ -108,14 +142,16 @@ public class Moving : MonoBehaviour
             }
             else
             {
-                //var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
-                //MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
+                MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                /*
                 if (hit.collider.gameObject.tag == "Bottom")
                 {
                     MoveCube.transform.position = new Vector3(hit.point.x, MoveCube.transform.position.y, hit.point.z);
-                }
+                }*/
             }
-            if(Cube_num != 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+
+            /*if (Cube_num != 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
             {
                 MoveCube.layer = 2;
             }
@@ -123,6 +159,7 @@ public class Moving : MonoBehaviour
             {
                 MoveCube.layer = start_layer;
             }
+            */
         }
 
 

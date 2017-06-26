@@ -28,7 +28,7 @@ public class Distance : MonoBehaviour {
         Linepos.z = (Sphere1.transform.position.z + Sphere2.transform.position.z) / 2;
         transform.position = Linepos;
         dist = Vector3.Distance(Sphere1.position, Sphere2.position); // Sphere1과 Sphere2의 사이 거리계산
-        dist = (int)((dist/99)*22);
+        dist = (int)(((dist/99)*22)-3);
         distance = dist.ToString(); // dist를 문자열로 변환
         text.GetComponent<TextMesh>().text = distance; // text에 문자열을 출력시킨다.
         text.GetComponent<TextMesh>().characterSize = 20;

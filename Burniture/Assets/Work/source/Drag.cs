@@ -15,6 +15,10 @@ public class Drag : MonoBehaviour
     public int SPHERE_SIZE = 8;
     public float FirstDistance;
 
+    //
+    private int start_layer;
+    //
+
     private int ceiling_num;
 
     private GameObject[] Spheres;
@@ -27,6 +31,9 @@ public class Drag : MonoBehaviour
         {
             Spheres[i] = GameObject.FindGameObjectWithTag(SPHERE_TAG_NAME + (i + 1));
         }
+        ///////////////////////////
+        start_layer = MoveSphere.layer;
+        ///////////////////////////
     }
 
     // Update is called once per frame
@@ -77,7 +84,17 @@ public class Drag : MonoBehaviour
                 MoveSphere.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
                 CeilingSphere.transform.position = new Vector3(hit.point.x, CeilingSphere.transform.position.y, hit.point.z);
             }
+            if (sphere_num != 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
+            {
+                MoveSphere.layer = 2;
+            }
+            else
+            {
+                MoveSphere.layer = start_layer; // 여기 고쳐주세요
+            }
         }
+        ///////////////////////
+
         else if (Input.touchCount > 1)                                                                          // 높이 설정 부분.
         {
             if (Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)     // 

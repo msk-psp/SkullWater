@@ -145,13 +145,13 @@ public class Context_fun : MonoBehaviour
                 Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 20, Fv.position.z - (Furn.transform.localScale.z / 2.6f));
             else if (Furn.gameObject.tag == "Air") // 에어컨
                 Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y, Fv.position.z - 1.597f);
-            else if (Furn.gameObject.tag == "Bed") // 침대 d
+            else if (Furn.gameObject.tag == "Bed") // 침대
                 Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 51.39358f, Fv.position.z - 0.00020029f);
-            else if (Furn.gameObject.tag == "Book") // 책장 d
+            else if (Furn.gameObject.tag == "Book") // 책장 
                 Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 51.395f, Fv.position.z + 5.640381e-09f);
             else if (Furn.gameObject.tag == "Chest") // 서랍장
                 Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 50.698f, Fv.position.z - 1);
-            else if (Furn.gameObject.tag == "Closet") // 옷장 d
+            else if (Furn.gameObject.tag == "Closet") // 옷장
                 Furn.transform.position = new Vector3(Fv.position.x, Fv.position.y - 50.41f, Fv.position.z - 0.0013838f);
             else if (Furn.gameObject.tag == "Desk") // 책상
                 Furn.transform.position = new Vector3(Fv.position.x + 5, Fv.position.y - Furn.transform.localScale.y + 13, Fv.position.z - 1);

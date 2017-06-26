@@ -25,7 +25,7 @@ public class MyScrollViewAdapter : MonoBehaviour
     public RectTransform content;                       // content 객체
     public string userID;                               // user ID;
     private Transaction tran;                           // 파이어 베이스에서 데이터 가져올 때 사용하는 클래스
-    string dbName = "burnitureDatabase.db";             // 내부 DB 파일로 저장될 이름
+    private const string DBNAME = "burnitureDatabase.db";             // 내부 DB 파일로 저장될 이름
     private string mCube_name = null;                   // 저장할 큐브 이름
     private string filePath;                            // 기본 경로를 받아오기 위한 변수
     private string conn;                                // URI+ filepath
@@ -45,15 +45,16 @@ public class MyScrollViewAdapter : MonoBehaviour
 
 
         #if UNITY_ANDROID
-                filePath = Application.persistentDataPath + "/" + dbName; //for android
+                filePath = Application.persistentDataPath + "/" + DBNAME; //for android
         #endif
         #if UNITY_EDITOR
-                filePath = Application.dataPath + "/" + dbName;   // for unity editor
+                filePath = Application.dataPath + "/" + DBNAME;   // for unity editor
         #endif
+
         if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
         {
 
-            WWW loadDB = new WWW("jar:file://" + Application.dataPath + "!/assets/" + dbName);  // this is the path to your StreamingAssets in android
+            WWW loadDB = new WWW("jar:file://" + Application.dataPath + "!/assets/" + DBNAME);  // this is the path to your StreamingAssets in android
             while (!loadDB.isDone)
             {
 

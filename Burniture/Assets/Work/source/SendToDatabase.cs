@@ -43,12 +43,9 @@ public class SendToDatabase : MonoBehaviour
 
     void Start()
     {
-        #if UNITY_ANDROID
                 filePath = Application.persistentDataPath + "/" + dbName; //for android
-        #endif
-        #if UNITY_EDITOR
-                filePath = Application.dataPath + "/" + dbName;   // for unity editor
-        #endif
+                //filePath = Application.dataPath + "/" + dbName;   // for unity editor
+
         tran = new Transaction();
         prefab.SetActive(false);
 
@@ -171,7 +168,7 @@ public class SendToDatabase : MonoBehaviour
         dbconn.Close();                                             // 트랜잭션 닫아주기
         dbconn = null;
     }
-    
+    /*
     public void SendCube()                                              // 외부 DB 전송 ( 이름 바꿀것)
     {
         string RGB = GameObject.Find("Spuit").GetComponent<RawImage>().color.ToString();                     
@@ -189,7 +186,7 @@ public class SendToDatabase : MonoBehaviour
                         mCube_xPosition, mCube_yPosition, mCube_zPosition, RGB);
         //큐브 저장
         prefab.SetActive(false);                                                                        //Dialog off
-    }
+    }*/
 
     public void Cancel()
     {

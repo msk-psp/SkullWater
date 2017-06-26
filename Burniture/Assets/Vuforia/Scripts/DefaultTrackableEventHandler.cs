@@ -5,8 +5,8 @@ Confidential and Proprietary - Protected under copyright and other laws.
 ==============================================================================*/
 
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Vuforia
 {
@@ -36,10 +36,10 @@ namespace Vuforia
         private Camera myCamera;
         private RaycastHit hit, hit2;
 
-
-
         private GameObject[] Spheres;
         private GameObject[] Lines;
+
+
         private const string SPHERE_TAG_NAME = "Sphere";
         private const string LINE_TAG_NAME = "Lines";
         private const int SPHERE_NUMBER = 8;
@@ -85,7 +85,6 @@ namespace Vuforia
                     Physics.Raycast(myCamera.ScreenPointToRay(Spheres[i].transform.position), out hit2);
                     rate = hit2.distance / firstSphereDistance[i].GetDistance();
                     if (rate > 1.0f) rate *= 0.5f;
-                    if (rate < 1.0f) rate = 1;
                     Spheres[i].transform.localScale = firstSphereScale * rate;
                 }
                 for (int i = 0; i < firstLineDistance.Length; i++)
@@ -93,7 +92,6 @@ namespace Vuforia
                     Physics.Raycast(myCamera.ScreenPointToRay(Lines[i].transform.position), out hit2);
                     rate = hit2.distance / firstLineDistance[i].GetDistance();
                     if (rate > 1.0f) rate *= 0.5f;
-                    if (rate < 1.0f) rate = 1;
                     Lines[i].transform.localScale = firstLineScale * rate;
                 }
             }
@@ -136,12 +134,12 @@ namespace Vuforia
 
         public void turnOffUpdate()
         {
-            stopFlag = true;
+            stopFlag = false;
         }
 
         public void turnOnUpdate()
         {
-            stopFlag = false;
+            stopFlag = true;
         }
         #endregion // PUBLIC_METHODS
 
