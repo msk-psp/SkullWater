@@ -31,7 +31,8 @@ public class Distance : MonoBehaviour {
         dist = (int)(((dist/99)*22)-3);
         distance = dist.ToString(); // dist를 문자열로 변환
         text.GetComponent<TextMesh>().text = distance; // text에 문자열을 출력시킨다.
-        text.GetComponent<TextMesh>().characterSize = 20;
+        text.GetComponent<TextMesh>().characterSize = 3.3f;
+        text.GetComponent<TextMesh>().fontSize = 100;
         text.transform.position = Linepos;
     }
 
