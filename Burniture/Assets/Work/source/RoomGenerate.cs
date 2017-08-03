@@ -11,7 +11,7 @@ public class RoomGenerate : MonoBehaviour
     private float Plane_xPosition, Plane_yPosition, Plane_zPosition;
     private float Quad_xScale, Quad_yScale, Quad_zScale;
     private float Quad_xPosition, Quad_yPosition, Quad_zPosition;
-    public Material Wmat;
+    public Material Fmat,Wmat;
 
     // Use this for initialization
     void Start()
@@ -23,7 +23,7 @@ public class RoomGenerate : MonoBehaviour
     void Update()
     {
     }
-    public void DestroyRoom()
+    /*public void DestroyRoom()
     {
         if (null != GameObject.FindWithTag("Bottom"))
         {
@@ -37,7 +37,7 @@ public class RoomGenerate : MonoBehaviour
         {
             //생성된 벽이 없습니다.
         }
-    }
+    }*/
     public void GenerateRoom()
     {
         BoxCollider rb;
@@ -53,9 +53,9 @@ public class RoomGenerate : MonoBehaviour
             /*바닥*/
             Plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
             Plane.tag = "Bottom";
-            Plane_xScale = Mathf.Abs((RF.transform.position.x - LF.transform.position.x)) / 10;//Mathf.Abs(LF.transform.position.x - RF.transform.position.x);
+            Plane_xScale = Mathf.Abs((RF.transform.position.x - LF.transform.position.x)) / 10;
             Plane_yScale = 1;
-            Plane_zScale = Mathf.Abs((RB.transform.position.z - RF.transform.position.z)) / 10;//Mathf.Abs(RB.transform.position.z - RF.transform.position.z);
+            Plane_zScale = Mathf.Abs((RB.transform.position.z - RF.transform.position.z)) / 10;
             Plane_xPosition = (RF.transform.position.x + LF.transform.position.x) / 2;
             Plane_yPosition = -0.1f;
             Plane_zPosition = (LB.transform.position.z + RF.transform.position.z) / 2;
@@ -70,8 +70,8 @@ public class RoomGenerate : MonoBehaviour
             rb.size = new Vector3(Plane_xScale, 100, Plane_zScale);
             rb.center = new Vector3(0, -rb.size.y / 2, 0);
 
-            Plane.GetComponent<Renderer>().material = Wmat;
-            Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
+            Plane.GetComponent<Renderer>().material = Fmat;
+            // Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1f);
 
             /*왼쪽벽*/
             Quad1 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -95,7 +95,7 @@ public class RoomGenerate : MonoBehaviour
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad1.GetComponent<Renderer>().material = Wmat;
-            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
+            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
             /*뒷쪽벽*/
             Quad2 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -118,7 +118,7 @@ public class RoomGenerate : MonoBehaviour
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad2.GetComponent<Renderer>().material = Wmat;
-            Quad2.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
+            Quad2.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
             /*오른쪽벽*/
             Quad3 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -142,7 +142,7 @@ public class RoomGenerate : MonoBehaviour
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad3.GetComponent<Renderer>().material = Wmat;
-            Quad3.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
+            Quad3.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
             //Quad3.AddComponent<BoxCollider>();
 
@@ -168,7 +168,7 @@ public class RoomGenerate : MonoBehaviour
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
             Quad4.GetComponent<Renderer>().material = Wmat;
-            Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.3f);
+            Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
             //Plane.transform.localScale += new Vector3(Plane_xScale/11, Plane_yScale/2, Plane_zScale/11) /*- new Vector3(1, 1, 1)*/;
             //Instantiate(Plane);
