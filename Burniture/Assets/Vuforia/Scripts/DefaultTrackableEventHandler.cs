@@ -165,19 +165,29 @@ namespace Vuforia
                 component.enabled = true;
             }
 
-            GameObject.Find("GenerateRoom").GetComponent<RawImage>().color = Color.red;
+            /*if (GameObject.Find("GenerateRoom") != null)
+            {
+                GameObject.Find("GenerateRoom").GetComponent<RawImage>().color = Color.red;
+            }*/
+
+            /*버튼 모션 제어*/
+            if (ButtonMotion.State != 2 && ButtonMotion.State != 3)
+            {
+                ButtonMotion.State = 2;
+                ButtonMotion.ChangeState = 0;
+            }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 
-            if (!isStarted && (SCENENAME == BURNITURE))
+            /*if (!isStarted && (SCENENAME == BURNITURE))
             {
                 SetDistances();
             }
             else if (!isStarted && (SCENENAME == LAYOUT))
             {
                 SetDistances();
-            }
-
+            }*/
+            
         }
         private void SetDistances()
         {
@@ -222,6 +232,8 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+
+            //ButtonMotion.State = 1; // ButtonMotion제어
         }
 
         #endregion // PRIVATE_METHODS
