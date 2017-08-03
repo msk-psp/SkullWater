@@ -189,7 +189,11 @@ public class RoomGenerate : MonoBehaviour
             RFU.SetActive(false);
             RBU.SetActive(false);
 
-            GameObject.Find(IMAGETARGET_NAME).GetComponent<DefaultTrackableEventHandler>().turnOffUpdate();
+            // GameObject.Find(IMAGETARGET_NAME).GetComponent<DefaultTrackableEventHandler>().turnOffUpdate();
+
+            /*버튼모션 제어*/
+            ButtonMotion.State = 5;
+            ButtonMotion.ChangeState = 0;
         }
     }
     void FindSphere()

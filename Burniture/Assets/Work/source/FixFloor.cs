@@ -13,12 +13,11 @@ public class FixFloor : MonoBehaviour
     private const string ARCAMERA_NAME = "ARCamera";
     private GameObject NParent; // ㅇㅇ
     //VuforiaBehaviour qcarBehaviour;
-    public GameObject obj;
+    private GameObject obj;
 
 
     public void fixfloor()
     {
-        
         NParent = GameObject.Find("Copy"); // ㅇㅇ
 
         Spheres = new GameObject[SPHERE_NUMBER];
@@ -27,22 +26,22 @@ public class FixFloor : MonoBehaviour
 
         NParent.transform.position = GameObject.Find(IMAGETARGET_NAME).transform.position ; // ㅇㅇ
 
-        for (int i = 0; i < SPHERE_NUMBER; i++)
+        for (int index = 0; index < SPHERE_NUMBER; index++)
         {
-            Spheres[i] = GameObject.FindGameObjectWithTag(SPHERE_TAG_NAME + (i + 1));
+            Spheres[index] = GameObject.FindGameObjectWithTag(SPHERE_TAG_NAME + (index + 1));
             //obj = Instantiate(Spheres[i]);
-            obj = Spheres[i];
+            obj = Spheres[index];
             //obj.transform.position = Spheres[i].transform.position;
             obj.transform.parent = NParent.transform; // 부모바꾸기
             //Spheres[i].SetActive(false);
         }
         string[] name = new string[Lines.Length]; ;
-        for (int i = 0; i < Lines.Length; i++)
+        for (int index = 0; index < Lines.Length; index++)
         {
             //obj = Instantiate(Lines[i]);
             //obj.transform.position = Lines[i].transform.position;
-            obj = Lines[i];
-            name[i] = Lines[i].GetComponent<Line>().GetNames();
+            obj = Lines[index];
+            name[index] = Lines[index].GetComponent<Line>().GetNames();
             obj.transform.parent = NParent.transform; // 부모바꾸기
             //Lines[i].SetActive(false);
         }
@@ -57,13 +56,13 @@ public class FixFloor : MonoBehaviour
         //GameObject.Find(ARCAMERA_NAME).GetComponent<Drag>().ChangeObjects();
         Lines = GameObject.FindGameObjectsWithTag(LINE_TAG_NAME);   //find line without deactivated gameobject
 
-        for (int i = 0; i < Lines.Length; i++)
+        for (int index = 0; index < Lines.Length; index++)
         {
-            string[] splitNames = name[i].Split(',');
-            Lines[i].GetComponent<Line>().ChangeObjects(splitNames[0], splitNames[1]);
-            if (Lines[i].GetComponent<Distance>())
+            string[] splitNames = name[index].Split(',');
+            Lines[index].GetComponent<Line>().ChangeObjects(splitNames[0], splitNames[1]);
+            if (Lines[index].GetComponent<Distance>())
             {
-                Lines[i].GetComponent<Distance>().ChangeObjects(splitNames[0], splitNames[1]);
+                Lines[index].GetComponent<Distance>().ChangeObjects(splitNames[0], splitNames[1]);
             }
         }
 
@@ -75,5 +74,9 @@ public class FixFloor : MonoBehaviour
          qcarBehaviour.enabled = false;*/
         GameObject.Find(ARCAMERA_NAME).GetComponent<Gyro>().enabled = true;
         //GameObject.Find(ARCAMERA_NAME).GetComponent<KeepScale>().enabled = true;
+
+        /*버튼모션 제어*/
+        ButtonMotion.State = 3;
+        ButtonMotion.ChangeState = 0;
     }
 }

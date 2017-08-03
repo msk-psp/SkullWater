@@ -6,52 +6,6 @@ public class Fix : MonoBehaviour
     public GameObject Sphere1, Sphere2, Sphere3, Sphere4, Sphere5, Sphere6, Sphere7, Sphere8;
     private Vector3 v;
 
-    /*public void FixCube()
-    {
-        
-        //1,2,3,7을 기준으로한다. 1과7은 2와3을 기준으로 2는 3을 기준으로한다.
-        v.x = Sphere1.transform.position.x;
-        v.y = Sphere3.transform.position.y;
-        v.z = Sphere3.transform.position.z;
-        transform.position = v;
-        Sphere4.transform.position = v;
-
-        v.x = Sphere1.transform.position.x;
-        v.y = Sphere3.transform.position.y;
-        v.z = Sphere7.transform.position.z;
-        transform.position = v;
-        Sphere5.transform.position = v;
-
-        v.x = Sphere3.transform.position.x;
-        v.y = Sphere3.transform.position.y;
-        v.z = Sphere7.transform.position.z;
-        transform.position = v;
-        Sphere6.transform.position = v;
-
-        v.x = Sphere3.transform.position.x;
-        v.y = Sphere2.transform.position.y;
-        v.z = Sphere3.transform.position.z;
-        transform.position = v;
-        Sphere2.transform.position = v;
-
-        v.x = Sphere1.transform.position.x;
-        v.y = Sphere2.transform.position.y;
-        v.z = Sphere2.transform.position.z;
-        transform.position = v;
-        Sphere1.transform.position = v;
-
-        v.x = Sphere1.transform.position.x;
-        v.y = Sphere2.transform.position.y;
-        v.z = Sphere7.transform.position.z;
-        transform.position = v;
-        Sphere8.transform.position = v;
-
-        v.x = Sphere2.transform.position.x;
-        v.y = Sphere2.transform.position.y;
-        v.z = Sphere7.transform.position.z;
-        transform.position = v;
-        Sphere7.transform.position = v;
-    }*/
     public void Fixed()
     {
         FindSphere();
@@ -99,6 +53,10 @@ public class Fix : MonoBehaviour
         v.z = Sphere7.transform.position.z;
         transform.position = v;
         Sphere6.transform.position = v;
+
+        /*버튼모션 제어*/
+        ButtonMotion.State = 4;
+        ButtonMotion.ChangeState = 0;
     }
 
     void FindSphere()
