@@ -21,7 +21,7 @@ public class Guide : MonoBehaviour
     void Start()
     {
         window = new Rect(0, 0, 2400, 1000);                                // Canvas의 크기를 가져와 Rect의 크기를 조절한다. 위치조정은 여기서 한다. (여백의 사각형 높이, 너비)
-        windowHeight = myScreen.pixelRect.height;
+        //windowHeight = myScreen.pixelRect.height;
         windowWidth = myScreen.pixelRect.width * 0.85f;
     }
 

@@ -186,7 +186,6 @@
     <None Include="Assets\Plugins\Android\Firebase\res\values\google-services.xml" />
     <None Include="Assets\Plugins\Android\firebase-common-10.2.1\AndroidManifest.xml" />
     <None Include="Assets\Plugins\Android\firebase-common-10.2.1\proguard.txt" />
-    <None Include="Assets\Plugins\iOS\Vuforia.UnityExtensions.iOS.XML" />
     <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
     <None Include="Assets\StreamingAssets\Vuforia\Burniture.xml" />
     <None Include="Assets\Vuforia\Editor\Scripts\Vuforia.UnityExtensions.Editor.XML" />
@@ -202,6 +201,7 @@
     <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
     <None Include="Assets\Work\StreamingAssets\QCAR\Burniture.xml" />
     <None Include="Assets\Work\source\Outline.shader" />
+    <None Include="Assets\fonts\arlishugbmd_test\Readme.txt" />
     <None Include="Assets\license_3rdpartynotice.txt" />
     <None Include="Assets\link.xml" />
     <None Include="Assets\readme_SDK.txt" />

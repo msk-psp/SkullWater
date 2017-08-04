@@ -48,11 +48,12 @@ public class VuforiaInitializer
 	
 	
 	// initializes Vuforia. This is a blocking call that is invoked from c# - Unity will prevent an ANR.
-    public static int initVuforia(Activity activity, int graphicsAPI, String licenseKey)
+    public static int initVuforia(Activity activity, String licenseKey)
     {
 		DebugLog.LOGD("Initializing Vuforia...");
 		
-		Vuforia.setInitParameters(activity, graphicsAPI, licenseKey);
+		// Always set GLES 2.0 - GLES 1.x is no longer supported.
+		Vuforia.setInitParameters(activity, Vuforia.GL_20, licenseKey);
 		
 		// Set the software environment type hint to 'UNITY_SOFTWARE_ENVIRONMENT':
 		Vuforia.setHint(0xCCCCC000, 0x001AAAAA);
