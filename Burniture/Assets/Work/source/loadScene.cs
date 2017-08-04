@@ -13,7 +13,11 @@ public class loadScene : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+<<<<<<< HEAD
         Toast = GameObject.Find("Toast");
+=======
+        Toast = GameObject.FindWithTag("Toast");
+>>>>>>> 6d6df8e2b2dd6734dfed7609306d86869ad6f2e9
         Toast.SetActive(false);
     }
 	
