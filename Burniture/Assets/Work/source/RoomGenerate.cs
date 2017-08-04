@@ -3,74 +3,46 @@ using System.Collections;
 using Vuforia;
 public class RoomGenerate : MonoBehaviour
 {
-    private const string IMAGETARGET_NAME = "ImageTarget";
-    private GameObject Plane;
-    private GameObject Quad1, Quad2, Quad3, Quad4;
-    private GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU;
-    private float Plane_xScale, Plane_yScale, Plane_zScale;
-    private float Plane_xPosition, Plane_yPosition, Plane_zPosition;
-    private float Quad_xScale, Quad_yScale, Quad_zScale;
-    private float Quad_xPosition, Quad_yPosition, Quad_zPosition;
-    public Material Fmat,Wmat;
+    private GameObject Plane; // 바닥
+    private GameObject Quad1, Quad2, Quad3, Quad4; // 벽
+    private GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU; // 꼭지점 객체
+    private float Plane_xScale, Plane_yScale, Plane_zScale; // 바닥 사이즈
+    private float Plane_xPosition, Plane_yPosition, Plane_zPosition; // 바닥 위치
+    private float Quad_xScale, Quad_yScale, Quad_zScale; // 벽 사이즈
+    private float Quad_xPosition, Quad_yPosition, Quad_zPosition; // 벽 위치
+    public Material Fmat,Wmat; // 벽과 바닥의 material
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-    /*public void DestroyRoom()
-    {
-        if (null != GameObject.FindWithTag("Bottom"))
-        {
-            Destroy(Plane);
-            Destroy(Quad1);
-            Destroy(Quad2);
-            Destroy(Quad3);
-            Destroy(Quad4);
-        }
-        else
-        {
-            //생성된 벽이 없습니다.
-        }
-    }*/
     public void GenerateRoom()
     {
         BoxCollider rb;
 
         FindSphere();
 
-        if (null != GameObject.FindWithTag("Bottom"))
-        {
-            //토스트 방이 이미 생성되었습니다.
-        }
-        else
-        {
             /*바닥*/
-            Plane = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            Plane.tag = "Bottom";
+            Plane = GameObject.CreatePrimitive(PrimitiveType.Plane); // 바닥 Plane을 동적으로 생성
+            Plane.tag = "Bottom"; // 태그를 부여
+            /*크기를 각 꼭지점 사이 거리에 반비례하여 부여*/
             Plane_xScale = Mathf.Abs((RF.transform.position.x - LF.transform.position.x)) / 10;
             Plane_yScale = 1;
             Plane_zScale = Mathf.Abs((RB.transform.position.z - RF.transform.position.z)) / 10;
+
+            /*위치*/
             Plane_xPosition = (RF.transform.position.x + LF.transform.position.x) / 2;
-            Plane_yPosition = -0.1f;
+            Plane_yPosition = -0.1f; // 가구를 생성해야 하므로 실제 바닥보다 0.1 낮게 설정
             Plane_zPosition = (LB.transform.position.z + RF.transform.position.z) / 2;
 
             Plane.transform.position = new Vector3(Plane_xPosition, Plane_yPosition, Plane_zPosition);
             Plane.transform.localScale = new Vector3(Plane_xScale, Plane_yScale, Plane_zScale);
-            Plane.transform.Rotate(new Vector3(0, 180, 0));
+            Plane.transform.Rotate(new Vector3(0, 180, 0)); // 한면만 표시되므로 회전이 필요
 
-            //Plane.layer = 2; // 레이캐스트 무시
+            Plane.layer = 2; // 레이캐스트를 무시 하여 드래그가 되지 않게 설정
 
+            /*가구와의 충돌 구현을 위하여 충돌 박스를 객체보다 크게 설정*/
             rb = Plane.AddComponent<BoxCollider>();
             rb.size = new Vector3(Plane_xScale, 100, Plane_zScale);
             rb.center = new Vector3(0, -rb.size.y / 2, 0);
 
-            Plane.GetComponent<Renderer>().material = Fmat;
+            Plane.GetComponent<Renderer>().material = Fmat; // 바닥 material을 넣어줌
             // Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1f);
 
             /*왼쪽벽*/
@@ -94,8 +66,8 @@ public class RoomGenerate : MonoBehaviour
             rb.size = new Vector3(3, 3, 100);
             rb.center = new Vector3(0, 0, rb.size.z / 2);
 
-            Quad1.GetComponent<Renderer>().material = Wmat;
-            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
+            Quad1.GetComponent<Renderer>().material = Wmat; 
+            Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 벽의 스위치 위치를 고려하여 벽의 투명도를 0.5로 설정
 
             /*뒷쪽벽*/
             Quad2 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -170,16 +142,6 @@ public class RoomGenerate : MonoBehaviour
             Quad4.GetComponent<Renderer>().material = Wmat;
             Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
-            //Plane.transform.localScale += new Vector3(Plane_xScale/11, Plane_yScale/2, Plane_zScale/11) /*- new Vector3(1, 1, 1)*/;
-            //Instantiate(Plane);
-            /*Destroy(RB);
-            Destroy(LF);
-            Destroy(RF);
-            Destroy(LB);
-            Destroy(LFU);
-            Destroy(LBU);
-            Destroy(RFU);
-            Destroy(RBU);*/
             RB.SetActive(false);
             LF.SetActive(false);
             RF.SetActive(false);
@@ -189,12 +151,9 @@ public class RoomGenerate : MonoBehaviour
             RFU.SetActive(false);
             RBU.SetActive(false);
 
-            // GameObject.Find(IMAGETARGET_NAME).GetComponent<DefaultTrackableEventHandler>().turnOffUpdate();
-
             /*버튼모션 제어*/
             ButtonMotion.State = 5;
             ButtonMotion.ChangeState = 0;
-        }
     }
     void FindSphere()
     {
