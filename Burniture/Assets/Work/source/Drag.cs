@@ -32,7 +32,7 @@ public class Drag : MonoBehaviour
             Spheres[i] = GameObject.FindGameObjectWithTag(SPHERE_TAG_NAME + (i + 1));
         }
         ///////////////////////////
-        start_layer = MoveSphere.layer;
+        //start_layer = MoveSphere.layer;
         ///////////////////////////
     }
 
