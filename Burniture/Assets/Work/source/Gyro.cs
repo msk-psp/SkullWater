@@ -1,42 +1,29 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Vuforia;
 
-public class Gyro : MonoBehaviour {
+public class Gyro : MonoBehaviour
+{
+    private int StartX;
+    private int StartY;
+    private int StartZ;
 
-    // Use this for initialization
     void Start()
     {
-        VuforiaBehaviour.Instance.RegisterVuforiaStartedCallback(OnVuforiaStarted);
-        VuforiaBehaviour.Instance.RegisterOnPauseCallback(OnPaused); // 카메라 초점모드
-        Input.gyro.enabled = true;
-        Input.gyro.updateInterval = 0.01f;
-    }
-    private void OnVuforiaStarted() // 카메라
-    {
-        bool focusModeSet = CameraDevice.Instance.SetFocusMode(
-     CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
 
-        if (!focusModeSet)
-        {
-            Debug.Log("Failed to set focus mode (unsupported mode).");
-        }
+        Input.gyro.enabled = true; // 자이로 센서 작동
+        Input.gyro.updateInterval = 0.01f; // 자이로 센서 업데이트 시간
+
+        /*처음 자이로 센서의 회전 각도를 기억*/
+        StartX = (int)Input.gyro.rotationRateUnbiased.x;
+        StartY = (int)Input.gyro.rotationRateUnbiased.y;
     }
 
-    private void OnPaused(bool paused) // 카메라
-    {
-        if (!paused) // resumed
-        {
-            // Set again autofocus mode when app is resumed
-            CameraDevice.Instance.SetFocusMode(
-                CameraDevice.FocusMode.FOCUS_MODE_CONTINUOUSAUTO);
-        }
-    }
 
     void Update()
     {
-        transform.Rotate(-Input.gyro.rotationRateUnbiased.x,
-                          -Input.gyro.rotationRateUnbiased.y,
-                          0);
+        /*처음 회전에서 프레임마다 회전각을 계산하여 객제를 회전시킴*/
+        transform.Rotate(StartX - Input.gyro.rotationRateUnbiased.x,
+                        StartY - Input.gyro.rotationRateUnbiased.y,
+                        StartZ + Input.gyro.rotationRateUnbiased.z);
     }
 }

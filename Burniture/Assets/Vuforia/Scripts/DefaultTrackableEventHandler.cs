@@ -1,4 +1,4 @@
-/*==============================================================================
+﻿/*==============================================================================
 Copyright (c) 2010-2014 Qualcomm Connected Experiences, Inc.
 All Rights Reserved.
 Confidential and Proprietary - Protected under copyright and other laws.
@@ -18,7 +18,9 @@ namespace Vuforia
     {
         #region PUBLIC_MEMBER_VARIABLES
 
-
+        public bool stopFlag = false;
+        public bool isStarted = false;
+        
         #endregion //PUBLIC_MEMBER_VARIABLES
 
         #region PRIVATE_MEMBER_VARIABLES
@@ -31,8 +33,6 @@ namespace Vuforia
         private Vector3 firstLineScale;
         private Vector3 firstSphereScale;
 
-        private bool stopFlag = false;
-        private bool isStarted = false;
         private Camera myCamera;
         private RaycastHit hit, hit2;
 
@@ -113,10 +113,12 @@ namespace Vuforia
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
                 OnTrackingFound();
+                turnOnUpdate();
             }
             else
             {
                 OnTrackingLost();
+                turnOffUpdate();
             }
         }
 
@@ -135,11 +137,13 @@ namespace Vuforia
         public void turnOffUpdate()
         {
             stopFlag = false;
+            isStarted = false;
         }
 
         public void turnOnUpdate()
         {
             stopFlag = true;
+            isStarted = true;
         }
         #endregion // PUBLIC_METHODS
 
@@ -165,18 +169,28 @@ namespace Vuforia
                 component.enabled = true;
             }
 
-            GameObject.Find("GenerateRoom").GetComponent<RawImage>().color = Color.red;
+            /*if (GameObject.Find("GenerateRoom") != null)
+            {
+                GameObject.Find("GenerateRoom").GetComponent<RawImage>().color = Color.red;
+            }*/
+
+            /*¹öÆ° ¸ð¼Ç Á¦¾î*/
+            if (ButtonMotion.State != 2 && ButtonMotion.State != 3)
+            {
+                ButtonMotion.State = 2;
+                ButtonMotion.ChangeState = 0;
+            }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 
-            if (!isStarted && (SCENENAME == BURNITURE))
+            /*if (!isStarted && (SCENENAME == BURNITURE))
             {
                 SetDistances();
             }
             else if (!isStarted && (SCENENAME == LAYOUT))
             {
                 SetDistances();
-            }
+            }*/
 
         }
         private void SetDistances()
@@ -222,6 +236,8 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+
+            //ButtonMotion.State = 1; // ButtonMotionÁ¦¾î
         }
 
         #endregion // PRIVATE_METHODS

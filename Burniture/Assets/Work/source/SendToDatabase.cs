@@ -43,12 +43,16 @@ public class SendToDatabase : MonoBehaviour
 
     void Start()
     {
+        #if UNITY_ANDROID
                 filePath = Application.persistentDataPath + "/" + dbName; //for android
-                //filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        #endif
+        #if UNITY_EDITOR
+                filePath = Application.dataPath + "/" + dbName;   // for unity editor
+        #endif
 
         tran = new Transaction();
         prefab.SetActive(false);
-
+        
         // Smart Phone 사용 시 코드
         if (!File.Exists(filePath))//데이터베이스가 생성이 안 되어 있다면.. jar 경로에서 DB를 불러와 어플리케이션  persistentpath에 DB를 write함
         {
@@ -83,9 +87,9 @@ public class SendToDatabase : MonoBehaviour
     }
     private void GetText()
     {
-        nameField = prefab.GetComponentInChildren(typeof(InputField)) as InputField;    //
+        nameField = prefab.GetComponentInChildren(typeof(InputField)) as InputField;
 
-        Text[] textfields = prefab.GetComponentsInChildren<Text>();      //prefab 칠드런에서 텍스트 입력 필드 가져옴           
+        Text[] textfields = prefab.GetComponentsInChildren<Text>();     //prefab 칠드런에서 텍스트 입력 필드 가져옴           
         textfields[0].text = mCube_xScale.ToString();                   //길이 띄워줌
         textfields[1].text = mCube_zScale.ToString();
         textfields[2].text = mCube_yScale.ToString();
@@ -102,6 +106,7 @@ public class SendToDatabase : MonoBehaviour
 
     public void SendInternalDB()
     {
+        //Debug.Log("My Persistent Data Path : +" + Application.persistentDataPath + "");
         mCube_name = nameField.text;
         const string TABLENAME = "myBurniture";
         Color color;
@@ -116,7 +121,7 @@ public class SendToDatabase : MonoBehaviour
         string sqlQuery = "INSERT INTO "+TABLENAME+"(Type,Name,XLength,YLength,ZLength,RGB) VALUES ('" + furnitureNum + "', '" + mCube_name + "', '" + mCube_xScale.ToString() + "', '" + mCube_yScale + "', '" + mCube_zScale + "', '" + ColorUtility.ToHtmlStringRGBA(color) + "');";        // 쿼리문 만들기
         Debug.Log("User_Save Color : " + ColorUtility.ToHtmlStringRGBA(color));
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
-        if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
+        if (dbcmd.ExecuteNonQuery() == -1)                          // 쿼리 실행
         {
             Debug.Log("Internal DataBase Rollback or Error!!!");
         }
@@ -145,7 +150,7 @@ public class SendToDatabase : MonoBehaviour
         }
         IDbConnection dbconn;
 
-        conn = "URI=file:" + Application.dataPath + "/" + dbName;                           // db 경로
+        conn = "URI=file:" + Application.dataPath + "/" + dbName;   // db 경로
         dbconn = new SqliteConnection(conn);                        // db 연결
         dbconn.Open(); //Open connection to the database.
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
@@ -154,7 +159,7 @@ public class SendToDatabase : MonoBehaviour
                      "', '" + cube.y.ToString() + "', '" + cube.z.ToString() + "', '" + cube.xAxis + "','" + cube.yAxis + "','" + cube.zAxis + "','" + cube.color + "');";        // 쿼리문 만들기
         Debug.Log("SendToDatabase sqlQuery:" +sqlQuery);
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
-        if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
+        if (dbcmd.ExecuteNonQuery() == -1)                          // 쿼리 실행
         {
             Debug.Log("Internal DataBase Rollback or Error!!!");
         }

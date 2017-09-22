@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 public class MyScrollViewAdapter : MonoBehaviour
 {
 
-    public Texture2D[] fImage = new Texture2D[9];       // 아이콘 이미지들
+    public Texture2D[] fImage = new Texture2D[10];       // 아이콘 이미지들
     public RectTransform prefab;                        // 아이템 prefab
     //public Text countText;                            // 개수 텍스트 여기에 큐브 개수 넣으면 됨.
     public RectTransform panel;                         // 데이터 베이스를 보여줄 Panel
@@ -131,7 +131,7 @@ public class MyScrollViewAdapter : MonoBehaviour
 
         IDbConnection dbconn;
 
-        conn = "URI=file:" + filePath;                   // db 경로
+        conn = "URI=file:" + filePath;                              // db 경로
         dbconn = new SqliteConnection(conn);                        // db 연결
         dbconn.Open(); //Open connection to the database.
         IDbCommand dbcmd = dbconn.CreateCommand();                  // 명령어 생성
@@ -140,7 +140,7 @@ public class MyScrollViewAdapter : MonoBehaviour
                      "', '" + cube.y.ToString() + "', '" + cube.z.ToString() + "', '" + cube.xAxis + "','" + cube.yAxis + "','" + cube.zAxis + "','" + cube.color + "');";        // 쿼리문 만들기
         Debug.Log("SendToDatabase sqlQuery:" + sqlQuery);
         dbcmd.CommandText = sqlQuery;                               // 명령어 설정
-        if (dbcmd.ExecuteNonQuery() == -1)                          //쿼리 실행
+        if (dbcmd.ExecuteNonQuery() == -1)                          // 쿼리 실행
         {
             Debug.Log("Internal DataBase Rollback or Error!!!");
         }
@@ -207,7 +207,7 @@ public class MyScrollViewAdapter : MonoBehaviour
         view.typeNum.text = model.type.ToString();
         Debug.Log("ModelColor:" + model.color);
         Debug.Log("MyScrollViewAdapter_Debug view.color.text :" + view.color.text);
-        view.furnitureImage.texture = fImage[model.type];
+        view.furnitureImage.texture = fImage[model.type - 1];
 
         view.x.text = model.x.ToString();
         view.y.text = model.y.ToString();
@@ -311,23 +311,25 @@ public class MyScrollViewAdapter : MonoBehaviour
         switch (num)
         {
             case 1:
-                return "서랍장";
-            case 2:
                 return "에어컨";
-            case 3:
-                return "옷장";
-            case 4:
-                return "의자";
-            case 5:
-                return "책장";
-            case 6:
-                return "책상";
-            case 7:
+            case 2:
                 return "침대";
-            case 8:
+            case 3:
+                return "책장";
+            case 4:
+                return "옷장";
+            case 5:
                 return "화장대";
+            case 6:
+                return "선풍기";
+            case 7:
+                return "냉장고";
+            case 8:
+                return "쇼파";
             case 9:
-                return "테이블";
+                return "선반";
+            case 10:
+                return "컴퓨터";
             default:
                 return "NO";
         }
@@ -336,24 +338,26 @@ public class MyScrollViewAdapter : MonoBehaviour
     {
         switch (furnitureName)
         {
-            case "서랍장":
-                return 1;
             case "에어컨":
-                return 2;
-            case "옷장":
-                return 3;
-            case "의자":
-                return 4;
-            case "책장":
-                return 5;
-            case "책상":
-                return 6;
+                return 1;
             case "침대":
-                return 7;
+                return 2;
+            case "책장":
+                return 3;
+            case "옷장":
+                return 4;
             case "화장대":
+                return 5;
+            case "선풍기":
+                return 6;
+            case "냉장고":
+                return 7;
+            case "쇼파":
                 return 8;
-            case "테이블":
+            case "선반":
                 return 9;
+            case "컴퓨터":
+                return 10;
             default:
                 return 0;
         }

@@ -1,0 +1,10 @@
+<dependencies>
+  <packages>
+    <package>com.google.android.gms:play-services-base:10+</package>
+    <package>com.google.firebase:firebase-app-unity:1.1.0</package>
+    <package>com.google.firebase:firebase-auth:10+</package>
+    <package>com.google.firebase:firebase-auth-unity:1.1.0</package>
+    <package>com.google.firebase:firebase-common:10+</package>
+  </packages>
+  <files />
+</dependencies>

@@ -18,11 +18,14 @@ public class Moving : MonoBehaviour
     private GameObject PreCube; // 이전 큐브 저장
     private GameObject PreArrow;
     private int start_layer;
+    private Transform MV;
+    private int lotate_state;
 
     public Material Mat;
     void Start()
     {
-        start_layer = MoveCube.layer; // 여기도
+        lotate_state = 0;
+        //start_layer = MoveCube.layer; // 여기도
     }
     void Update()
     {
@@ -47,11 +50,11 @@ public class Moving : MonoBehaviour
                     {
                         Debug.Log("던져!");
                     }*/
-                    F_Color = Furn.GetComponent<Renderer>().material.color;
+                    //F_Color = Furn.GetComponent<Renderer>().material.color;
                 }
                 T_Color = F_Color;
                 T_Color.a = 0.5f;
-                Furn.GetComponent<Renderer>().material.color = T_Color;
+              //  Furn.GetComponent<Renderer>().material.color = T_Color;
                 ColorChangeState = 1;
                 Arrow= MoveCube.gameObject.transform.GetChild(0).gameObject;
                 Arrow.layer = 2; // 레이캐스트 무시
@@ -61,7 +64,7 @@ public class Moving : MonoBehaviour
                 if (ColorChangeState == 1)
                 {
                     Furn = MoveCube.gameObject.transform.GetChild(1).gameObject;
-                    Furn.GetComponent<Renderer>().material.color = F_Color;
+                    //Furn.GetComponent<Renderer>().material.color = F_Color;
                     ColorChangeState = 0;
                 }
                 //Debug.Log("디디디디버그 : " + Furn.GetComponent<Renderer>().material.color + "그리고" + F_Color);
@@ -109,7 +112,8 @@ public class Moving : MonoBehaviour
                         Vector3 A = Arrow.transform.position;
                         MoveCube.transform.Rotate(0, 90, 0);
 
-                        Transform MV = MoveCube.transform;
+                        //Transform MV = MoveCube.transform;
+                        MV = MoveCube.transform;
                         Arrow.transform.position = new Vector3(A.x, A.y, A.z);
                         Arrow.transform.Rotate(0, -270, 0);
                         //Transform FV = Furn.transform;
@@ -117,19 +121,23 @@ public class Moving : MonoBehaviour
                         //Debug.Log(MV.eulerAngles.y);
                         if (MV.eulerAngles.y >= 270 && MV.eulerAngles.y <= 271)
                         {
+                            lotate_state = 3;
                             Debug.Log("270!!");
                             //FV.position = new Vector3(MV.position.x-FV.localScale.x/2, MV.position.y, MV.position.z);
                         }
                         else if (MV.eulerAngles.y >= 0 && MV.eulerAngles.y <= 1)
                         {
+                            lotate_state = 0;
                             Debug.Log("0!!");
                         }
                         else if (MV.eulerAngles.y >= 90 && MV.eulerAngles.y <= 91)
                         {
+                            lotate_state = 1;
                             Debug.Log("90!!");
                         }
                         else if (MV.eulerAngles.y >= 180 && MV.eulerAngles.y <= 181)
                         {
+                            lotate_state = 2;
                             Debug.Log("180!!");
                         }
                     }
@@ -143,25 +151,30 @@ public class Moving : MonoBehaviour
             else
             {
                 var touchDeltaPosition = (Vector3)Input.GetTouch(0).deltaPosition;
-                MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
-                /*
-                if (hit.collider.gameObject.tag == "Bottom")
+                //MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f); //드래그
+                // modify
+                if (lotate_state == 3)
                 {
-                    MoveCube.transform.position = new Vector3(hit.point.x, MoveCube.transform.position.y, hit.point.z);
-                }*/
+                    MoveCube.transform.Translate(touchDeltaPosition.y * Time.deltaTime * 20f, 0, -touchDeltaPosition.x * Time.deltaTime * 20f);
+                    Debug.Log("Debug Lotate : 270!!");
+                }
+                else if (lotate_state == 1)
+                {
+                    MoveCube.transform.Translate(-touchDeltaPosition.y * Time.deltaTime * 20f, 0, touchDeltaPosition.x * Time.deltaTime * 20f);
+                    Debug.Log("Debug Lotate : 90!!");
+                }
+                else if (lotate_state == 2)
+                {
+                    MoveCube.transform.Translate(-touchDeltaPosition.x * Time.deltaTime * 20f, 0, -touchDeltaPosition.y * Time.deltaTime * 20f);
+                    Debug.Log("Debug Lotate : 180!!");
+                }
+                else
+                {
+                    MoveCube.transform.Translate(touchDeltaPosition.x * Time.deltaTime * 20f, 0, touchDeltaPosition.y * Time.deltaTime * 20f);
+                    Debug.Log("Debug Lotate : 0!!");
+                }
             }
-
-            /*if (Cube_num != 0 && Input.GetTouch(0).phase == TouchPhase.Moved)
-            {
-                MoveCube.layer = 2;
-            }
-            else
-            {
-                MoveCube.layer = start_layer;
-            }
-            */
         }
-
 
         else if (Input.touchCount > 1)
         {

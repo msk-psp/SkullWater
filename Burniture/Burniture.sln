@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burniture", "Burniture.csproj", "{5FF2D204-A87D-E812-4B36-E64975E35630}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Burniture.Editor", "Burniture.Editor.csproj", "{85BD6BF5-C6BF-DE53-61BE-8ED33CE32AC4}"

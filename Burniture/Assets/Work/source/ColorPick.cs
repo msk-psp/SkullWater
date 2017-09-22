@@ -79,7 +79,7 @@ public class ColorPick : MonoBehaviour
     {
         stateSwitch = true;
     }
-    void MyCapture()                                                            // 카메라 캡쳐 부분 tempImage에 스크린샷을 저장한다.
+    void MyCapture()                                    // 카메라 캡쳐 부분 tempImage에 스크린샷을 저장한다.
     {
         Rect mcap = new Rect(0, 0, windowWidth, windowHeight);
         RenderTexture rt = new RenderTexture(windowWidth, windowHeight, 24);

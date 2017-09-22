@@ -31,9 +31,6 @@ public class Drag : MonoBehaviour
         {
             Spheres[i] = GameObject.FindGameObjectWithTag(SPHERE_TAG_NAME + (i + 1));
         }
-        ///////////////////////////
-        start_layer = MoveSphere.layer;
-        ///////////////////////////
     }
 
     // Update is called once per frame
