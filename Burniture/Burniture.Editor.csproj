@@ -121,8 +121,17 @@
     <Reference Include="Unity.Tasks">
       <HintPath>Assets\Firebase\Plugins\Unity.Tasks.dll</HintPath>
     </Reference>
+    <Reference Include="Google.IOSResolver_v1.2.48.0">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.IOSResolver_v1.2.48.0.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.JarResolver_v1.2.48.0">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.JarResolver_v1.2.48.0.dll</HintPath>
+    </Reference>
     <Reference Include="Google.VersionHandler">
       <HintPath>Assets\PlayServicesResolver\Editor\Google.VersionHandler.dll</HintPath>
+    </Reference>
+    <Reference Include="Google.VersionHandlerImpl_v1.2.48.0">
+      <HintPath>Assets\PlayServicesResolver\Editor\Google.VersionHandlerImpl_v1.2.48.0.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Data">
       <HintPath>Assets\plugins\Mono.Data.dll</HintPath>
@@ -151,15 +160,6 @@
     <Reference Include="Vuforia.UnityExtensions">
       <HintPath>Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.dll</HintPath>
     </Reference>
-    <Reference Include="Google.JarResolver_v1.2.48.0">
-      <HintPath>Assets\PlayServicesResolver\Editor\Google.JarResolver_v1.2.48.0.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.VersionHandlerImpl_v1.2.48.0">
-      <HintPath>Assets\PlayServicesResolver\Editor\Google.VersionHandlerImpl_v1.2.48.0.dll</HintPath>
-    </Reference>
-    <Reference Include="Google.IOSResolver_v1.2.48.0">
-      <HintPath>Assets\PlayServicesResolver\Editor\Google.IOSResolver_v1.2.48.0.dll</HintPath>
-    </Reference>
     <Reference Include="Assembly-UnityScript-Editor-firstpass">
       <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-Editor-firstpass.dll</HintPath>
     </Reference>
@@ -179,11 +179,13 @@
     <Compile Include="Assets\Vuforia\Editor\Scripts\Unzipper\SharpZipLibUnzipper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\Editor\Vuforia\CylinderTargetTextures\Burniture\authoringinfo.xml" />
     <None Include="Assets\Firebase\Plugins\link.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-app-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\PlayServicesResolver\Editor\play-services-resolver_v1.2.48.0.txt" />
     <None Include="Assets\StreamingAssets\QCAR\Burniture.xml" />
+    <None Include="Assets\StreamingAssets\Vuforia\Burniture.xml" />
     <None Include="Assets\Vuforia\Editor\Scripts\Vuforia.UnityExtensions.Editor.XML" />
     <None Include="Assets\Vuforia\Editor\WebcamProfiles\profiles.xml" />
     <None Include="Assets\Vuforia\Scripts\Internal\Vuforia.UnityExtensions.XML" />

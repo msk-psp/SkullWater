@@ -26,8 +26,6 @@ public class FixFloor : MonoBehaviour
         Lines = GameObject.FindGameObjectsWithTag(LINE_TAG_NAME); // 태그로 객체를 찾아 Lines 배열에 넣어줌
 
         NParent.transform.position = GameObject.Find(IMAGETARGET_NAME).transform.position; // 새로운 부모의 좌표를 이미지 타겟의 좌표로 옮겨줌
-
-
         for (int index = 0; index < SPHERE_NUMBER; index++)
         {
             //Spheres[index] = GameObject.FindGameObjectWithTag(SPHERE_TAG_NAME + (index + 1));

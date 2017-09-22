@@ -249,6 +249,7 @@ public class ButtonMotion : MonoBehaviour {
         Detach.SetActive(false);
         Recapt.SetActive(false);
         Notify.SetActive(true); // 마커 촬영전 알림을 띄운다.
+
         State = 1; // 첫번째 단계부터 다시 시작
     }
 

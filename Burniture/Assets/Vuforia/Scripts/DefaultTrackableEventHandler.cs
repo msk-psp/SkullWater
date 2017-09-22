@@ -174,7 +174,6 @@ namespace Vuforia
                 GameObject.Find("GenerateRoom").GetComponent<RawImage>().color = Color.red;
             }*/
 
-            /*¹öÆ° ¸ð¼Ç Á¦¾î*/
             if (ButtonMotion.State != 2 && ButtonMotion.State != 3)
             {
                 ButtonMotion.State = 2;
@@ -191,7 +190,6 @@ namespace Vuforia
             {
                 SetDistances();
             }*/
-
         }
         private void SetDistances()
         {
@@ -236,8 +234,6 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-
-            //ButtonMotion.State = 1; // ButtonMotionÁ¦¾î
         }
 
         #endregion // PRIVATE_METHODS

@@ -19,6 +19,7 @@ public class loadScene : MonoBehaviour {
         //Toast = GameObject.FindWithTag("Toast");
 
         //Toast.SetActive(false);
+        Toast = GameObject.Find("Toast");
     }
 	
 	// Update is called once per frame
