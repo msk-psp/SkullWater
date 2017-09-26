@@ -5,11 +5,12 @@ public class ControlFurniture : MonoBehaviour
 {
 
     RaycastHit hit;
-    public GameObject MovingFurn; // 움직일 가구 임시 저장
-    public GameObject RotateUI; // 회전판
-    public GameObject PreOBJ, NowOBJ; // 전에 선택한 가구, 현재 선택한 가구
+    private GameObject MovingFurn; // 움직일 가구 임시 저장
+    private GameObject RotateUI; // 회전판
+    private GameObject PreOBJ, NowOBJ; // 전에 선택한 가구, 현재 선택한 가구
     public float FirstDistance;
-    public int IsRotate;
+    private Vector2 Finger1Pre, Finger2Pre;
+    private int IsRotate;
 
     // Use this for initialization
     void Start()
@@ -80,30 +81,15 @@ public class ControlFurniture : MonoBehaviour
         {
             if (NowOBJ != null)
             {
-                if (Input.GetTouch(0).phase == TouchPhase.Moved && Input.GetTouch(1).phase == TouchPhase.Moved)
-                {
-                    
-                    if (Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position) > FirstDistance) // 위아래
-                    {
-                        Debug.Log("UP");
-                        NowOBJ.transform.position = new Vector3(NowOBJ.transform.position.x, (NowOBJ.transform.position.y + 10f) * Time.smoothDeltaTime, NowOBJ.transform.position.z);
-                        FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-                    }
-                    /*else
-                    {
-                        Debug.Log("Down");
-                        NowOBJ.transform.Translate(0, -(NowOBJ.transform.position.y * Time.smoothDeltaTime), 0);
-                        FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-                    }*/
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Began && Input.GetTouch(1).phase == TouchPhase.Began)
-                {
-                    FirstDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-                }
-                else if (Input.GetTouch(0).phase == TouchPhase.Ended || Input.GetTouch(1).phase == TouchPhase.Ended)
-                {
-                    FirstDistance = 0;
-                }
+                Finger1Pre = Input.GetTouch(0).position - Input.GetTouch(0).deltaPosition;
+                Finger2Pre = Input.GetTouch(1).position - Input.GetTouch(1).deltaPosition;
+
+                float prevTouchDeltaMag = (Finger1Pre - Finger2Pre).magnitude;
+                float touchDeltaMag = (Input.GetTouch(0).position - Input.GetTouch(1).position).magnitude;
+
+                float deltaMagnitudeDiff = prevTouchDeltaMag - touchDeltaMag;
+
+                NowOBJ.transform.position = new Vector3(NowOBJ.transform.position.x, NowOBJ.transform.position.y - deltaMagnitudeDiff * 0.5f, NowOBJ.transform.position.z);
             }
         }
     }
