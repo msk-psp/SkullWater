@@ -6,13 +6,10 @@ public class Line : MonoBehaviour {
     //private float dist;
     public Transform Sphere1;
     public Transform Sphere2;
-    private string Sphere1Name,Sphere2Name;
     private const string CLONE = "(Clone)";
 	// Use this for initialization
 	void Start () {
         lineRenderer = GetComponent<LineRenderer>(); // linRenderer에 LineRenderer컴포넌트를 가져옴
-        Sphere1Name = Sphere1.name;
-        Sphere2Name = Sphere2.name;
 
        // dist = Vector3.Distance(Sphere1.position, Sphere2.position);
     }

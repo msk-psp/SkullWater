@@ -11,15 +11,7 @@ public class Distance : MonoBehaviour
     public Transform Line;
     public Vector3 Linepos;
 
-
-    private string Sphere1Name, Sphere2Name;
     private const string CLONE = "(Clone)";
-    // Use this for initialization
-    void Start()
-    {
-        Sphere1Name = Sphere1.name;
-        Sphere2Name = Sphere2.name;
-    }
 
     // Update is called once per frame
     void Update()

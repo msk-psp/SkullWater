@@ -160,6 +160,7 @@
     <Compile Include="Assets\Work\source\CameraFocus.cs" />
     <Compile Include="Assets\Work\source\ColorPick.cs" />
     <Compile Include="Assets\Work\source\Context_fun.cs" />
+    <Compile Include="Assets\Work\source\ControlFurniture.cs" />
     <Compile Include="Assets\Work\source\Distance.cs" />
     <Compile Include="Assets\Work\source\Drag.cs" />
     <Compile Include="Assets\Work\source\FadeIn.cs" />
@@ -170,7 +171,6 @@
     <Compile Include="Assets\Work\source\FurnitureGenerate.cs" />
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />
-    <Compile Include="Assets\Work\source\GyroTest.cs" />
     <Compile Include="Assets\Work\source\Line.cs" />
     <Compile Include="Assets\Work\source\Moving.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
@@ -180,6 +180,7 @@
     <Compile Include="Assets\Work\source\SaveLoadBehaviour.cs" />
     <Compile Include="Assets\Work\source\SendToDatabase.cs" />
     <Compile Include="Assets\Work\source\SqlLiteBehaviour.cs" />
+    <Compile Include="Assets\Work\source\TemporaryGenerate.cs" />
     <Compile Include="Assets\Work\source\loadScene.cs" />
     <Compile Include="Assets\Work\source\start.cs" />
   </ItemGroup>

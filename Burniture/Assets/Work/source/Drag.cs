@@ -87,7 +87,7 @@ public class Drag : MonoBehaviour
             }
             else
             {
-                MoveSphere.layer = start_layer; // 여기 고쳐주세요
+                //MoveSphere.layer = start_layer; // 여기 고쳐주세요
             }
         }
         ///////////////////////

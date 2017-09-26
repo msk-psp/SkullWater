@@ -21,7 +21,6 @@ public class Moving : MonoBehaviour
     private Transform MV;
     private int lotate_state;
 
-    public Material Mat;
     void Start()
     {
         lotate_state = 0;
@@ -42,19 +41,9 @@ public class Moving : MonoBehaviour
                 if (ColorChangeState == 0)
                 {
                     Furn = MoveCube.gameObject.transform.GetChild(1).gameObject;
-                    /*try
-                    {
-
-                    }
-                    catch (UnityException)
-                    {
-                        Debug.Log("던져!");
-                    }*/
-                    //F_Color = Furn.GetComponent<Renderer>().material.color;
                 }
                 T_Color = F_Color;
                 T_Color.a = 0.5f;
-              //  Furn.GetComponent<Renderer>().material.color = T_Color;
                 ColorChangeState = 1;
                 Arrow= MoveCube.gameObject.transform.GetChild(0).gameObject;
                 Arrow.layer = 2; // 레이캐스트 무시
@@ -67,7 +56,6 @@ public class Moving : MonoBehaviour
                     //Furn.GetComponent<Renderer>().material.color = F_Color;
                     ColorChangeState = 0;
                 }
-                //Debug.Log("디디디디버그 : " + Furn.GetComponent<Renderer>().material.color + "그리고" + F_Color);
                 if (Arrow != null && Arrow.transform.parent.gameObject.name == MoveCube.name)
                 {
                     Arrow.SetActive(true);
@@ -78,11 +66,6 @@ public class Moving : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
             RaycastHit hit = new RaycastHit(); // 레이저가 맞을때를 hit라고 선언
 
-            /*if (Physics.Raycast(ray, out hit) && hit.collider.gameObject.tag == "Bottom")
-            {
-                MoveCube.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
-            }
-            else */
             if (Physics.Raycast(ray, out hit) && Cube_num == 0) // 레이저가 오브젝트에 맞고, 아직 선택된 것이 없을때
             {
                 if (hit.collider.gameObject.tag == "Cube")//터치된것이 큐브인지 확인
@@ -104,7 +87,6 @@ public class Moving : MonoBehaviour
                 }
                 if (hit.collider.gameObject.name == MoveCube.transform.FindChild("RotateArrow").gameObject.name)
                 {
-                    //Furn = MoveCube.transform.FindChild("chair(Clone)").gameObject;
                     Arrow = MoveCube.transform.FindChild("RotateArrow").gameObject;
                     if (TouchState == 0)
                     {
@@ -112,18 +94,14 @@ public class Moving : MonoBehaviour
                         Vector3 A = Arrow.transform.position;
                         MoveCube.transform.Rotate(0, 90, 0);
 
-                        //Transform MV = MoveCube.transform;
                         MV = MoveCube.transform;
                         Arrow.transform.position = new Vector3(A.x, A.y, A.z);
                         Arrow.transform.Rotate(0, -270, 0);
-                        //Transform FV = Furn.transform;
 
-                        //Debug.Log(MV.eulerAngles.y);
                         if (MV.eulerAngles.y >= 270 && MV.eulerAngles.y <= 271)
                         {
                             lotate_state = 3;
                             Debug.Log("270!!");
-                            //FV.position = new Vector3(MV.position.x-FV.localScale.x/2, MV.position.y, MV.position.z);
                         }
                         else if (MV.eulerAngles.y >= 0 && MV.eulerAngles.y <= 1)
                         {

@@ -154,6 +154,9 @@ public class RoomGenerate : MonoBehaviour
         /*버튼모션 제어*/
         ButtonMotion.State = 5;
         ButtonMotion.ChangeState = 0;
+
+        gameObject.GetComponent<ControlFurniture>().enabled = true;
+        gameObject.GetComponent<Drag>().enabled = false;
     }
     void FindSphere()
     {

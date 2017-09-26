@@ -5,7 +5,6 @@ public class Gyro : MonoBehaviour
 {
     private int StartX;
     private int StartY;
-    private int StartZ;
 
     void Start()
     {
@@ -24,6 +23,6 @@ public class Gyro : MonoBehaviour
         /*처음 회전에서 프레임마다 회전각을 계산하여 객제를 회전시킴*/
         transform.Rotate(StartX - Input.gyro.rotationRateUnbiased.x,
                         StartY - Input.gyro.rotationRateUnbiased.y,
-                        StartZ + Input.gyro.rotationRateUnbiased.z);
+                        Input.gyro.rotationRateUnbiased.z);
     }
 }
