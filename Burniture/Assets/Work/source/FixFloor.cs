@@ -43,7 +43,7 @@ public class FixFloor : MonoBehaviour
         GameObject ground = GameObject.Find("Ground");
 
         obj = ground;
-        //obj.transform.parent = NParent.transform; // 부모바꾸기
+        obj.transform.parent = NParent.transform; // 부모바꾸기
 
         Lines = GameObject.FindGameObjectsWithTag(LINE_TAG_NAME);   //find line without deactivated gameobject
 
