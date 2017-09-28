@@ -158,6 +158,7 @@
     <Compile Include="Assets\Work\source\BackButton.cs" />
     <Compile Include="Assets\Work\source\ButtonMotion.cs" />
     <Compile Include="Assets\Work\source\CameraFocus.cs" />
+    <Compile Include="Assets\Work\source\ColliderEvent.cs" />
     <Compile Include="Assets\Work\source\ColorPick.cs" />
     <Compile Include="Assets\Work\source\Context_fun.cs" />
     <Compile Include="Assets\Work\source\ControlFurniture.cs" />
@@ -172,6 +173,7 @@
     <Compile Include="Assets\Work\source\Guide.cs" />
     <Compile Include="Assets\Work\source\Gyro.cs" />
     <Compile Include="Assets\Work\source\Line.cs" />
+    <Compile Include="Assets\Work\source\MeasureDrag.cs" />
     <Compile Include="Assets\Work\source\Moving.cs" />
     <Compile Include="Assets\Work\source\MyScrollViewAdapter.cs" />
     <Compile Include="Assets\Work\source\ObjectReplace.cs" />

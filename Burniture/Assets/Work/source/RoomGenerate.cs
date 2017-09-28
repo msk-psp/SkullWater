@@ -3,8 +3,8 @@ using System.Collections;
 using Vuforia;
 public class RoomGenerate : MonoBehaviour
 {
-    private GameObject Plane; // 바닥
-    private GameObject Quad1, Quad2, Quad3, Quad4; // 벽
+    public static GameObject Plane; // 바닥
+    public static GameObject Quad1, Quad2, Quad3, Quad4; // 벽
     private GameObject LF, RF, LB, RB, LFU, LBU, RFU, RBU; // 꼭지점 객체
     private float Plane_xScale, Plane_yScale, Plane_zScale; // 바닥 사이즈
     private float Plane_xPosition, Plane_yPosition, Plane_zPosition; // 바닥 위치
@@ -12,9 +12,14 @@ public class RoomGenerate : MonoBehaviour
     private float Quad_xPosition, Quad_yPosition, Quad_zPosition; // 벽 위치
     public Material Fmat, Wmat; // 벽과 바닥의 material
 
+    private void Start()
+    {
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), LayerMask.NameToLayer("Ignore Raycast"), true); // 벽과 벽의 충돌 무시
+    }
     public void GenerateRoom()
     {
         BoxCollider rb;
+        //Rigidbody rigid;
 
         FindSphere();
 
@@ -42,8 +47,14 @@ public class RoomGenerate : MonoBehaviour
         rb.size = new Vector3(Plane_xScale, 100, Plane_zScale);
         rb.center = new Vector3(0, -rb.size.y / 2, 0);
 
+        /*rigid = Plane.AddComponent<Rigidbody>();  // RigidBody 컴포넌트 추가
+        rigid.useGravity = false;
+        rigid.interpolation = RigidbodyInterpolation.Interpolate;
+        rigid.constraints = RigidbodyConstraints.FreezeRotation;
+
+        Destroy(Plane.GetComponent<MeshCollider>()); // MeshCollider컴포넌트 제거
+        */
         Plane.GetComponent<Renderer>().material = Fmat; // 바닥 material을 넣어줌
-                                                        // Plane.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 1f);
 
         /*왼쪽벽*/
         Quad1 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -66,6 +77,13 @@ public class RoomGenerate : MonoBehaviour
         rb.size = new Vector3(3, 3, 100);
         rb.center = new Vector3(0, 0, rb.size.z / 2);
 
+        /*rigid = Quad1.AddComponent<Rigidbody>();  // RigidBody 컴포넌트 추가
+        rigid.useGravity = false;
+        rigid.interpolation = RigidbodyInterpolation.Interpolate;
+        rigid.constraints = RigidbodyConstraints.FreezeRotation;
+
+        Destroy(Quad1.GetComponent<MeshCollider>());
+        */
         Quad1.GetComponent<Renderer>().material = Wmat;
         Quad1.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f); // 벽의 스위치 위치를 고려하여 벽의 투명도를 0.5로 설정
 
@@ -88,7 +106,14 @@ public class RoomGenerate : MonoBehaviour
         rb = Quad2.AddComponent<BoxCollider>();
         rb.size = new Vector3(3, 3, 100);
         rb.center = new Vector3(0, 0, rb.size.z / 2);
+        /*
+        rigid = Quad2.AddComponent<Rigidbody>();  // RigidBody 컴포넌트 추가
+        rigid.useGravity = false;
+        rigid.interpolation = RigidbodyInterpolation.Interpolate;
+        rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
+        Destroy(Quad2.GetComponent<MeshCollider>());
+        */
         Quad2.GetComponent<Renderer>().material = Wmat;
         Quad2.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
@@ -112,11 +137,16 @@ public class RoomGenerate : MonoBehaviour
         rb = Quad3.AddComponent<BoxCollider>();
         rb.size = new Vector3(3, 3, 100);
         rb.center = new Vector3(0, 0, rb.size.z / 2);
+        /*
+        rigid = Quad3.AddComponent<Rigidbody>();  // RigidBody 컴포넌트 추가
+        rigid.useGravity = false;
+        rigid.interpolation = RigidbodyInterpolation.Interpolate;
+        rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
+        Destroy(Quad3.GetComponent<MeshCollider>());
+        */
         Quad3.GetComponent<Renderer>().material = Wmat;
         Quad3.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
-
-        //Quad3.AddComponent<BoxCollider>();
 
         /*앞쪽벽*/
         Quad4 = GameObject.CreatePrimitive(PrimitiveType.Quad);
@@ -138,7 +168,14 @@ public class RoomGenerate : MonoBehaviour
         rb = Quad4.AddComponent<BoxCollider>();
         rb.size = new Vector3(3, 3, 100);
         rb.center = new Vector3(0, 0, rb.size.z / 2);
+        /*
+        rigid = Quad4.AddComponent<Rigidbody>();  // RigidBody 컴포넌트 추가
+        rigid.useGravity = false;
+        rigid.interpolation = RigidbodyInterpolation.Interpolate;
+        rigid.constraints = RigidbodyConstraints.FreezeRotation;
 
+        Destroy(Quad4.GetComponent<MeshCollider>());
+        */
         Quad4.GetComponent<Renderer>().material = Wmat;
         Quad4.GetComponent<Renderer>().material.color = new Color(1, 1, 1, 0.5f);
 
