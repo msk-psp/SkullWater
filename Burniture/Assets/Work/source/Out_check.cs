@@ -12,7 +12,7 @@ public class Out_check : MonoBehaviour {
 	
     public void Out_Che()
     {
-        myCanvas.FindChild("ContextMenu").gameObject.SetActive(false);
-        myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
+        myCanvas.Find("ContextMenu").gameObject.SetActive(false);
+        myCanvas.Find("Outcheck").gameObject.SetActive(false);
     }
 }

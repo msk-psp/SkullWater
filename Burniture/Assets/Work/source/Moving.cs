@@ -74,7 +74,7 @@ public class Moving : MonoBehaviour
                     PreCube = MoveCube;
                     MoveCube = hit.collider.gameObject;
                     ChangeStatus = 0;
-                    Arrow = MoveCube.transform.FindChild("RotateArrow").gameObject; // 자식오브젝트 찾기
+                    Arrow = MoveCube.transform.Find("RotateArrow").gameObject; // 자식오브젝트 찾기
                     if (PreCube != null)
                     {
                         PreArrow = PreCube.transform.Find("RotateArrow").gameObject;
@@ -85,9 +85,9 @@ public class Moving : MonoBehaviour
                 {
                     Arrow.SetActive(false);
                 }
-                if (hit.collider.gameObject.name == MoveCube.transform.FindChild("RotateArrow").gameObject.name)
+                if (hit.collider.gameObject.name == MoveCube.transform.Find("RotateArrow").gameObject.name)
                 {
-                    Arrow = MoveCube.transform.FindChild("RotateArrow").gameObject;
+                    Arrow = MoveCube.transform.Find("RotateArrow").gameObject;
                     if (TouchState == 0)
                     {
                         TouchState = 1; // 누르고있는 동안 한번만 변화하기 위한 상태변수

@@ -1,25 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Line : MonoBehaviour {
-    private LineRenderer lineRenderer; // 라인렌더러 선언
-    //private float dist;
+public class Line : MonoBehaviour
+{
     public Transform Sphere1;
     public Transform Sphere2;
+    public Transform ThisLine;
+    public LineRenderer LineRend;
     private const string CLONE = "(Clone)";
-	// Use this for initialization
-	void Start () {
-        lineRenderer = GetComponent<LineRenderer>(); // linRenderer에 LineRenderer컴포넌트를 가져옴
 
-       // dist = Vector3.Distance(Sphere1.position, Sphere2.position);
+
+    // Use this for initialization
+    void Start()
+    {
+        ThisLine = this.gameObject.transform;
+        LineRend = ThisLine.GetComponent<LineRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         /* 선의 시작과 끝 지점을 잡아줌 */
-        lineRenderer.SetPosition(0, Sphere1.position);
-        lineRenderer.SetPosition(1, Sphere2.position);
+        LineRend.SetPosition(0, Sphere1.position);
+        LineRend.SetPosition(1, Sphere2.position);
     }
 
     public void ChangeObjects(string name1, string name2)
@@ -32,6 +35,6 @@ public class Line : MonoBehaviour {
     }
     public string GetNames()
     {
-        return Sphere1.name +','+ Sphere2.name;
+        return Sphere1.name + ',' + Sphere2.name;
     }
 }

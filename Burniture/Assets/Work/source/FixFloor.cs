@@ -37,7 +37,7 @@ public class FixFloor : MonoBehaviour
         for (int index = 0; index < Lines.Length; index++)
         {
             obj = Lines[index];
-            name[index] = Lines[index].GetComponent<Line>().GetNames();
+            //name[index] = Lines[index].GetComponent<Line>().GetNames();
             obj.transform.parent = NParent.transform; // 부모바꾸기
         }
         GameObject ground = GameObject.Find("Ground");
@@ -47,7 +47,7 @@ public class FixFloor : MonoBehaviour
 
         Lines = GameObject.FindGameObjectsWithTag(LINE_TAG_NAME);   //find line without deactivated gameobject
 
-        for (int index = 0; index < Lines.Length; index++)
+        /*for (int index = 0; index < Lines.Length; index++)
         {
             string[] splitNames = name[index].Split(',');
             Lines[index].GetComponent<Line>().ChangeObjects(splitNames[0], splitNames[1]);
@@ -55,7 +55,7 @@ public class FixFloor : MonoBehaviour
             {
                 Lines[index].GetComponent<Distance>().ChangeObjects(splitNames[0], splitNames[1]);
             }
-        }
+        }*/
 
         TrackerManager.Instance.GetTracker<ObjectTracker>().Stop(); // 객체가 마커를 트래킹하는 기능을 정지 시켜 화면에 고정
         GameObject.Find(ARCAMERA_NAME).GetComponent<Gyro>().enabled = true; // 자이로 센서 스크립트를 작동시킴

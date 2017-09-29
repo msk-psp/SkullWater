@@ -48,22 +48,22 @@ public class Context_fun : MonoBehaviour
     {
         prefab = EventSystem.current.currentSelectedGameObject.GetComponent<RectTransform>();
         Debug.Log("Touched : " + prefab.name);
-        myCanvas.FindChild("Outcheck").gameObject.SetActive(true);
-        myCanvas.FindChild("ContextMenu").gameObject.SetActive(true);
+        myCanvas.Find("Outcheck").gameObject.SetActive(true);
+        myCanvas.Find("ContextMenu").gameObject.SetActive(true);
 
         if (prefab != null)
         {
-            index = int.Parse(prefab.FindChild("Index").GetComponent<Text>().text.ToString());
-            type = Furniture_Choose(prefab.FindChild("TitlePanel/Type").GetComponent<Text>().text.ToString());
-            mCube_name = prefab.FindChild("TitlePanel").FindChild("CubeName").GetComponent<Text>().text.ToString();
-            if (!ColorUtility.TryParseHtmlString("#" + prefab.FindChild("Color").GetComponent<Text>().text.ToString(), out fcolor))
+            index = int.Parse(prefab.Find("Index").GetComponent<Text>().text.ToString());
+            type = Furniture_Choose(prefab.Find("TitlePanel/Type").GetComponent<Text>().text.ToString());
+            mCube_name = prefab.Find("TitlePanel").Find("CubeName").GetComponent<Text>().text.ToString();
+            if (!ColorUtility.TryParseHtmlString("#" + prefab.Find("Color").GetComponent<Text>().text.ToString(), out fcolor))
                 ColorUtility.TryParseHtmlString("#FFFFFF",out fcolor);
-            float.TryParse(prefab.FindChild("TitlePanel/XText").GetComponent<Text>().text, out mCube_xScale);
-            float.TryParse(prefab.FindChild("TitlePanel/YText").GetComponent<Text>().text, out mCube_yScale);
-            float.TryParse(prefab.FindChild("TitlePanel/ZText").GetComponent<Text>().text, out mCube_zScale);
-            float.TryParse(prefab.FindChild("XAxisText").GetComponent<Text>().text, out mCube_xPosition);
-            float.TryParse(prefab.FindChild("YAxisText").GetComponent<Text>().text, out mCube_yPosition);
-            float.TryParse(prefab.FindChild("ZAxisText").GetComponent<Text>().text, out mCube_zPosition);
+            float.TryParse(prefab.Find("TitlePanel/XText").GetComponent<Text>().text, out mCube_xScale);
+            float.TryParse(prefab.Find("TitlePanel/YText").GetComponent<Text>().text, out mCube_yScale);
+            float.TryParse(prefab.Find("TitlePanel/ZText").GetComponent<Text>().text, out mCube_zScale);
+            float.TryParse(prefab.Find("XAxisText").GetComponent<Text>().text, out mCube_xPosition);
+            float.TryParse(prefab.Find("YAxisText").GetComponent<Text>().text, out mCube_yPosition);
+            float.TryParse(prefab.Find("ZAxisText").GetComponent<Text>().text, out mCube_zPosition);
 
 
         }
@@ -167,18 +167,18 @@ public class Context_fun : MonoBehaviour
             Furn.SetActive(true);
             Furn.transform.parent = Fv; // 가구의 부모 객체를 큐브로
 
-            myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
-            myCanvas.FindChild("ContextMenu").gameObject.SetActive(false);
+            myCanvas.Find("Outcheck").gameObject.SetActive(false);
+            myCanvas.Find("ContextMenu").gameObject.SetActive(false);
             panel.gameObject.SetActive(false);
-            myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
+            myCanvas.Find("Outcheck").gameObject.SetActive(false);
         }
         else
             Debug.Log("바닥이 생성이 되어있지 않습니다.");
     }
     private void ContextMenuHiding()
     {
-        myCanvas.FindChild("Outcheck").gameObject.SetActive(false);
-        myCanvas.FindChild("ContextMenu").gameObject.SetActive(false);
+        myCanvas.Find("Outcheck").gameObject.SetActive(false);
+        myCanvas.Find("ContextMenu").gameObject.SetActive(false);
     }
     private int Furniture_Choose(string furnitureName)
     {
