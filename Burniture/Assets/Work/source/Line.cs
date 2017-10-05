@@ -21,8 +21,23 @@ public class Line : MonoBehaviour
     void Update()
     {
         /* 선의 시작과 끝 지점을 잡아줌 */
-        LineRend.SetPosition(0, Sphere1.position);
-        LineRend.SetPosition(1, Sphere2.position);
+        if (ThisLine.name.Contains("Line1-2") || ThisLine.name.Contains("Line5-6")
+            ||ThisLine.name.Contains("Line3-4")||ThisLine.name.Contains("Line7-8"))
+        {
+            LineRend.SetPosition(0, Sphere1.position + new Vector3(18f, 0, 0));
+            LineRend.SetPosition(1, Sphere2.position - new Vector3(18f, 0, 0));
+        } // 23 14 67 58
+        else if(ThisLine.name.Contains("Line2-3") || ThisLine.name.Contains("Line1-4")
+            || ThisLine.name.Contains("Line6-7") || ThisLine.name.Contains("Line5-8"))
+        {
+            LineRend.SetPosition(0, Sphere1.position + new Vector3(0, 18f, 0));
+            LineRend.SetPosition(1, Sphere2.position - new Vector3(0, 18f, 0));
+        }
+        else
+        {
+            LineRend.SetPosition(0, Sphere1.position + new Vector3(0, 0, 18f));
+            LineRend.SetPosition(1, Sphere2.position - new Vector3(0, 0, 18f));
+        }
     }
 
     public void ChangeObjects(string name1, string name2)
