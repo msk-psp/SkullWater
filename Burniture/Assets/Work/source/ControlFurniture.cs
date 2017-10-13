@@ -11,6 +11,7 @@ public class ControlFurniture : MonoBehaviour
     private Vector2 Finger1Pre, Finger2Pre;
     private int IsRotate;
     private float DragSpeed = 0.15f;
+    private Vector3 S_Pos, E_Pos, M_Pos; // 터치 시작위치, 끝난위치, 움직인 거리
 
     // Use this for initialization
     void Start()
@@ -28,6 +29,7 @@ public class ControlFurniture : MonoBehaviour
         {
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
+                S_Pos = Input.GetTouch(0).position;
                 Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
                 hit = new RaycastHit();
                 Physics.Raycast(ray, out hit); // 레이저에 맞은 객체를 hit에 저장
@@ -89,9 +91,9 @@ public class ControlFurniture : MonoBehaviour
                 }
                 else
                 { // 가구 드래그
-                    Vector3 touchedPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, 0, Input.GetTouch(0).position.y)); // 스크린 좌표를 월드좌표계로 변환
-                    transform.position = Vector3.Lerp(transform.position, touchedPos, Time.deltaTime);
-                    NowOBJ.transform.position = new Vector3(MovingFurn.transform.position.x + Input.GetTouch(0).deltaPosition.x * DragSpeed, MovingFurn.transform.position.y, MovingFurn.transform.position.z + Input.GetTouch(0).deltaPosition.y * DragSpeed);
+                    E_Pos = Input.GetTouch(0).position;
+                    M_Pos = E_Pos - S_Pos;
+                    NowOBJ.transform.position = new Vector3(MovingFurn.transform.position.x + M_Pos.x, MovingFurn.transform.position.y, MovingFurn.transform.position.z + M_Pos.y);
                 }
             }
         }
