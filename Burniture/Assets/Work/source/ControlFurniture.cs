@@ -10,11 +10,13 @@ public class ControlFurniture : MonoBehaviour
     private GameObject PreOBJ, NowOBJ; // 전에 선택한 가구, 현재 선택한 가구
     private Vector2 Finger1Pre, Finger2Pre;
     private int IsRotate;
+    private float DragSpeed = 0.15f;
 
     // Use this for initialization
     void Start()
     {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), LayerMask.NameToLayer("Rotate"), true); // 벽과 회전판의 충돌 무시
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Rotate"), LayerMask.NameToLayer("Furniture"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ground"), LayerMask.NameToLayer("Rotate"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ground"), LayerMask.NameToLayer("Furniture"), true);
     }
@@ -89,7 +91,7 @@ public class ControlFurniture : MonoBehaviour
                 { // 가구 드래그
                     Vector3 touchedPos = Camera.main.ScreenToWorldPoint(new Vector3(Input.GetTouch(0).position.x, 0, Input.GetTouch(0).position.y)); // 스크린 좌표를 월드좌표계로 변환
                     transform.position = Vector3.Lerp(transform.position, touchedPos, Time.deltaTime);
-                    NowOBJ.transform.position = new Vector3(MovingFurn.transform.position.x + Input.GetTouch(0).deltaPosition.x, MovingFurn.transform.position.y, MovingFurn.transform.position.z + Input.GetTouch(0).deltaPosition.y);
+                    NowOBJ.transform.position = new Vector3(MovingFurn.transform.position.x + Input.GetTouch(0).deltaPosition.x * DragSpeed, MovingFurn.transform.position.y, MovingFurn.transform.position.z + Input.GetTouch(0).deltaPosition.y * DragSpeed);
                 }
             }
         }

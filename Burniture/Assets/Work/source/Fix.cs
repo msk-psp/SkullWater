@@ -55,6 +55,7 @@ public class Fix : MonoBehaviour
         Sphere6.transform.position = v;
 
         /*버튼모션 제어*/
+        
         ButtonMotion.State = 4;
         ButtonMotion.ChangeState = 0;
     }

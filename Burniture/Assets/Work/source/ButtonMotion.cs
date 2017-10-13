@@ -17,8 +17,15 @@ public class ButtonMotion : MonoBehaviour {
     public static float Speed;
     public static Vector3 F_position;
     private int FixButtonState;
-    private int OKsign1, OKsign2, OKsign3;
+    private static int OKsign1, OKsign2, OKsign3;
 
+    private Vector2 Pos;
+    public GameObject ChangeButton, Info, Toast;
+
+    private void Awake()
+    {
+        Screen.SetResolution(Screen.width, Screen.height, true);
+    }
     // Use this for initialization
     void Start () {
         /*모두 초기화*/
@@ -30,24 +37,37 @@ public class ButtonMotion : MonoBehaviour {
         OKsign2 = 0;
         OKsign3 = 0;
 
+        ChangeButton.transform.position = new Vector2(Screen.width / 10, Screen.height * 6 / 7);
+        Info.transform.position = new Vector2(Screen.width * 9 / 10, Screen.height / 7);
+        Pos = new Vector2(Screen.width * 9 / 10, Screen.height / 2);
+        Toast.transform.position = new Vector2(Screen.width / 2, Screen.height / 7);
+
         Notify = GameObject.Find("Notify"); // 객체 등록
         NotiRaw = Notify.GetComponent<RawImage>(); // RawImage 컴포넌트 불러옴
         NotiText = Notify.transform.GetChild(0).GetComponent<Text>(); // 알림 첫번째 자식의 Text 컴포넌트 불러옴
+        Notify.transform.position = new Vector2(Screen.width * 8 / 10, Screen.height * 6 / 7);
+        Notify.SetActive(false);
         
         Detach = GameObject.Find("Detach"); // 마커에서 떼어내기
         Recapt = GameObject.Find("Recapt"); // 다시 촬영
         Fix = GameObject.Find("Fix"); // 교정
+        Detach.transform.position = Pos;
+        Recapt.transform.position = Pos;
+        Fix.transform.position = Pos;
 
         if (SceneManager.GetActiveScene().name== "Burniture") // 현재 활성화된 Scene이름이 Burniture일 경우
         {
             /*Burniture Scene의 버튼 객체 등록*/
             Save = GameObject.Find("Save"); // 저장
+            Save.transform.position = Pos;
         }
         else if (SceneManager.GetActiveScene().name== "Layout")
         {
             /*Layout Scene의 버튼 객체 등록 Recapt, Fix와 Detach는 Burniture Scene과 함께 공유*/
             GRoom = GameObject.Find("GenerateRoom");
             LoadFurn = GameObject.Find("Load");
+            GRoom.transform.position = Pos;
+            LoadFurn.transform.position = Pos;
         }
 
         F_position = Fix.transform.position; // 버튼의 처음위치 기억
@@ -127,6 +147,10 @@ public class ButtonMotion : MonoBehaviour {
             GRoom.transform.position = F_position;
             LoadFurn.transform.position = F_position;
         }
+
+        OKsign1 = 0;
+        OKsign2 = 0;
+        OKsign3 = 0;
 
         Fix.transform.position = F_position;
         Detach.transform.position = F_position;
@@ -250,6 +274,7 @@ public class ButtonMotion : MonoBehaviour {
         Recapt.SetActive(false);
         Notify.SetActive(true); // 마커 촬영전 알림을 띄운다.
 
+        FixButtonState = 1;
         State = 1; // 첫번째 단계부터 다시 시작
     }
 
@@ -265,6 +290,7 @@ public class ButtonMotion : MonoBehaviour {
 
         if (GRoom.transform.position.y < 3.5 * Screen.height / 4)
         {
+            Debug.Log("ㅁㄴㅇ");
             GRoom.transform.position = new Vector3(GRoom.transform.position.x, GRoom.transform.position.y + Speed, 0);
         }
         else // 버튼이 이동을 마친 후 변수 변경
