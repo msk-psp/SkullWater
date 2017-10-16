@@ -10,8 +10,6 @@ public class ControlFurniture : MonoBehaviour
     private GameObject PreOBJ, NowOBJ; // 전에 선택한 가구, 현재 선택한 가구
     private Vector2 Finger1Pre, Finger2Pre;
     private int IsRotate;
-    private float DragSpeed = 0.15f;
-    private Vector3 S_Pos, E_Pos, M_Pos; // 터치 시작위치, 끝난위치, 움직인 거리
 
     // Use this for initialization
     void Start()
@@ -27,12 +25,12 @@ public class ControlFurniture : MonoBehaviour
     {
         if (Input.touchCount == 1)
         {
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
+            hit = new RaycastHit();
+            Physics.Raycast(ray, out hit); // 레이저에 맞은 객체를 hit에 저장
             if (Input.GetTouch(0).phase == TouchPhase.Began)
             {
-                S_Pos = Input.GetTouch(0).position;
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position); // 손가락에서 화면안으로 레이저를쏨
-                hit = new RaycastHit();
-                Physics.Raycast(ray, out hit); // 레이저에 맞은 객체를 hit에 저장
+                
                 if (hit.collider != null)
                 {
                     if (hit.collider.tag == "Furniture")
@@ -91,9 +89,10 @@ public class ControlFurniture : MonoBehaviour
                 }
                 else
                 { // 가구 드래그
-                    E_Pos = Input.GetTouch(0).position;
-                    M_Pos = E_Pos - S_Pos;
-                    NowOBJ.transform.position = new Vector3(MovingFurn.transform.position.x + M_Pos.x, MovingFurn.transform.position.y, MovingFurn.transform.position.z + M_Pos.y);
+                    if (hit.collider != null && hit.collider.tag == "Bottom")
+                    {
+                        NowOBJ.transform.position = new Vector3(hit.point.x, 0, hit.point.z);
+                    }
                 }
             }
         }

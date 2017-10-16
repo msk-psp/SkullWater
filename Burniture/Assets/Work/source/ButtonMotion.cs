@@ -290,7 +290,6 @@ public class ButtonMotion : MonoBehaviour {
 
         if (GRoom.transform.position.y < 3.5 * Screen.height / 4)
         {
-            Debug.Log("ㅁㄴㅇ");
             GRoom.transform.position = new Vector3(GRoom.transform.position.x, GRoom.transform.position.y + Speed, 0);
         }
         else // 버튼이 이동을 마친 후 변수 변경
